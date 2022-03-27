@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "Web Feed",
+  "version": "0.1",
+  "description": "Web Feed Reader",
+  "author": "涛叔",
+  "developer": {
+    "name": "涛叔",
+    "url": "https://taoshu.in"
+  },
+  "homepage_url": "https://taoshu.in/web-feed.html",
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "webRequest",
+    "contextMenus"
+  ],
+  "web_accessible_resources": ["show.html"],
+  "page_action": {
+    "default_icon": "icons/bar-icon.svg",
+    "default_title": "Subscribe to page",
+    "browser_style": true,
+    "pinned": true
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "webfeed@taoshu.in",
+      "strict_min_version": "50.0"
+    }
+  }
+}
+

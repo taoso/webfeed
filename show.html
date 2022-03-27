@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Feed</title>
+    <link rel="icon" href="./icons/icon-color.svg">
+    <link rel="stylesheet" href="./css/water.css">
+    <link rel="stylesheet" href="./css/show.css">
+    <script src="./js/show.js" defer type="module"></script>
+  </head>
+  <body>
+    <header>
+      <h1><a href=""></a></h1>
+      <a id="feed-link" href=""></a>
+      <a id="feed-link-source" href="">source</a>
+      <subscribe-button link="">Subscribe</subscribe-button>
+    </header>
+    <main>
+      <div class="items"></div>
+    </main>
+    <footer>
+      <a href="https://github.com/taoso/web-rss">Web RSS</a>
+    </footer>
+    <template id="feed-item">
+      <article>
+        <h2></h2>
+        <time></time>
+        <div></div>
+        <a class="link" href="">Read more</a>
+      </article>
+    </template>
+  </body>
+</html>

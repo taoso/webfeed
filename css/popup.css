@@ -1,0 +1,24 @@
+body {
+  max-width: 30rem;
+}
+
+.items {
+  padding: 0.2rem;
+}
+
+.items__item-link {
+  display: block;
+  position: relative;
+  padding: 0.2rem 0.4rem;
+  color: #000;
+  text-decoration: none;
+}
+
+.items__item-link:hover {
+  color: hsl(200, 70%, 50%);
+}
+
+.items__item + .items__item {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
