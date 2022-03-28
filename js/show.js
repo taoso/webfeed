@@ -17,6 +17,17 @@ function renderHTML(feed) {
 
   const template = document.getElementById("feed-item");
 
+  let rewriteRefer = (e) => {
+    e.requestHeaders.push({name:"Referer", value:feed.url})
+    return {requestHeaders: e.requestHeaders};
+  }
+
+  browser.webRequest.onBeforeSendHeaders.addListener(
+    rewriteRefer,
+    {urls: ["*://*/*"]},
+    ["blocking", "requestHeaders"]
+  );
+
   feed.entries.forEach(entry => {
     const content = template.content.cloneNode(true);
 
@@ -25,8 +36,27 @@ function renderHTML(feed) {
     content.querySelector("article>div").innerHTML = entry.summary;
     content.querySelector("article>a").href = entry.link;
 
+    content.querySelectorAll("article>div img").forEach(img => {
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+      }
+      img.src = fixLink(img.src, feed.url);
+    });
+    content.querySelectorAll("article>div a").forEach(a => {
+      a.href = fixLink(a.href, feed.url);
+    });
+
     document.querySelector(".items").appendChild(content);
   });
+}
+
+function fixLink(link, feedLink) {
+  if (!link.startsWith("http")) {
+    let url = new URL(link);
+    let feedUrl = new URL(feedLink);
+    return feedUrl.protocol + "//" + feedUrl.host + url.pathname;
+  }
+  return link;
 }
 
 async function parse(reader, url) {
