@@ -3,21 +3,67 @@
 import Parser from "./parser.js";
 import { AtomFeed, RssFeed } from './feed.js';
 
-function renderHTML(feed) {
+async function subscribe(data) {
+  let bs = await browser.bookmarks.search({title:"[web-feed]"});
+  if (bs.length > 0) {
+    var id = bs[0].id;
+  } else {
+    let b = await browser.bookmarks.create({title:"[web-feed]"});
+    var id = b.id
+  }
+
+  bs = await browser.bookmarks.search({url:data.url});
+  if (bs.length > 0) {
+  }
+
+  await browser.bookmarks.create({
+    title: `${data.title}[${data.link}]`,
+    url: data.url,
+    parentId: id,
+  });
+}
+
+async function renderHTML(feed) {
   let header = document.querySelector('body header');
   let h1 = header.querySelector('h1 a')
   h1.href = feed.link;
   h1.innerHTML = feed.title;
 
-  header.querySelector('subscribe-button').link = feed.link;
+  let button = header.querySelector('subscribe-button')
+  button.dataset.url = feed.url
+  button.dataset.link = feed.link
+  button.dataset.title = feed.title
+
+  let bs = await browser.bookmarks.search({url:feed.url});
+  if (bs.length > 0) {
+    button.innerHTML = "Unsubscribe";
+  } else {
+    button.innerHTML = "Subscribe";
+  }
+
+  button.onclick = async (e) => {
+    if (button.innerHTML == "Subscribe") {
+      await subscribe(e.target.dataset);
+      button.innerHTML = "Unsubscribe";
+    } else {
+      let bs = await browser.bookmarks.search({url:feed.url});
+      await browser.bookmarks.remove(bs[0].id);
+      button.innerHTML = "Subscribe";
+    }
+  };
+
   let feedLink = header.querySelector('#feed-link')
   feedLink.href = feed.url;
   feedLink.innerHTML = feed.url;
-  header.querySelector('#feed-link-source').href = "view-source:"+feed.url;
 
   const template = document.getElementById("feed-item");
 
   let rewriteRefer = (e) => {
+    for (let header of e.requestHeaders) {
+      if (header.name.toLowerCase() === "user-agent") {
+        header.value += " WebFeed";
+      }
+    }
     e.requestHeaders.push({name:"Referer", value:feed.url})
     return {requestHeaders: e.requestHeaders};
   }
@@ -69,9 +115,9 @@ async function parse(reader, url) {
   let parser = new Parser();
   let num = 10;
 
-  let render = (feed) => {
+  let render = async (feed) => {
     reader.cancel();
-    renderHTML(feed);
+    await renderHTML(feed);
   };
 
   if (chunk.includes("rss")) {

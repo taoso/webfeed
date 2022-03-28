@@ -19,6 +19,7 @@
   "permissions": [
     "<all_urls>",
     "storage",
+    "bookmarks",
     "webRequest",
     "webRequestBlocking",
     "contextMenus"
