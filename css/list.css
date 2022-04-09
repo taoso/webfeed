@@ -1,0 +1,22 @@
+body {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+article div {
+  font-family: serif;
+}
+
+article {
+  border-bottom: 1px dashed;
+}
+
+a.link {
+  display: inline-block;
+  padding: 0.5em 0;
+}
+
+#more {
+  text-align: center;
+  cursor: pointer;
+}

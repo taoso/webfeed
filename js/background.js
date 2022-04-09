@@ -1,5 +1,8 @@
 'use strict';
 
+import { syncAll, setBadge } from "./utils.js";
+import { openDB } from "./store.js";
+
 let tabFeeds = {};
 
 function setAction(tabId, feeds) {
@@ -58,6 +61,10 @@ async function main() {
     }
   });
 
+  browser.browserAction.onClicked.addListener((tab) => {
+    browser.tabs.create({url:browser.runtime.getURL("./list.html")});
+  });
+
   browser.pageAction.onClicked.addListener((tab) => {
     let url = tabFeeds[tab.id];
     if (!url) {
@@ -68,6 +75,12 @@ async function main() {
       url: browser.runtime.getURL(`show.html?url=${encodeURI(url)}`),
     });
   });
+
+  browser.alarms.create("sync-feed", {periodInMinutes:1});
+  browser.alarms.onAlarm.addListener(async e => await syncAll());
+  window.syncAll = syncAll;
+  window.openDB = openDB;
+  window.setBadge = setBadge;
 };
 
 main().catch(e => console.error(e));

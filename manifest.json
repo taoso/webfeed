@@ -18,6 +18,7 @@
   },
   "permissions": [
     "<all_urls>",
+    "alarms",
     "storage",
     "bookmarks",
     "webRequest",
@@ -30,6 +31,10 @@
     "default_title": "Subscribe feed",
     "browser_style": true,
     "pinned": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-color.svg",
+    "default_title": "Web Feed"
   },
   "options_ui": {
     "page": "options.html"

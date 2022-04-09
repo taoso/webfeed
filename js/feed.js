@@ -101,16 +101,14 @@ export class AtomFeed {
           entry.title = content;
           break;
         case "updated":
-          entry.updated = content;
+          entry.updated = new Date(content);
           break;
-        case "summary":
         case "content":
-          if (entry.summary) {
-            return;
-          }
+          if (entry.summary) return;
           if (content.length > MAX_SUMMARY) {
             content = content.substring(0, MAX_SUMMARY)+"...";
           }
+        case "summary":
           if (event == "text") {
             entry.summary = htmldecode(content);
           } else {
@@ -228,7 +226,7 @@ export class RssFeed {
           }
           break;
         case "pubDate":
-          entry.updated = content;
+          entry.updated = new Date(content);
           break;
       }
     }
