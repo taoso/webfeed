@@ -42,7 +42,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "webfeed@taoshu.in",
-      "strict_min_version": "50.0"
+      "strict_min_version": "90.0"
     }
   }
 }

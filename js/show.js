@@ -1,7 +1,7 @@
 'use strict';
 
 import { setBadge, fixLink, fetchFeed } from './utils.js';
-import { subscribe, saveEntries, removeEntries } from './store.js';
+import * as store from './store.js';
 
 async function renderHTML(feed) {
   let header = document.querySelector('body header');
@@ -25,15 +25,15 @@ async function renderHTML(feed) {
 
   button.onclick = async (e) => {
     if (button.innerHTML == "Subscribe") {
-      await subscribe(e.target.dataset);
+      await store.subscribe(e.target.dataset);
       button.innerHTML = "Unsubscribe";
       await fetchFeed(feed.url, async (resp, feed) => {
-        await saveEntries(feed.url, feed.entries);
+        await store.saveEntries(feed.url, feed.entries);
       });
     } else {
       let bs = await browser.bookmarks.search({url:document.URL});
       await browser.bookmarks.remove(bs[0].id);
-      await removeEntries(feed.url);
+      await store.removeEntries(feed.url);
       button.innerHTML = "Subscribe";
     }
     await setBadge();
@@ -60,7 +60,6 @@ async function renderHTML(feed) {
   feed.entries.forEach(entry => {
     const content = template.content.cloneNode(true);
 
-    console.log(entry.title);
     content.querySelector("article>h2").innerHTML = entry.title;
     content.querySelector("article>time").innerHTML = entry.updated.toLocaleString();
     content.querySelector("article>div").innerHTML = entry.summary;

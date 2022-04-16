@@ -78,9 +78,6 @@ async function main() {
 
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.alarms.onAlarm.addListener(async e => await syncAll());
-  window.syncAll = syncAll;
-  window.openDB = openDB;
-  window.setBadge = setBadge;
 };
 
 main().catch(e => console.error(e));

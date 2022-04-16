@@ -1,7 +1,7 @@
 'use strict';
 
 import { fixLink, setBadge } from './utils.js';
-import { openDB, setLastId } from './store.js';
+import { openDB, setLastId, getLastId } from './store.js';
 
 var imgReferers = {};
 var firstId = 0;
@@ -52,9 +52,17 @@ async function listEntries(last = 0) {
     }
   }
 
+  let lastId = await getLastId();
   if (firstId > 0) {
     await setLastId(firstId);
     await setBadge();
+  }
+
+  if (lastId > 0) {
+    let lastItem = document.getElementById("idb-"+lastId);
+    if (lastItem.previousElementSibling) {
+      lastItem.previousElementSibling.style.borderBottomStyle = "solid";
+    }
   }
 
   let more = document.querySelector("#more")
