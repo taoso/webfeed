@@ -42,11 +42,6 @@ async function renderHTML(feed) {
   const template = document.getElementById("feed-item");
 
   let rewriteRefer = (e) => {
-    for (let header of e.requestHeaders) {
-      if (header.name.toLowerCase() === "user-agent") {
-        header.value += " WebFeed";
-      }
-    }
     e.requestHeaders.push({name:"Referer", value:feed.url})
     return {requestHeaders: e.requestHeaders};
   }
