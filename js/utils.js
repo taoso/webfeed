@@ -81,6 +81,8 @@ export async function fetchFeed(url, done) {
 }
 
 export async function syncAll() {
+  if (!navigator.onLine) return;
+
   let urls = await store.listFeeds();
   for (const url of urls) {
     let now = new Date();
