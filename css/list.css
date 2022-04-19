@@ -3,8 +3,9 @@ body {
   margin: 0 auto;
 }
 
-article div {
+article .summary {
   font-family: serif;
+  margin-top: 0.5em;
 }
 
 article {
