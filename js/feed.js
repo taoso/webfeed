@@ -7,61 +7,71 @@ const STATE = {
 
 const MAX_SUMMARY = 500;
 
-export class AtomFeed {
-  #state;
-  #entry;
+class Feed {
+  state;
+  entry;
   #maxEntries;
   #done;
   #finished;
 
-  constructor(parser, done, maxEntries = 10) {
+  constructor(url, done, maxEntries = 10) {
     this.title = "";
     this.description = "";
     this.link = "";
+    this.url = url;
     this.entries = [];
 
     this.#maxEntries = maxEntries;
     this.#done = done;
     this.#finished = false;
-
-    parser.emit = this.emitAll.bind(this);
   }
 
-  finish() {
+  finish(force = false) {
     if (this.#finished) return;
+    if (!force && this.entries.length < this.#maxEntries) return;
     this.#finished = true;
-    this.#done(this);
-  }
 
-  emitAll(event, content, attrs) {
-    if (this.entries.length >= this.#maxEntries) {
-      this.finish();
-      return;
+    delete this.state;
+    delete this.entry;
+
+    if (!this.link) {
+      let parts = this.url.split("/");
+      parts.pop();
+      this.link = parts.join("/");
     }
 
+    this.#done(this);
+    return true;
+  }
+}
+
+export class AtomFeed extends Feed {
+  emitAll(event, content, attrs) {
+    if (this.finish()) { return; }
+
     if (event == "opentag" && content == "feed") {
-      this.#state = STATE.FEED;
+      this.state = STATE.FEED;
       return;
     }
 
     if (event == "opentag" && content == "entry") {
-      this.#entry = {};
-      this.#state = STATE.ENTRY;
+      this.entry = {};
+      this.state = STATE.ENTRY;
       return;
     }
 
     if (event == "closetag" && content == "entry") {
-      this.entries.push(this.#entry);
-      this.#state = STATE.FEED;
+      this.entries.push(this.entry);
+      this.state = STATE.FEED;
       return;
     }
 
     if (event == "closetag" && content == "feed") {
-      this.finish();
+      this.finish(true);
       return;
     }
 
-    switch (this.#state) {
+    switch (this.state) {
       case STATE.ENTRY:
         this.emitEntry(event, content, attrs);
         break;
@@ -88,7 +98,7 @@ export class AtomFeed {
   }
 
   emitEntry(event, content, attrs) {
-    let entry = this.#entry;
+    let entry = this.entry;
     if (event == "opentag" && content == "link") {
       if (!attrs.rel || attrs.rel == "alternate") {
         entry.link = attrs.href;
@@ -120,61 +130,33 @@ export class AtomFeed {
   }
 }
 
-export class RssFeed {
-  #state;
-  #entry;
-  #maxEntries;
-  #done;
-  #finished;
-
-  constructor(parser, done, maxEntries = 10) {
-    this.title = "";
-    this.link = "";
-    this.description = "";
-    this.entries = [];
-
-    this.#maxEntries = maxEntries;
-    this.#done = done;
-    this.#finished = false;
-
-    parser.emit = this.emitAll.bind(this);
-  }
-
-  finish() {
-    if (this.#finished) return;
-    this.#finished = true;
-    this.#done(this);
-  }
-
+export class RssFeed extends Feed {
   emitAll(event, content, attrs) {
-    if (this.entries.length >= this.#maxEntries) {
-      this.finish();
-      return;
-    }
+    if (this.finish()) { return; }
 
     if (event == "opentag" && content == "channel") {
-      this.#state = STATE.FEED;
+      this.state = STATE.FEED;
       return;
     }
 
     if (event == "opentag" && content == "item") {
-      this.#entry = {};
-      this.#state = STATE.ENTRY;
+      this.entry = {};
+      this.state = STATE.ENTRY;
       return;
     }
 
     if (event == "closetag" && content == "item") {
-      this.entries.push(this.#entry);
-      this.#state = STATE.FEED;
+      this.entries.push(this.entry);
+      this.state = STATE.FEED;
       return;
     }
 
     if (event == "closetag" && content == "rss") {
-      this.finish();
+      this.finish(true);
       return;
     }
 
-    switch (this.#state) {
+    switch (this.state) {
       case STATE.ENTRY:
         this.emitEntry(event, content, attrs);
         break;
@@ -200,7 +182,7 @@ export class RssFeed {
   }
 
   emitEntry(event, content, attrs) {
-    let entry = this.#entry;
+    let entry = this.entry;
     if (event == "text" || event == "cdata") {
       switch(attrs._last.name) {
         case "title":

@@ -51,10 +51,12 @@ async function parse(reader, url, finished) {
   let num = 10;
 
   if (chunk.includes("<rss")) {
-    var feed = new RssFeed(parser, finished, num);
+    var feed = new RssFeed(url, finished, num);
   } else {
-    var feed = new AtomFeed(parser, finished, num);
+    var feed = new AtomFeed(url, finished, num);
   }
+
+  parser.emit = feed.emitAll.bind(feed);
 
   feed.url = url;
 
