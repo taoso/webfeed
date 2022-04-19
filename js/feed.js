@@ -8,18 +8,20 @@ const STATE = {
 const MAX_SUMMARY = 500;
 
 class Feed {
-  state;
-  entry;
+  link = "";
+  title = "";
+  description = "";
+  entries = [];
+
+  _state;
+  _entry;
+
   #maxEntries;
   #done;
   #finished;
 
   constructor(url, done, maxEntries = 10) {
-    this.title = "";
-    this.description = "";
-    this.link = "";
     this.url = url;
-    this.entries = [];
 
     this.#maxEntries = maxEntries;
     this.#done = done;
@@ -31,8 +33,8 @@ class Feed {
     if (!force && this.entries.length < this.#maxEntries) return;
     this.#finished = true;
 
-    delete this.state;
-    delete this.entry;
+    delete this._state;
+    delete this._entry;
 
     if (!this.link) {
       let parts = this.url.split("/");
@@ -50,19 +52,22 @@ export class AtomFeed extends Feed {
     if (this.finish()) { return; }
 
     if (event == "opentag" && content == "feed") {
-      this.state = STATE.FEED;
+      this._state = STATE.FEED;
       return;
     }
 
     if (event == "opentag" && content == "entry") {
-      this.entry = {};
-      this.state = STATE.ENTRY;
+      this._entry = {};
+      this._state = STATE.ENTRY;
       return;
     }
 
     if (event == "closetag" && content == "entry") {
-      this.entries.push(this.entry);
-      this.state = STATE.FEED;
+      // FIXME this.entry will be undefined in some case.
+      // parse https://pinlyu.com/atom.xml
+      // It seems caused by invalid encoding.
+      if (this._entry) this.entries.push(this._entry);
+      this._state = STATE.FEED;
       return;
     }
 
@@ -71,7 +76,7 @@ export class AtomFeed extends Feed {
       return;
     }
 
-    switch (this.state) {
+    switch (this._state) {
       case STATE.ENTRY:
         this.emitEntry(event, content, attrs);
         break;
@@ -98,7 +103,7 @@ export class AtomFeed extends Feed {
   }
 
   emitEntry(event, content, attrs) {
-    let entry = this.entry;
+    let entry = this._entry;
     if (event == "opentag" && content == "link") {
       if (!attrs.rel || attrs.rel == "alternate") {
         entry.link = attrs.href;
@@ -135,19 +140,19 @@ export class RssFeed extends Feed {
     if (this.finish()) { return; }
 
     if (event == "opentag" && content == "channel") {
-      this.state = STATE.FEED;
+      this._state = STATE.FEED;
       return;
     }
 
     if (event == "opentag" && content == "item") {
-      this.entry = {};
-      this.state = STATE.ENTRY;
+      this._entry = {};
+      this._state = STATE.ENTRY;
       return;
     }
 
     if (event == "closetag" && content == "item") {
-      this.entries.push(this.entry);
-      this.state = STATE.FEED;
+      this.entries.push(this._entry);
+      this._state = STATE.FEED;
       return;
     }
 
@@ -156,7 +161,7 @@ export class RssFeed extends Feed {
       return;
     }
 
-    switch (this.state) {
+    switch (this._state) {
       case STATE.ENTRY:
         this.emitEntry(event, content, attrs);
         break;
@@ -182,7 +187,7 @@ export class RssFeed extends Feed {
   }
 
   emitEntry(event, content, attrs) {
-    let entry = this.entry;
+    let entry = this._entry;
     if (event == "text" || event == "cdata") {
       switch(attrs._last.name) {
         case "title":
