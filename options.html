@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Web Feed Options</title>
+    <link rel="stylesheet" href="./css/options.css">
+    <script src="./js/options.js" defer type="module"></script>
+  </head>
+  <body>
+    <form id="options">
+      <table>
+        <tr>
+          <td><label for="fetch-limit">Fetch limit: </label></td>
+          <td><input id="fetch-limit" type="number" value="10" max="10" min="1" placeholder="integer"></td>
+        </tr>
+        <tr>
+          <td><label for="fetch-interval">Fetch interval: </label></td>
+          <td><input id="fetch-interval" type="number" value="60" min="1" placeholder="integer"><span>min</span></td>
+        </tr>
+      </table>
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>

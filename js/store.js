@@ -120,3 +120,18 @@ export async function getLastId() {
 
   return Number.MAX_SAFE_INTEGER;
 }
+
+export async function setOption(name, value) {
+  let opts = {};
+  opts["option-"+name] = value;
+  await browser.storage.sync.set(opts);
+}
+
+export async function getOptionInt(name) {
+  let key = "option-"+name;
+  let results = await browser.storage.sync.get(key);
+  let value = results[key]
+  if (value) {
+    return parseInt(value);
+  }
+}

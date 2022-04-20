@@ -48,7 +48,7 @@ async function parse(reader, url, finished) {
   let chunk = utf8Decoder.decode(value, {stream: true});
 
   let parser = new Parser();
-  let num = 10;
+  let num = await store.getOptionInt("fetch-limit") || 10;
 
   if (chunk.includes("<rss")) {
     var feed = new RssFeed(url, finished, num);
@@ -73,8 +73,8 @@ export async function fetchFeed(url, done) {
   var resp = await fetch(url);
   let reader = resp.body.getReader();
   await parse(reader, url, async (feed) => {
-    reader.cancel();
-    done(resp, feed);
+    await reader.cancel();
+    await done(resp, feed);
   });
 }
 
@@ -82,11 +82,12 @@ export async function syncAll() {
   if (!navigator.onLine) return;
 
   let urls = await store.listFeeds();
+  let interval = await store.getOptionInt("fetch-interval") || 60;
   for (const url of urls) {
     let now = new Date();
     let last = await store.getLastFetchTime(url);
-    if ((now - last) < 60*60*1000) {
-      console.log("skip, last fetched at: ", last);
+    if ((now - last) < interval*60*1000) {
+      console.log("skip", url, ", last fetched at: ", last);
       continue;
     }
 

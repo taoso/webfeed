@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
   "name": "Web Feed",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Web Feed Reader",
   "author": "涛叔",
   "developer": {
     "name": "涛叔",
     "url": "https://taoshu.in"
   },
-  "homepage_url": "https://taoshu.in/web-feed.html",
+  "homepage_url": "https://github.com/taoso/webfeed",
   "icons": {
     "48": "icons/icon.svg",
     "96": "icons/icon.svg"
@@ -37,7 +37,8 @@
     "default_title": "Web Feed"
   },
   "options_ui": {
-    "page": "options.html"
+    "page": "options.html",
+    "browser_style": true
   },
   "browser_specific_settings": {
     "gecko": {
