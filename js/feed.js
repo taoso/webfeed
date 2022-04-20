@@ -213,6 +213,7 @@ export class RssFeed extends Feed {
           }
           break;
         case "pubDate":
+        case "dc:date":
           entry.updated = new Date(content);
           break;
       }
