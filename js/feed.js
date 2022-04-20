@@ -29,8 +29,9 @@ class Feed {
   }
 
   finish(force = false) {
-    if (this.#finished) return;
-    if (!force && this.entries.length < this.#maxEntries) return;
+    if (this.#finished) return true;
+    if (!force && this.entries.length < this.#maxEntries) return false;
+
     this.#finished = true;
 
     delete this._state;

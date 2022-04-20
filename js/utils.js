@@ -58,13 +58,11 @@ async function parse(reader, url, finished) {
 
   parser.emit = feed.emitAll.bind(feed);
 
-  feed.url = url;
-
   parser._write(chunk);
 
   while (!done) {
     const { value, done } = await reader.read();
-    if (done) break;
+    if (done) return;
     let chunk = utf8Decoder.decode(value, {stream: true});
     parser._write(chunk);
   };
