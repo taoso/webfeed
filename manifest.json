@@ -6,12 +6,12 @@
   "author": "涛叔",
   "developer": {
     "name": "涛叔",
-    "url": "https://taoshu.in"
+    "url": "https://taoshu.in/"
   },
   "homepage_url": "https://github.com/taoso/webfeed",
   "icons": {
-    "48": "icons/icon.svg",
-    "96": "icons/icon.svg"
+    "32": "icons/icon-square.svg",
+    "48": "icons/icon-square.svg"
   },
   "background": {
     "page": "background.html"
@@ -23,7 +23,7 @@
     "bookmarks",
     "webRequest",
     "webRequestBlocking",
-    "contextMenus"
+    "menus"
   ],
   "web_accessible_resources": ["show.html"],
   "page_action": {
@@ -33,7 +33,7 @@
     "pinned": true
   },
   "browser_action": {
-    "default_icon": "icons/icon-color.svg",
+    "default_icon": "icons/icon-square.svg",
     "default_title": "Web Feed"
   },
   "options_ui": {
