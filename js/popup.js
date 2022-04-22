@@ -9,7 +9,6 @@ const feeds = JSON.parse(
 const types = {
 	"application/rss+xml": "rss",
 	"application/atom+xml": "atom",
-	"application/json": "json",
 };
 
 document.addEventListener("click", e => {
