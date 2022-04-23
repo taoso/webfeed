@@ -103,6 +103,7 @@ async function main() {
         <div>
           <h1>Error</h1>
           <p>Error while fetching feed</p>
+          <p style="color:red;">${e}</p>
           <a href="${url}">${url}</a>
         </div>
       `;
