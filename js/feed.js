@@ -43,6 +43,15 @@ class Feed {
       this.link = parts.join("/");
     }
 
+    // Fix html entity (&#45 -> -)
+    if (this.entries.length > 0 && this.entries[0].link.indexOf("&#") > 0) {
+      for (let entry of this.entries) {
+        entry.link = entry.link.replace(/&#(\d+);/ig, (match, p1) => {
+          return String.fromCharCode(parseInt(p1, 10));
+        });
+      }
+    }
+
     this.#done(this);
     return true;
   }
