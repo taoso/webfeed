@@ -7,3 +7,12 @@ article .summary {
   font-family: serif;
   margin-top: 0.5em;
 }
+
+article {
+  border-bottom: 1px dashed;
+}
+
+a.link {
+  display: inline-block;
+  padding: 0.5em 0;
+}
