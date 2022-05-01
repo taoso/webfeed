@@ -1,6 +1,6 @@
 'use strict';
 
-import { fixLink, setBadge } from './utils.js';
+import { fixLink, setBadge, dropHr } from './utils.js';
 import { openDB, setLastId, getLastId } from './store.js';
 
 var imgReferers = {};
@@ -44,6 +44,8 @@ async function listEntries(last = 0) {
 
     let imgs = content.querySelectorAll("img");
     imgs.forEach(img => imgReferers[img.src] = entry.link);
+
+    dropHr(content);
 
     items.appendChild(content);
     if (--num === 0) {

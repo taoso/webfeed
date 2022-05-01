@@ -106,3 +106,14 @@ export async function syncAll() {
   }
   await setBadge();
 }
+
+export async function dropHr(content) {
+  let nodes = content.querySelectorAll("hr,hr~*");
+
+  if (nodes.length === 0) return;
+
+  let prev = nodes[0].previousElementSibling;
+  if (prev) prev.style.marginBottom = "0px";
+
+  nodes.forEach(n => n.remove());
+}

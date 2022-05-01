@@ -1,6 +1,6 @@
 'use strict';
 
-import { setBadge, fixLink, fetchFeed } from './utils.js';
+import { setBadge, fixLink, fetchFeed, dropHr } from './utils.js';
 import * as store from './store.js';
 
 async function renderHTML(feed) {
@@ -70,6 +70,8 @@ async function renderHTML(feed) {
     content.querySelectorAll("article>div a").forEach(a => {
       a.href = fixLink(a.href, feed.url);
     });
+
+    dropHr(content);
 
     document.querySelector(".items").appendChild(content);
   });
