@@ -1,7 +1,7 @@
 'use strict';
 
 import { syncAll, setBadge } from "./utils.js";
-import { openDB } from "./store.js";
+import { openDB, fixBookmarks } from "./store.js";
 
 let tabFeeds = {};
 
@@ -94,6 +94,10 @@ async function main() {
 
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.alarms.onAlarm.addListener(async e => await syncAll());
+
+  browser.runtime.onInstalled.addListener(async details => {
+    await fixBookmarks();
+  });
 };
 
 main().catch(e => console.error(e));
