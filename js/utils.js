@@ -93,7 +93,6 @@ export async function syncAll() {
     let now = new Date();
     let last = await store.getLastFetchTime(url);
     if ((now - last) < interval*60*1000) {
-      console.log("skip", url, ", last fetched at: ", last);
       continue;
     }
 
