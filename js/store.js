@@ -1,5 +1,11 @@
 'use strict';
 
+export async function subscribed(url) {
+  url = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
+  let bs = await browser.bookmarks.search({url});
+  return bs.length > 0;
+}
+
 export async function subscribe(data) {
   let bs = await browser.bookmarks.search({title:"[web-feed]"});
   if (bs.length > 0) {

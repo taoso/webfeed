@@ -1,18 +1,18 @@
 'use strict';
 
-import { syncAll, setBadge } from "./utils.js";
-import { openDB, fixBookmarks } from "./store.js";
+import { syncAll } from "./utils.js";
+import { fixBookmarks, subscribed } from "./store.js";
 
 let tabFeeds = {};
 
-function setAction(tabId, feeds) {
+async function setAction(tabId, feeds) {
   if (feeds.length === 0) {
     browser.pageAction.hide(tabId);
     return;
   }
 
   if (feeds.length > 1) {
-    browser.pageAction.setPopup({
+    await browser.pageAction.setPopup({
       tabId,
       popup: `./popup.html?links=${encodeURIComponent(JSON.stringify(feeds))}`,
     });
@@ -20,35 +20,37 @@ function setAction(tabId, feeds) {
     tabFeeds[tabId] = feeds[0].url;
   }
 
+  let icon = "icons/bar-icon.svg";
+  for (const feed of feeds) {
+    if (await subscribed(feed.url)) {
+      icon = "icons/icon-color.svg";
+      break;
+    }
+  }
+
+  await browser.pageAction.setIcon({
+    path: icon,
+    tabId: tabId,
+  });
+
   browser.pageAction.show(tabId);
 };
 
 const handler = async (id) => {
-  browser.pageAction.hide(id);
-  browser.tabs
-    .executeScript(id, {
+  await browser.pageAction.hide(id);
+  try {
+    let x = await browser.tabs.executeScript(id, {
       file: "./js/page.js",
       runAt: "document_end",
-    })
-    .then(x => {
-      setAction(id, x[0] ? x[0]: [])
-    })
-    .catch(e => {
-      setAction(id, []);
     });
+
+    await setAction(id, x[0] || [])
+  } catch(e) {
+    await setAction(id, []);
+  }
 };
 
 async function main() {
-  browser.tabs
-    .query({
-      active: true,
-    })
-    .then(tabs => {
-      for (const tab of tabs) {
-        tab.id && handler(tab.id);
-      }
-    });
-
   browser.tabs.onActivated.addListener(info => handler(info.tabId));
   browser.tabs.onUpdated.addListener(id => handler(id));
 
