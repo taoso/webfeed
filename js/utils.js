@@ -70,7 +70,9 @@ async function parse(reader, url, finished) {
 
 export async function fetchFeed(url, done) {
   console.log("fetching", url);
-  var resp = await fetch(url);
+  var resp = await fetch(url, {
+    cache: "no-cache",
+  });
   let reader = resp.body.getReader();
 
   // Use the relocated url.
