@@ -1,5 +1,8 @@
 'use strict';
 
+let browser = self.browser || self.chrome;
+browser.action = browser.action || browser.browserAction;
+
 import Parser from './parser.js';
 import { AtomFeed, RssFeed } from './feed.js';
 import * as store from './store.js';
@@ -26,9 +29,9 @@ export async function setBadge() {
   }
 
   if (num > 0) {
-    await browser.browserAction.setBadgeText({text:num.toString()});
+    await browser.action.setBadgeText({text:num.toString()});
   } else {
-    await browser.browserAction.setBadgeText({text:""});
+    await browser.action.setBadgeText({text:""});
   }
 }
 

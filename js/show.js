@@ -1,5 +1,7 @@
 'use strict';
 
+let browser = self.browser || self.chrome;
+
 import { setBadge, fixLink, fetchFeed, dropHr } from './utils.js';
 import * as store from './store.js';
 
@@ -41,16 +43,18 @@ async function renderHTML(feed) {
 
   const template = document.getElementById("feed-item");
 
-  let rewriteRefer = (e) => {
-    e.requestHeaders.push({name:"Referer", value:feed.url})
-    return {requestHeaders: e.requestHeaders};
-  }
+  if (!chrome) {
+    let rewriteRefer = (e) => {
+      e.requestHeaders.push({name:"Referer", value:feed.url})
+      return {requestHeaders: e.requestHeaders};
+    }
 
-  browser.webRequest.onBeforeSendHeaders.addListener(
-    rewriteRefer,
-    {urls: ["*://*/*"]},
-    ["blocking", "requestHeaders"]
-  );
+    browser.webRequest.onBeforeSendHeaders.addListener(
+      rewriteRefer,
+      {urls: ["*://*/*"]},
+      ["blocking", "requestHeaders"]
+    );
+  }
 
   feed.entries.forEach(entry => {
     const content = template.content.cloneNode(true);

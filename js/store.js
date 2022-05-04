@@ -1,5 +1,9 @@
 'use strict';
 
+import { idb } from "./idb@7.js";
+
+let browser = self.browser || self.chrome;
+
 export async function subscribed(url) {
   url = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
   let bs = await browser.bookmarks.search({url});

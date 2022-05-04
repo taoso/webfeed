@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Web Feed",
+  "version": "0.5",
+  "description": "Web Feed Reader",
+  "author": "涛叔",
+  "homepage_url": "https://github.com/taoso/webfeed",
+  "icons": {
+    "128": "icons/icon-square-128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "alarms",
+    "storage",
+    "scripting",
+    "bookmarks"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "action": {
+    "default_icon": {
+      "128": "icons/icon-square-gray-128.png"
+    },
+    "default_title": "Web Feed"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "minimum_chrome_version": "92"
+}
+
