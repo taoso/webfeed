@@ -64,7 +64,7 @@ async function listEntries(last = 0) {
 
   if (lastId > 0) {
     let lastItem = document.getElementById("idb-"+lastId);
-    if (lastItem.previousElementSibling) {
+    if (lastItem && lastItem.previousElementSibling) {
       lastItem.previousElementSibling.style.borderBottomStyle = "solid";
     }
   }
