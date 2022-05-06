@@ -124,7 +124,7 @@ export async function listFeeds() {
 
 export async function getLastFetchTime(url) {
   let key = "last-fetch:"+url;
-  let result = await browser.storage.sync.get(key)
+  let result = await browser.storage.sync.get(key) || {};
 
   let s = result[key];
   if (s) {
@@ -147,7 +147,7 @@ export async function setLastId(id) {
 }
 
 export async function getLastId() {
-  let results = await browser.storage.sync.get("last-id");
+  let results = await browser.storage.sync.get("last-id") || {};
   let id = results["last-id"]
   if (id) {
     return parseInt(id);
@@ -164,7 +164,7 @@ export async function setOption(name, value) {
 
 export async function getOptionInt(name) {
   let key = "option-"+name;
-  let results = await browser.storage.sync.get(key);
+  let results = await browser.storage.sync.get(key) || {};
   let value = results[key]
   if (value) {
     return parseInt(value);
