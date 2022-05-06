@@ -16,7 +16,8 @@
     "alarms",
     "storage",
     "scripting",
-    "bookmarks"
+    "bookmarks",
+    "contextMenus"
   ],
   "host_permissions": [
     "*://*/*"

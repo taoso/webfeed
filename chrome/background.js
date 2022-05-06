@@ -36,8 +36,13 @@ const handler = async (id) => {
 };
 
 browser.runtime.onInstalled.addListener(async details => {
-  await fixBookmarks();
+  fixBookmarks();
   browser.alarms.create("sync-feed", {periodInMinutes:1});
+  browser.contextMenus.create({
+    id: "open-web-feed",
+    title: "Open in Web Feed...",
+    contexts: ["link"],
+  });
 });
 
 browser.tabs.onActivated.addListener(info => handler(info.tabId));
@@ -47,4 +52,8 @@ browser.action.onClicked.addListener((tab) => {
   browser.tabs.create({url:browser.runtime.getURL("./list.html")});
 });
 
-browser.alarms.onAlarm.addListener(async e => await syncAll());
+browser.alarms.onAlarm.addListener(async e => syncAll());
+
+chrome.contextMenus.onClicked.addListener((info, tab) => browser.tabs.create({
+  url: browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`),
+}));
