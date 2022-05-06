@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "idb": "^7.0.1"
+  }
+}

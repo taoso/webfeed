@@ -1,5 +1,7 @@
 'use strict';
 
+import { unescape as htmldecode } from './unescape.js';
+
 const STATE = {
   FEED: 0,
   ENTRY: 1,
@@ -233,10 +235,4 @@ export class RssFeed extends Feed {
       }
     }
   }
-}
-
-function htmldecode(str) {
-  var txt = document.createElement('textarea');
-  txt.innerHTML = str;
-  return txt.value;
 }

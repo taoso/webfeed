@@ -1,6 +1,6 @@
 'use strict';
 
-import { idb } from "./idb@7.js";
+import * as idb from "./idb.js";
 
 let browser = self.browser || self.chrome;
 

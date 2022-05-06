@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd $(dirname "$0");
+
 rsync -a ../*.html .
 rsync -a --exclude=".*" ../js/ js/
 rsync -a --exclude=".*" ../css/ css/
@@ -9,4 +11,4 @@ for icon in $(ls icons/|grep svg); do
 	rsvg-convert -h $size ../icons/$icon > icons/${icon%.svg}-$size.png
 done
 
-zip -r webfeed.zip *
+npm install --prefix js
