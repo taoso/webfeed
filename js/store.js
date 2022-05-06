@@ -137,7 +137,7 @@ export async function getLastFetchTime(url) {
 export async function setLastFetchTime(url, time) {
   let objects = {};
   let key = "last-fetch:"+url;
-  objects[key] = time;
+  objects[key] = time.toString();
 
   await browser.storage.sync.set(objects);
 }
