@@ -24,7 +24,7 @@ document.addEventListener("click", e => {
   });
 });
 
-if (chrome) {
+if (!self.browser) {
   feeds.unshift({
     title: "My Feeds",
     url: browser.runtime.getURL(`list.html`),

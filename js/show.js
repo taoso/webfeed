@@ -43,7 +43,7 @@ async function renderHTML(feed) {
 
   const template = document.getElementById("feed-item");
 
-  if (!chrome) {
+  if (self.browser) {
     let rewriteRefer = (e) => {
       e.requestHeaders.push({name:"Referer", value:feed.url})
       return {requestHeaders: e.requestHeaders};

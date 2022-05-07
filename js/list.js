@@ -103,7 +103,7 @@ async function main() {
   });
   observer.observe(more);
 
-  if (!chrome) {
+  if (self.browser) {
     let rewriteRefer = (e) => {
       let referer = imgReferers[e.url];
       if (!referer) return;
