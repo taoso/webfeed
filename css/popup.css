@@ -1,5 +1,7 @@
 body {
   max-width: 30rem;
+  min-width: 10rem;
+  font-size: 1em;
   padding: 0;
   margin: 0;
 }

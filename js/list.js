@@ -1,5 +1,7 @@
 'use strict';
 
+let browser = self.browser || self.chrome;
+
 import { fixLink, setBadge, dropHr } from './utils.js';
 import { openDB, setLastId, getLastId } from './store.js';
 
@@ -62,7 +64,7 @@ async function listEntries(last = 0) {
 
   if (lastId > 0) {
     let lastItem = document.getElementById("idb-"+lastId);
-    if (lastItem.previousElementSibling) {
+    if (lastItem && lastItem.previousElementSibling) {
       lastItem.previousElementSibling.style.borderBottomStyle = "solid";
     }
   }
@@ -101,18 +103,20 @@ async function main() {
   });
   observer.observe(more);
 
-  let rewriteRefer = (e) => {
-    let referer = imgReferers[e.url];
-    if (!referer) return;
-    e.requestHeaders.push({name:"Referer", value:referer})
-    return {requestHeaders: e.requestHeaders};
-  }
+  if (self.browser) {
+    let rewriteRefer = (e) => {
+      let referer = imgReferers[e.url];
+      if (!referer) return;
+      e.requestHeaders.push({name:"Referer", value:referer})
+      return {requestHeaders: e.requestHeaders};
+    }
 
-  browser.webRequest.onBeforeSendHeaders.addListener(
-    rewriteRefer,
-    {urls: ["*://*/*"]},
-    ["blocking", "requestHeaders"]
-  );
+    browser.webRequest.onBeforeSendHeaders.addListener(
+      rewriteRefer,
+      {urls: ["*://*/*"]},
+      ["blocking", "requestHeaders"]
+    );
+  }
 }
 
 main().catch(e => console.error(e));
