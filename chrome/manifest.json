@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Web Feed",
-  "version": "0.5",
+  "name": "WebFeed",
+  "version": "0.6",
   "description": "Web Feed Reader",
   "author": "涛叔",
   "homepage_url": "https://github.com/taoso/webfeed",
@@ -26,7 +26,7 @@
     "default_icon": {
       "128": "icons/icon-square-gray-128.png"
     },
-    "default_title": "Web Feed"
+    "default_title": "WebFeed"
   },
   "options_ui": {
     "page": "options.html",
