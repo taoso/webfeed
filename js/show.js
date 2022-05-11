@@ -2,7 +2,7 @@
 
 let browser = self.browser || self.chrome;
 
-import { setBadge, fixLink, fetchFeed, dropHr } from './utils.js';
+import * as utils from './utils.js';
 import * as store from './store.js';
 
 async function renderHTML(feed) {
@@ -11,7 +11,7 @@ async function renderHTML(feed) {
   header.querySelector('h1').innerHTML = feed.title;
   let h1 = header.querySelector('#site-link')
   h1.href = feed.link;
-  h1.innerHTML = (new URL(feed.link)).hostname.replace("www.", "");
+  h1.innerHTML = utils.getSiteTitle(feed.link);
 
   let button = header.querySelector('subscribe-button')
   button.dataset.url = feed.url
@@ -29,7 +29,7 @@ async function renderHTML(feed) {
     if (button.innerHTML == "Subscribe") {
       await store.subscribe(e.target.dataset);
       button.innerHTML = "Unsubscribe";
-      await fetchFeed(feed.url, async (resp, feed) => {
+      await utils.fetchFeed(feed.url, async (resp, feed) => {
         await store.saveEntries(feed.url, feed.entries);
       });
     } else {
@@ -38,7 +38,7 @@ async function renderHTML(feed) {
       await store.removeEntries(feed.url);
       button.innerHTML = "Subscribe";
     }
-    await setBadge();
+    await utils.setBadge();
   };
 
   const template = document.getElementById("feed-item");
@@ -62,20 +62,20 @@ async function renderHTML(feed) {
     content.querySelector("article>h2").innerHTML = entry.title;
     content.querySelector("article>time").innerHTML = entry.updated.toLocaleString();
     content.querySelector("article>div").innerHTML = entry.summary;
-    content.querySelector("article>a").href = fixLink(entry.link, feed.url);
+    content.querySelector("article>a").href = utils.fixLink(entry.link, feed.url);
 
     content.querySelectorAll("article>div img").forEach(img => {
       if (img.dataset.src) {
         img.src = img.dataset.src;
       }
-      img.src = fixLink(img.src, feed.url);
+      img.src = utils.fixLink(img.src, feed.url);
     });
 
     content.querySelectorAll("article>div a").forEach(a => {
-      a.href = fixLink(a.href, feed.url);
+      a.href = utils.fixLink(a.href, feed.url);
     });
 
-    dropHr(content);
+    utils.dropHr(content);
 
     document.querySelector(".items").appendChild(content);
   });
@@ -89,7 +89,7 @@ async function main() {
   }
 
   try {
-    await fetchFeed(url, async (resp, feed) => {
+    await utils.fetchFeed(url, async (resp, feed) => {
       if (resp.status >= 400) {
         const notFound = document.createElement("div");
         notFound.innerHTML = `

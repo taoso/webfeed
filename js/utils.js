@@ -121,3 +121,12 @@ export async function dropHr(content) {
 
   nodes.forEach(n => n.remove());
 }
+
+export function getSiteTitle(link) {
+  let url = new URL(link);
+  let title = url.hostname.replace("www.", "")
+  if (title === "medium.com") {
+    title += url.pathname.replace("/feed", "");
+  }
+  return title;
+}

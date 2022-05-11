@@ -2,14 +2,14 @@
 
 let browser = self.browser || self.chrome;
 
-import { fixLink, setBadge, dropHr } from './utils.js';
-import { openDB, setLastId, getLastId } from './store.js';
+import * as utils from './utils.js';
+import * as store from './store.js';
 
 var imgReferers = {};
 var firstId = 0;
 
 async function listEntries(last = 0) {
-  let db = await openDB();
+  let db = await store.openDB();
 
   const template = document.getElementById("feed-item");
   let tx = db.transaction("entries");
@@ -37,17 +37,16 @@ async function listEntries(last = 0) {
     $("article>div").innerHTML = entry.summary;
     $("article>a.link").href = entry.link;
 
-    let site = new URL(entry.site);
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
     $("article>a.site").href = showUrl;
-    $("article>a.site").innerHTML = site.hostname.replace("www.", "");
+    $("article>a.site").innerHTML = utils.getSiteTitle(entry.site);
 
     $("article").id = "idb-" + cursor.key;
 
     let imgs = content.querySelectorAll("img");
     imgs.forEach(img => imgReferers[img.src] = entry.link);
 
-    dropHr(content);
+    utils.dropHr(content);
 
     items.appendChild(content);
     if (--num === 0) {
@@ -56,10 +55,10 @@ async function listEntries(last = 0) {
     }
   }
 
-  let lastId = await getLastId();
+  let lastId = await store.getLastId();
   if (firstId > 0) {
-    await setLastId(firstId);
-    await setBadge();
+    await store.setLastId(firstId);
+    await utils.setBadge();
   }
 
   if (lastId > 0) {
