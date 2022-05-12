@@ -6,7 +6,6 @@ import * as utils from './utils.js';
 import * as store from './store.js';
 
 var imgReferers = {};
-var firstId = 0;
 
 async function listEntries(last = 0) {
   let db = await store.openDB();
@@ -24,10 +23,6 @@ async function listEntries(last = 0) {
     }
 
     let entry = cursor.value;
-
-    if (last === 0 && firstId === 0) {
-      firstId = cursor.key;
-    }
 
     const content = template.content.cloneNode(true);
     let $ = content.querySelector.bind(content);
@@ -56,15 +51,16 @@ async function listEntries(last = 0) {
   }
 
   let lastId = await store.getLastId();
-  if (firstId > 0) {
-    await store.setLastId(firstId);
-    await utils.setBadge();
-  }
-
   if (lastId > 0) {
     let lastItem = document.getElementById("idb-"+lastId);
     if (lastItem && lastItem.previousElementSibling) {
       lastItem.previousElementSibling.style.borderBottomStyle = "solid";
+      let first = document.querySelector("div.items > article");
+      if (first) {
+        let firstId = parseInt(first.id.substring("idb-".length));
+        await store.setLastId(firstId);
+        await utils.setBadge();
+      }
     }
   }
 
