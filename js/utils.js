@@ -46,9 +46,14 @@ export function fixLink(link, feedLink) {
 async function parse(reader, url, finished) {
   const { value, done } = await reader.read();
 
-  const utf8Decoder = new TextDecoder("utf-8");
+  let decoder = new TextDecoder("utf-8");
+  let chunk = decoder.decode(value, {stream: true});
 
-  let chunk = utf8Decoder.decode(value, {stream: true});
+  let m = chunk.match(/<\?xml.+encoding="(.+?)".*\?>/);
+  if (m && m[1].toLowerCase() != "utf-8") {
+    decoder = new TextDecoder(m[1]);
+    chunk = decoder.decode(value, {stream: true});
+  }
 
   let parser = new Parser();
   let num = await store.getOptionInt("fetch-limit") || 10;
@@ -66,7 +71,7 @@ async function parse(reader, url, finished) {
   while (!done) {
     const { value, done } = await reader.read();
     if (done) return;
-    let chunk = utf8Decoder.decode(value, {stream: true});
+    let chunk = decoder.decode(value, {stream: true});
     parser._write(chunk);
   };
 }
