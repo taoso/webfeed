@@ -78,9 +78,6 @@ export async function fetchFeed(url, done) {
   });
   let reader = resp.body.getReader();
 
-  // Use the relocated url.
-  if (resp.url != url) url = resp.url;
-
   await parse(reader, url, async (feed) => {
     await reader.cancel();
     await done(resp, feed);

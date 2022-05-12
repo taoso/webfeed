@@ -109,8 +109,10 @@ export class AtomFeed extends Feed {
       }
     }
 
-    if (event == "opentag" && content == "link" && attrs.rel != "self") {
-      this.link = attrs.href;
+    if (event == "opentag" && content == "link") {
+      if (!attrs.rel || attrs.rel == "alternate") {
+        this.link = attrs.href;
+      }
     }
   }
 
