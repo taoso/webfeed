@@ -43,19 +43,6 @@ async function renderHTML(feed) {
 
   const template = document.getElementById("feed-item");
 
-  if (self.browser) {
-    let rewriteRefer = (e) => {
-      e.requestHeaders.push({name:"Referer", value:feed.url})
-      return {requestHeaders: e.requestHeaders};
-    }
-
-    browser.webRequest.onBeforeSendHeaders.addListener(
-      rewriteRefer,
-      {urls: ["*://*/*"]},
-      ["blocking", "requestHeaders"]
-    );
-  }
-
   feed.entries.forEach(entry => {
     const content = template.content.cloneNode(true);
 

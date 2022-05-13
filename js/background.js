@@ -78,22 +78,6 @@ async function main() {
     });
   });
 
-  let manifest = await browser.runtime.getManifest();
-  let rewriteUserAgent = (e) => {
-    for (let header of e.requestHeaders) {
-      if (header.name.toLowerCase() === "user-agent") {
-        header.value += " WebFeed/"+manifest.version;
-      }
-    }
-    return {requestHeaders: e.requestHeaders};
-  }
-
-  browser.webRequest.onBeforeSendHeaders.addListener(
-    rewriteUserAgent,
-    {urls: ["*://*/*"]},
-    ["blocking", "requestHeaders"]
-  );
-
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.alarms.onAlarm.addListener(async e => await syncAll());
 

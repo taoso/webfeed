@@ -20,8 +20,6 @@
     "alarms",
     "storage",
     "bookmarks",
-    "webRequest",
-    "webRequestBlocking",
     "menus"
   ],
   "web_accessible_resources": ["show.html"],

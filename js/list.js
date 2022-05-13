@@ -5,8 +5,6 @@ let browser = self.browser || self.chrome;
 import * as utils from './utils.js';
 import * as store from './store.js';
 
-var imgReferers = {};
-
 async function listEntries(last = 0) {
   let db = await store.openDB();
 
@@ -39,7 +37,6 @@ async function listEntries(last = 0) {
     $("article").id = "idb-" + cursor.key;
 
     let imgs = content.querySelectorAll("img");
-    imgs.forEach(img => imgReferers[img.src] = entry.link);
 
     utils.dropHr(content);
 
@@ -97,21 +94,6 @@ async function main() {
     }
   });
   observer.observe(more);
-
-  if (self.browser) {
-    let rewriteRefer = (e) => {
-      let referer = imgReferers[e.url];
-      if (!referer) return;
-      e.requestHeaders.push({name:"Referer", value:referer})
-      return {requestHeaders: e.requestHeaders};
-    }
-
-    browser.webRequest.onBeforeSendHeaders.addListener(
-      rewriteRefer,
-      {urls: ["*://*/*"]},
-      ["blocking", "requestHeaders"]
-    );
-  }
 }
 
 main().catch(e => console.error(e));

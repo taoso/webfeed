@@ -78,8 +78,12 @@ async function parse(reader, url, finished) {
 
 export async function fetchFeed(url, done) {
   console.log("fetching", url);
+  let manifest = await browser.runtime.getManifest();
   var resp = await fetch(url, {
     cache: "no-cache",
+    headers: {
+      "user-agent": navigator.userAgent + " WebFeed/" + manifest.version,
+    },
   });
   let reader = resp.body.getReader();
 
