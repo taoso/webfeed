@@ -94,6 +94,18 @@ export async function saveEntries(url, entries) {
   }
 }
 
+export async function cleanEntries(limit) {
+  let db = await openDB();
+  let tx = db.transaction("entries", 'readwrite');
+  let index = tx.store.index("idx");
+  let begin = IDBKeyRange.lowerBound(0);
+  for await (const cursor of index.iterate(begin)) {
+    if (--limit < 0) {
+      await cursor.delete();
+    }
+  }
+}
+
 export async function removeEntries(url) {
   let db = await openDB();
 

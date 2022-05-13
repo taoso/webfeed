@@ -98,6 +98,7 @@ export async function syncAll() {
 
   let urls = await store.listFeeds();
   let interval = await store.getOptionInt("fetch-interval") || 60;
+  let needClean = false;
   for (const url of urls) {
     let now = new Date();
     let last = await store.getLastFetchTime(url);
@@ -110,11 +111,17 @@ export async function syncAll() {
         await store.saveEntries(feed.url, feed.entries);
       });
       await store.setLastFetchTime(url, now);
+      needClean = true;
     } catch (e) {
       console.error(e);
     }
   }
   await setBadge();
+
+  if (needClean) {
+    let limit = store.getOptionInt("max-store-entries") || 500;
+    await cleanEntries(limit);
+  }
 }
 
 export async function dropHr(content) {

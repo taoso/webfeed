@@ -1,7 +1,7 @@
 'use strict';
 
-import { syncAll } from "./utils.js";
-import { fixBookmarks, subscribed } from "./store.js";
+import * as utils from "./utils.js";
+import * as store from "./store.js";
 
 let tabFeeds = {};
 
@@ -22,7 +22,7 @@ async function setAction(tabId, feeds) {
 
   let icon = "icons/bar-icon.svg";
   for (const feed of feeds) {
-    if (await subscribed(feed.url)) {
+    if (await store.subscribed(feed.url)) {
       icon = "icons/icon-color.svg";
       break;
     }
@@ -79,10 +79,10 @@ async function main() {
   });
 
   browser.alarms.create("sync-feed", {periodInMinutes:1});
-  browser.alarms.onAlarm.addListener(async e => await syncAll());
+  browser.alarms.onAlarm.addListener(async e => await utils.syncAll());
 
   browser.runtime.onInstalled.addListener(async details => {
-    await fixBookmarks();
+    await store.fixBookmarks();
   });
 };
 
