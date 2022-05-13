@@ -16,11 +16,12 @@ async function listEntries(last = 0) {
   const begin = IDBKeyRange.lowerBound(last);
   const items = document.querySelector(".items");
   for await (const cursor of index.iterate(begin)) {
-    if (document.getElementById("idb-"+cursor.key)) {
+    let entry = cursor.value;
+    let id = "idb-" + entry.id;
+
+    if (document.getElementById(id)) {
       continue;
     }
-
-    let entry = cursor.value;
 
     const content = template.content.cloneNode(true);
     let $ = content.querySelector.bind(content);
@@ -34,7 +35,7 @@ async function listEntries(last = 0) {
     $("article>a.site").href = showUrl;
     $("article>a.site").innerHTML = utils.getSiteTitle(entry.site);
 
-    $("article").id = "idb-" + cursor.key;
+    $("article").id = id;
 
     let imgs = content.querySelectorAll("img");
 
