@@ -76,10 +76,12 @@ export async function openDB() {
   return db;
 }
 
+const maxTime = (new Date("9999-01-01")).getTime();
+
 export async function saveEntries(url, entries) {
   let db = await openDB();
 
-  let maxTime = (new Date("9999-01-01")).getTime();
+  let added = 0;
   for (const entry of entries) {
     entry.idx = maxTime - entry.updated.getTime();
     entry.site = url;
@@ -87,22 +89,25 @@ export async function saveEntries(url, entries) {
       const value = await db.getFromIndex('entries', 'link', entry.link);
       if (!value) {
         await db.add('entries', entry);
+        added++;
       }
     } catch (e) {
       console.error(e);
     }
   }
+  return added;
 }
 
-export async function cleanEntries(limit) {
+export async function cleanEntries(cleanDate) {
   let db = await openDB();
   let tx = db.transaction("entries", 'readwrite');
   let index = tx.store.index("idx");
-  let begin = IDBKeyRange.lowerBound(0);
+
+  let idx = maxTime - cleanDate.getTime();
+  let begin = IDBKeyRange.lowerBound(idx);
   for await (const cursor of index.iterate(begin)) {
-    if (--limit < 0) {
-      await cursor.delete();
-    }
+    console.log("delete", cursor.value);
+    cursor.delete();
   }
 }
 
@@ -165,7 +170,28 @@ export async function getLastId() {
     return parseInt(id);
   }
 
-  return Number.MAX_SAFE_INTEGER;
+  return 0;
+}
+
+export async function resetUnreadNum() {
+  await browser.storage.sync.set({"unread-num": 0});
+  await browser.action.setBadgeText({text:""});
+}
+
+export async function incrUnreadNum(num) {
+  num += await getUnreadNum();
+  await browser.storage.sync.set({"unread-num": num});
+  await browser.action.setBadgeText({text: num.toString()});
+}
+
+async function getUnreadNum() {
+  let results = await browser.storage.sync.get("unread-num") || {};
+  let num = results["unread-num"]
+  if (num) {
+    return parseInt(num);
+  }
+
+  return 0;
 }
 
 export async function setOption(name, value) {

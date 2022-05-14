@@ -5,6 +5,8 @@ let browser = self.browser || self.chrome;
 import * as utils from './utils.js';
 import * as store from './store.js';
 
+let lastId = 0;
+
 async function listEntries(last = 0) {
   let db = await store.openDB();
 
@@ -13,6 +15,7 @@ async function listEntries(last = 0) {
   const index = tx.store.index("idx");
 
   let num = 5;
+  let firstId = 0;
   const begin = IDBKeyRange.lowerBound(last);
   const items = document.querySelector(".items");
   for await (const cursor of index.iterate(begin)) {
@@ -42,24 +45,24 @@ async function listEntries(last = 0) {
     utils.dropHr(content);
 
     items.appendChild(content);
+
+    if (lastId === entry.id && items.children.length > 1) {
+      let last = items.children[items.children.length-2];
+      last.style.borderBottomStyle = "solid";
+    }
+
+    if (items.children.length === 1) {
+      firstId = entry.id;
+    }
+
     if (--num === 0) {
       document.querySelector("#more").dataset.last = entry.idx;
       break;
     }
   }
 
-  let lastId = await store.getLastId();
-  if (lastId > 0) {
-    let lastItem = document.getElementById("idb-"+lastId);
-    if (lastItem && lastItem.previousElementSibling) {
-      lastItem.previousElementSibling.style.borderBottomStyle = "solid";
-      let first = document.querySelector("div.items > article");
-      if (first) {
-        let firstId = parseInt(first.id.substring("idb-".length));
-        await store.setLastId(firstId);
-        await utils.setBadge();
-      }
-    }
+  if (firstId > 0) {
+    await store.setLastId(firstId);
   }
 
   let more = document.querySelector("#more")
@@ -70,6 +73,10 @@ async function listEntries(last = 0) {
 }
 
 async function main() {
+  lastId = await store.getLastId();
+
+  await store.resetUnreadNum();
+
   let more = document.querySelector('#more');
   more.onclick = async (e) => {
     if (e.target.dataset.done) return;

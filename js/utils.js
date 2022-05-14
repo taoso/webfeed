@@ -15,26 +15,6 @@ export function findParent(el, selector) {
 	return el;
 }
 
-export async function setBadge() {
-  let last = await store.getLastId();
-
-  let db = await store.openDB();
-  let tx = db.transaction("entries");
-  const index = tx.store.index("idx");
-  const begin = IDBKeyRange.upperBound(last, true);
-
-  let num = 0;
-  for await (const cursor of index.iterate(begin)) {
-    num++;
-  }
-
-  if (num > 0) {
-    await browser.action.setBadgeText({text:num.toString()});
-  } else {
-    await browser.action.setBadgeText({text:""});
-  }
-}
-
 export function fixLink(link, feedLink) {
   if (!link.startsWith("http")) {
     let feedUrl = new URL(feedLink);
@@ -96,9 +76,12 @@ export async function fetchFeed(url, done) {
 export async function syncAll() {
   if (!navigator.onLine) return;
 
+  let newEntries = 0;
   let urls = await store.listFeeds();
   let interval = await store.getOptionInt("fetch-interval") || 60;
-  let needClean = false;
+  let saveDays = await store.getOptionInt("entry-save-days") || 30;
+  let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
+
   for (const url of urls) {
     let now = new Date();
     let last = await store.getLastFetchTime(url);
@@ -108,19 +91,18 @@ export async function syncAll() {
 
     try {
       await fetchFeed(url, async (resp, feed) => {
-        await store.saveEntries(feed.url, feed.entries);
+        let entries = feed.entries.filter(f => f.updated >= cleanDate);
+        newEntries += await store.saveEntries(feed.url, entries);
       });
       await store.setLastFetchTime(url, now);
-      needClean = true;
     } catch (e) {
       console.error(e);
     }
   }
-  await setBadge();
 
-  if (needClean) {
-    let limit = store.getOptionInt("max-store-entries") || 500;
-    await cleanEntries(limit);
+  if (newEntries > 0) {
+    await store.incrUnreadNum(newEntries);
+    await store.cleanEntries(cleanDate);
   }
 }
 

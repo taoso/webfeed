@@ -38,7 +38,6 @@ async function renderHTML(feed) {
       await store.removeEntries(feed.url);
       button.innerHTML = "Subscribe";
     }
-    await utils.setBadge();
   };
 
   const template = document.getElementById("feed-item");
