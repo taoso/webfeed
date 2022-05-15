@@ -55,6 +55,9 @@ async function renderHTML(feed) {
         img.src = img.dataset.src;
       }
       img.src = utils.fixLink(img.src, feed.url);
+      img.onerror = (e) => {
+        img.style.display = 'none';
+      };
     });
 
     content.querySelectorAll("article>div a").forEach(a => {
