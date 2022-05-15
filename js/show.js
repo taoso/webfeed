@@ -25,7 +25,13 @@ async function renderHTML(feed) {
     button.innerHTML = "Subscribe";
   }
 
+  let invalid = false;
+
   button.onclick = async (e) => {
+    if (invalid) {
+      alert("invalid feed");
+      return;
+    }
     if (button.innerHTML == "Subscribe") {
       await store.subscribe(e.target.dataset);
       button.innerHTML = "Unsubscribe";
@@ -44,6 +50,10 @@ async function renderHTML(feed) {
 
   feed.entries.forEach(entry => {
     const content = template.content.cloneNode(true);
+
+    if (isNaN(entry.updated)) {
+      invalid = true;
+    }
 
     content.querySelector("article>h2").innerHTML = entry.title;
     content.querySelector("article>time").innerHTML = entry.updated.toLocaleString();
