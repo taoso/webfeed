@@ -121,6 +121,9 @@ export class AtomFeed extends Feed {
     if (event == "opentag" && content == "link") {
       if (!attrs.rel || attrs.rel == "alternate") {
         entry.link = attrs.href;
+        if (entry.link.startsWith("/")) {
+          entry.link = this.link + entry.link;
+        }
       }
     }
     content = content.trim();
