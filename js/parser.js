@@ -3,7 +3,7 @@
 export default class Parser {
   constructor() {
     this.state = STATE.TEXT;
-    this.buffer = '';
+    this.buffer = [];
     this.pos = 0;
     this.tagType = TAG_TYPE.NONE;
     this.last = { name: "", attrs: {} };
@@ -14,7 +14,7 @@ export default class Parser {
     for (let i = 0; i < chunk.length && !this.finished; i++) {
       let c = chunk[i];
       let prev = this.buffer[this.pos-1];
-      this.buffer += c;
+      this.buffer.push(c);
       this.pos++;
 
       switch (this.state) {
@@ -60,14 +60,36 @@ export default class Parser {
     }
   }
 
+  isWhite(c) {
+    switch (c) {
+      case " ":
+      case "\t":
+      case "\v":
+      case "\f":
+      case "\n":
+      case "\r":
+      case '\uFEFF': // BOM
+        return true;
+      default:
+        return false;
+    }
+  }
+
   _endRecording() {
-    let rec = this.buffer.slice(1, this.pos-1).trim();    
+    let i = 1, j = this.pos-1;
+    while (this.isWhite(this.buffer[i])) i++;
+    while (this.isWhite(this.buffer[j])) j--;
+    
+    let rec = this.buffer.slice(i, j);
+
     // Keep last item in buffer for prev comparison in main loop.
     this.buffer = this.buffer.slice(-1);
     this.pos = 1;
-    rec = rec.charAt(rec.length-1) === '/' ? rec.slice(0, -1) : rec;
-    rec = rec.charAt(rec.length-1) === '>' ? rec.slice(0, -2) : rec;
-    return rec;
+
+    if (rec[rec.length-1] === '/') rec = rec.slice(0, -1);
+    if (rec[rec.length-1] === '>') rec = rec.slice(0, -2);
+
+    return rec.join("");
   }
 
   _onStartNewTag() {
