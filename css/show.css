@@ -4,6 +4,15 @@ body {
   font-size: 1em;
 }
 
+subscribe-button {
+  user-select: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background: #0076d1;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+}
+
 article .summary {
   font-family: serif;
   margin-top: 0.5em;
