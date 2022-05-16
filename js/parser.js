@@ -7,10 +7,11 @@ export default class Parser {
     this.pos = 0;
     this.tagType = TAG_TYPE.NONE;
     this.last = { name: "", attrs: {} };
+    this.finished = false;
   }
 
   _write(chunk) {
-    for (let i = 0; i < chunk.length; i++) {
+    for (let i = 0; i < chunk.length && !this.finished; i++) {
       let c = chunk[i];
       let prev = this.buffer[this.pos-1];
       this.buffer += c;
@@ -53,8 +54,14 @@ export default class Parser {
     }
   }
 
+  emit(event, content, attrs) {
+    if (this._emit(event, content, attrs)) {
+      this.finished = true;
+    }
+  }
+
   _endRecording() {
-    let rec = this.buffer.slice(1, this.pos-1).trim();
+    let rec = this.buffer.slice(1, this.pos-1).trim();    
     // Keep last item in buffer for prev comparison in main loop.
     this.buffer = this.buffer.slice(-1);
     this.pos = 1;

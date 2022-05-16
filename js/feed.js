@@ -61,7 +61,7 @@ class Feed {
 
 export class AtomFeed extends Feed {
   emitAll(event, content, attrs) {
-    if (this.finish()) { return; }
+    if (this.finish()) { return true; }
 
     if (event == "opentag" && content == "feed") {
       this._state = STATE.FEED;
@@ -85,7 +85,7 @@ export class AtomFeed extends Feed {
 
     if (event == "closetag" && content == "feed") {
       this.finish(true);
-      return;
+      return true;
     }
 
     switch (this._state) {
@@ -158,7 +158,7 @@ export class AtomFeed extends Feed {
 
 export class RssFeed extends Feed {
   emitAll(event, content, attrs) {
-    if (this.finish()) { return; }
+    if (this.finish()) { return true; }
 
     if (event == "opentag" && content == "channel") {
       this._state = STATE.FEED;
@@ -179,7 +179,7 @@ export class RssFeed extends Feed {
 
     if (event == "closetag" && content == "rss") {
       this.finish(true);
-      return;
+      return true;
     }
 
     switch (this._state) {

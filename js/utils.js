@@ -44,7 +44,7 @@ async function parse(reader, url, finished) {
     var feed = new AtomFeed(url, finished, num);
   }
 
-  parser.emit = feed.emitAll.bind(feed);
+  parser._emit = feed.emitAll.bind(feed);
 
   parser._write(chunk);
 
