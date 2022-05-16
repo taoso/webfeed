@@ -76,6 +76,10 @@ export async function fetchFeed(url, done) {
 export async function syncAll() {
   if (!navigator.onLine) return;
 
+  let now = new Date();
+  let last = await store.getLastFetchTime();
+  if ((now - last) < interval*60*1000) return;
+
   let newEntries = 0;
   let urls = await store.listFeeds();
   let interval = await store.getOptionInt("fetch-interval") || 60;
@@ -83,18 +87,11 @@ export async function syncAll() {
   let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
 
   for (const url of urls) {
-    let now = new Date();
-    let last = await store.getLastFetchTime(url);
-    if ((now - last) < interval*60*1000) {
-      continue;
-    }
-
     try {
       await fetchFeed(url, async (resp, feed) => {
         let entries = feed.entries.filter(f => f.updated >= cleanDate);
         newEntries += await store.saveEntries(feed.url, entries);
       });
-      await store.setLastFetchTime(url, now);
     } catch (e) {
       console.error(e);
     }
@@ -104,6 +101,8 @@ export async function syncAll() {
     await store.incrUnreadNum(newEntries);
     await store.cleanEntries(cleanDate);
   }
+
+  await store.setLastFetchTime(now);
 }
 
 export async function dropHr(content) {

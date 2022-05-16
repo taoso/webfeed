@@ -139,8 +139,8 @@ export async function listFeeds() {
   });
 }
 
-export async function getLastFetchTime(url) {
-  let key = "last-fetch:"+url;
+export async function getLastFetchTime() {
+  let key = "last-fetch-at";
   let result = await browser.storage.sync.get(key) || {};
 
   let s = result[key];
@@ -151,9 +151,9 @@ export async function getLastFetchTime(url) {
   return new Date("2000-01-01");
 }
 
-export async function setLastFetchTime(url, time) {
+export async function setLastFetchTime(time) {
   let objects = {};
-  let key = "last-fetch:"+url;
+  let key = "last-fetch-at";
   objects[key] = time.toString();
 
   await browser.storage.sync.set(objects);
