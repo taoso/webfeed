@@ -11,6 +11,7 @@ subscribe-button {
   background: #0076d1;
   color: #fff;
   padding: 0.25rem 0.5rem;
+  display: none;
 }
 
 article .summary {

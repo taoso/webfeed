@@ -24,6 +24,7 @@ async function renderHTML(feed) {
   } else {
     button.innerHTML = "Subscribe";
   }
+  button.style.display = "inline";
 
   let invalid = false;
 
