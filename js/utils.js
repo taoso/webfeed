@@ -78,11 +78,11 @@ export async function syncAll() {
 
   let now = new Date();
   let last = await store.getLastFetchTime();
+  let interval = await store.getOptionInt("fetch-interval") || 60;
   if ((now - last) < interval*60*1000) return;
 
   let newEntries = 0;
   let urls = await store.listFeeds();
-  let interval = await store.getOptionInt("fetch-interval") || 60;
   let saveDays = await store.getOptionInt("entry-save-days") || 30;
   let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
 
