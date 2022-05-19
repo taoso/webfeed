@@ -1,5 +1,6 @@
 'use strict';
 
+import Parser from './parser.js';
 import { unescape as htmldecode } from './unescape.js';
 
 const STATE = {
@@ -21,6 +22,7 @@ class Feed {
   #maxEntries;
   #done;
   #finished;
+  #parser;
 
   constructor(url, done, maxEntries = 10) {
     this.url = url;
@@ -28,6 +30,13 @@ class Feed {
     this.#maxEntries = maxEntries;
     this.#done = done;
     this.#finished = false;
+
+    this.#parser = new Parser();
+    this.#parser._emit = this.emitAll.bind(this);
+  }
+
+  write(chunk) {
+    this.#parser._write(chunk);
   }
 
   finish(force = false) {

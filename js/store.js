@@ -106,7 +106,6 @@ export async function cleanEntries(cleanDate) {
   let idx = maxTime - cleanDate.getTime();
   let begin = IDBKeyRange.lowerBound(idx);
   for await (const cursor of index.iterate(begin)) {
-    console.log("delete", cursor.value);
     cursor.delete();
   }
 }

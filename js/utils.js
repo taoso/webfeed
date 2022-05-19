@@ -3,7 +3,6 @@
 let browser = self.browser || self.chrome;
 browser.action = browser.action || browser.browserAction;
 
-import Parser from './parser.js';
 import { AtomFeed, RssFeed } from './feed.js';
 import * as store from './store.js';
 
@@ -35,7 +34,6 @@ async function parse(reader, url, finished) {
     chunk = decoder.decode(value, {stream: true});
   }
 
-  let parser = new Parser();
   let num = await store.getOptionInt("fetch-limit") || 10;
 
   if (chunk.includes("<rss")) {
@@ -44,15 +42,13 @@ async function parse(reader, url, finished) {
     var feed = new AtomFeed(url, finished, num);
   }
 
-  parser._emit = feed.emitAll.bind(feed);
-
-  parser._write(chunk);
+  feed.write(chunk);
 
   while (!done) {
     const { value, done } = await reader.read();
     if (done) return;
     let chunk = decoder.decode(value, {stream: true});
-    parser._write(chunk);
+    feed.write(chunk);
   };
 }
 

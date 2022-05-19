@@ -104,6 +104,7 @@ async function main() {
       await renderHTML(feed);
     })
   } catch (e) {
+    console.error(e);
     const error = document.createElement("div");
     error.innerHTML = `
         <div>
