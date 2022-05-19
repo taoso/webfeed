@@ -52,6 +52,8 @@ export default class Parser {
           break;
       }
     }
+
+    return this.finished;
   }
 
   emit(event, content, attrs) {

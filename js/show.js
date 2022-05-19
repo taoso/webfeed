@@ -89,20 +89,19 @@ async function main() {
   }
 
   try {
-    await utils.fetchFeed(url, async (resp, feed) => {
-      if (resp.status >= 400) {
-        const notFound = document.createElement("div");
-        notFound.innerHTML = `
+    let { resp, feed } = await utils.fetchFeed(url);
+    if (resp.status >= 400) {
+      const notFound = document.createElement("div");
+      notFound.innerHTML = `
         <div>
           <h1>404</h1>
           <p>Feed <a href="${url}">${url}</a> not found</p>
         </div>
       `;
-        document.body.appendChild(notFound);
-        return;
-      }
-      await renderHTML(feed);
-    })
+      document.body.appendChild(notFound);
+      return;
+    }
+    await renderHTML(feed);
   } catch (e) {
     console.error(e);
     const error = document.createElement("div");

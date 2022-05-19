@@ -24,11 +24,10 @@ class Feed {
   #finished;
   #parser;
 
-  constructor(url, done, maxEntries = 10) {
+  constructor(url, maxEntries = 10) {
     this.url = url;
 
     this.#maxEntries = maxEntries;
-    this.#done = done;
     this.#finished = false;
 
     this.#parser = new Parser();
@@ -36,7 +35,7 @@ class Feed {
   }
 
   write(chunk) {
-    this.#parser._write(chunk);
+    return this.#parser._write(chunk);
   }
 
   finish(force = false) {
@@ -63,7 +62,6 @@ class Feed {
       }
     }
 
-    this.#done(this);
     return true;
   }
 }

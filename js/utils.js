@@ -22,7 +22,7 @@ export function fixLink(link, feedLink) {
   return link;
 }
 
-async function parse(reader, url, finished) {
+async function parseFeed(reader, url) {
   const { value, done } = await reader.read();
 
   let decoder = new TextDecoder("utf-8");
@@ -37,19 +37,20 @@ async function parse(reader, url, finished) {
   let num = await store.getOptionInt("fetch-limit") || 10;
 
   if (chunk.includes("<rss")) {
-    var feed = new RssFeed(url, finished, num);
+    var feed = new RssFeed(url, num);
   } else {
-    var feed = new AtomFeed(url, finished, num);
+    var feed = new AtomFeed(url, num);
   }
 
-  feed.write(chunk);
+  if (feed.write(chunk)) return feed;
 
   while (!done) {
     const { value, done } = await reader.read();
-    if (done) return;
     let chunk = decoder.decode(value, {stream: true});
-    feed.write(chunk);
+    if (feed.write(chunk)) break;
   };
+
+  return feed;
 }
 
 export async function fetchFeed(url, done) {
@@ -63,10 +64,10 @@ export async function fetchFeed(url, done) {
   });
   let reader = resp.body.getReader();
 
-  await parse(reader, url, async (feed) => {
-    await reader.cancel();
-    await done(resp, feed);
-  });
+  let feed = await parseFeed(reader, url);
+  await reader.cancel();
+
+  return { resp, feed };
 }
 
 export async function syncAll() {
@@ -84,10 +85,9 @@ export async function syncAll() {
 
   for (const url of urls) {
     try {
-      await fetchFeed(url, async (resp, feed) => {
-        let entries = feed.entries.filter(f => f.updated >= cleanDate);
-        newEntries += await store.saveEntries(feed.url, entries);
-      });
+      let { resp, feed } = await fetchFeed(url);
+      let entries = feed.entries.filter(f => f.updated >= cleanDate);
+      newEntries += await store.saveEntries(feed.url, entries);
     } catch (e) {
       console.error(e);
     }
