@@ -40,7 +40,7 @@ browser.runtime.onInstalled.addListener(async details => {
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.contextMenus.create({
     id: "open-web-feed",
-    title: "Open in Web Feed...",
+    title: "Open in WebFeed...",
     contexts: ["link"],
   });
 });

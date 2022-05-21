@@ -55,7 +55,7 @@ async function main() {
   browser.tabs.onUpdated.addListener(id => handler(id));
 
   browser.menus.create({
-    title: "Open in Web Feed...",
+    title: "Open in WebFeed...",
     contexts: ["link"],
     onclick: (info, tab) => {
       const url = browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`);
