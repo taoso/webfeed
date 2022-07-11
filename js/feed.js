@@ -47,10 +47,9 @@ class Feed {
     delete this._state;
     delete this._entry;
 
-    if (!this.link) {
-      let parts = this.url.split("/");
-      parts.pop();
-      this.link = parts.join("/");
+    if (!this.link.startsWith("http")) {
+      let url = new URL(this.url);
+      this.link = url.origin;
     }
 
     // Fix html entity (&#45 -> -)
