@@ -5,6 +5,7 @@ browser.action = browser.action || browser.browserAction;
 
 import { AtomFeed, RssFeed } from './feed.js';
 import * as store from './store.js';
+import { fromIDN } from './punycode.js';
 
 export function findParent(el, selector) {
 	while (!el.matches(selector)) {
@@ -117,6 +118,8 @@ export function getSiteTitle(link) {
   let title = url.hostname.replace("www.", "")
   if (title === "medium.com") {
     title += url.pathname.replace("/feed", "");
+  } else if (title.indexOf("xn--") >= 0) {
+    title = fromIDN(title);
   }
   return title;
 }

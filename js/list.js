@@ -40,8 +40,6 @@ async function listEntries(last = 0) {
 
     $("article").id = id;
 
-    let imgs = content.querySelectorAll("img");
-
     utils.dropHr(content);
 
     items.appendChild(content);
