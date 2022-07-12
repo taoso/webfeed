@@ -19,6 +19,10 @@ article .summary {
   margin-top: 0.5em;
 }
 
+article .summary > * {
+  overflow-x: scroll;
+}
+
 article {
   border-bottom: 1px dashed;
 }
