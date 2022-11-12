@@ -116,7 +116,7 @@ export class AtomFeed extends Feed {
     }
 
     if (event == "opentag" && content == "link") {
-      if (!attrs.rel || attrs.rel == "alternate") {
+      if (!attrs.rel || attrs.rel == "alternate" || attrs.rel == "self") {
         this.link = attrs.href;
       }
     }
@@ -125,7 +125,7 @@ export class AtomFeed extends Feed {
   emitEntry(event, content, attrs) {
     let entry = this._entry;
     if (event == "opentag" && content == "link") {
-      if (!attrs.rel || attrs.rel == "alternate") {
+      if (!attrs.rel || attrs.rel == "alternate" || attrs.rel == "self") {
         entry.link = attrs.href;
         if (entry.link.startsWith("/")) {
           entry.link = this.link + entry.link;
