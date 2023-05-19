@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "WebFeed",
   "version": "0.8.1",
   "description": "Web Feed Reader",
@@ -13,23 +13,26 @@
     "48": "icons/icon-square.svg"
   },
   "background": {
-    "page": "background.html"
+    "scripts": ["js/background.js"],
+    "type": "module"
   },
   "permissions": [
-    "<all_urls>",
     "alarms",
     "storage",
     "bookmarks",
+    "scripting",
+    "activeTab",
     "menus"
   ],
-  "web_accessible_resources": ["show.html"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "page_action": {
     "default_icon": "icons/bar-icon.svg",
     "default_title": "Subscribe feed",
-    "browser_style": true,
     "pinned": true
   },
-  "browser_action": {
+  "action": {
     "default_icon": "icons/icon-square.svg",
     "default_title": "WebFeed"
   },
@@ -39,7 +42,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "webfeed@taoshu.in",
+      "id": "web-feed@taoshu.in",
       "strict_min_version": "90.0"
     }
   }

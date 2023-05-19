@@ -1,7 +1,6 @@
 'use strict';
 
 let browser = self.browser || self.chrome;
-browser.action = browser.action || browser.browserAction;
 
 import { AtomFeed, RssFeed } from './feed.js';
 import * as store from './store.js';
