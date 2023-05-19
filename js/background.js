@@ -39,31 +39,35 @@ async function setAction(tabId, feeds) {
 const handler = async (id) => {
   await browser.pageAction.hide(id);
   try {
-    let x = await browser.tabs.executeScript(id, {
-      file: "./js/page.js",
-      runAt: "document_end",
+    let x = await browser.scripting.executeScript({
+      target: {tabId: id},
+      files: ['./js/page.js'],
     });
 
-    await setAction(id, x[0] || [])
+    await setAction(id, (x[0] && x[0].result) || [])
   } catch(e) {
     await setAction(id, []);
   }
 };
 
-async function main() {
-  browser.tabs.onActivated.addListener(info => handler(info.tabId));
-  browser.tabs.onUpdated.addListener(id => handler(id));
-
+browser.runtime.onInstalled.addListener(async details => {
+  await store.fixBookmarks();
+  browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.menus.create({
     title: "Open in WebFeed...",
     contexts: ["link"],
-    onclick: (info, tab) => {
-      const url = browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`);
-      browser.tabs.create({url});
-    }
+  });
+});
+
+  browser.menus.onClicked.addListener((info, tab) => {
+    const url = browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`);
+    browser.tabs.create({url});
   });
 
-  browser.browserAction.onClicked.addListener((tab) => {
+  browser.tabs.onActivated.addListener(info => handler(info.tabId));
+  browser.tabs.onUpdated.addListener(id => handler(id));
+
+  browser.action.onClicked.addListener((tab) => {
     browser.tabs.create({url:browser.runtime.getURL("./list.html")});
   });
 
@@ -78,12 +82,4 @@ async function main() {
     });
   });
 
-  browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.alarms.onAlarm.addListener(async e => await utils.syncAll());
-
-  browser.runtime.onInstalled.addListener(async details => {
-    await store.fixBookmarks();
-  });
-};
-
-main().catch(e => console.error(e));
