@@ -175,7 +175,9 @@ export default class Parser {
     let [name, ...attrs] = str.split(/\s+(?=[\w:-]+=)/g);
     let attributes = {};
     attrs.forEach((attribute) => {
-      let [name, value] = attribute.split("=");
+      let i = attribute.indexOf('=');
+      let name = attribute.substr(0, i);
+      let value = attribute.substr(i+1);
       attributes[name] = value.trim().replace(/"|'/g, "");
     });
     attributes["_last"] = this.last;
