@@ -34,6 +34,10 @@ async function listEntries(last = 0) {
     $("article>div").innerHTML = entry.summary;
     $("article>a.link").href = entry.link;
 
+    // drop duplicate read more link in content
+    let a = $(`article>div a[href="${entry.link}"]`);
+    if (a) a.outerHTML = '';
+
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
     let site = utils.getSiteTitle(entry.site);
     $("article>a.site").href = showUrl;

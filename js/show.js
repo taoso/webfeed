@@ -62,7 +62,12 @@ async function renderHTML(feed) {
     content.querySelector("article>h2").innerHTML = entry.title;
     content.querySelector("article>time").innerHTML = entry.updated.toLocaleString();
     content.querySelector("article>div").innerHTML = entry.summary;
-    content.querySelector("article>a").href = utils.fixLink(entry.link, feed.url);
+    let link = utils.fixLink(entry.link, feed.url);
+    content.querySelector("article>a").href = link;
+
+    // drop duplicate read more link in content
+    let a = sum.querySelector(`a[href="${link}"]`);
+    if (a) a.outerHTML = '';
 
     content.querySelectorAll("article>div img").forEach(img => {
       if (img.dataset.src) {
