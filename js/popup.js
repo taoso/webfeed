@@ -22,6 +22,7 @@ document.addEventListener("click", e => {
   let creating = browser.tabs.create({
     url: el.dataset.url
   });
+  window.close();
 });
 
 feeds.unshift({
