@@ -57,12 +57,13 @@ browser.runtime.onInstalled.addListener(async details => {
   await store.fixBookmarks();
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.menus.create({
-    title: "Open in WebFeed...",
+    title: "Open in WebFeed",
     contexts: ["link"],
   });
 });
 
   browser.menus.onClicked.addListener((info, tab) => {
+    store.saveIcon(utils.getSiteTitle(tab.url), tab.favIconUrl);
     const url = browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`);
     browser.tabs.create({url});
   });

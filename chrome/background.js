@@ -42,7 +42,7 @@ browser.runtime.onInstalled.addListener(async details => {
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.contextMenus.create({
     id: "open-web-feed",
-    title: "Open in WebFeed...",
+    title: "Open in WebFeed",
     contexts: ["link"],
   });
 });
@@ -56,6 +56,8 @@ browser.action.onClicked.addListener((tab) => {
 
 browser.alarms.onAlarm.addListener(async e => utils.syncAll());
 
-chrome.contextMenus.onClicked.addListener((info, tab) => browser.tabs.create({
-  url: browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`),
-}));
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  store.saveIcon(utils.getSiteTitle(tab.url), tab.favIconUrl);
+  let url = browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`);
+  browser.tabs.create({url})
+});
