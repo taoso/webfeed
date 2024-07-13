@@ -38,7 +38,8 @@ async function listEntries(last = 0) {
     let site = utils.getSiteTitle(entry.site);
     $("article>a.site").href = showUrl;
     $("article>a.site").innerHTML = site;
-    $("article>img.icon").src = await store.getIcon(site);
+    let $img = $("article>img.icon");
+    store.getIcon(site).then(src => $img.src = src);
 
     $("article").id = id;
 
