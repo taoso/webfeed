@@ -57,6 +57,7 @@ export async function fetchFeed(url, done) {
   console.log("fetching", url);
   let manifest = await browser.runtime.getManifest();
   var resp = await fetch(url, {
+    credentials: "omit",
     cache: "no-cache",
     headers: {
       "user-agent": navigator.userAgent + " WebFeed/" + manifest.version,
