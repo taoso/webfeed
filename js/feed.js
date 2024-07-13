@@ -8,7 +8,7 @@ const STATE = {
   ENTRY: 1,
 };
 
-const MAX_SUMMARY = 500;
+const MAX_SUMMARY = 2048;
 
 class Feed {
   link = "";

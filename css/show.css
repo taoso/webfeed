@@ -16,7 +16,10 @@ subscribe-button {
 
 article .summary {
   font-family: serif;
-  margin-top: 0.5em;
+  margin-top: 0.3em;
+  max-height: 6em;
+  max-height: 5lh;
+  overflow: hidden;
 }
 
 article .summary > * {

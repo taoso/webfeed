@@ -61,7 +61,14 @@ async function renderHTML(feed) {
 
     content.querySelector("article>h2").innerHTML = entry.title;
     content.querySelector("article>time").innerHTML = entry.updated.toLocaleString();
-    content.querySelector("article>div").innerHTML = entry.summary;
+
+    let sum = content.querySelector("article>div");
+    sum.innerHTML = entry.summary;
+
+    if (sum.children) {
+      sum.innerHTML = sum.innerText;
+    }
+
     let link = utils.fixLink(entry.link, feed.url);
     content.querySelector("article>a").href = link;
 

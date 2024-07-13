@@ -31,8 +31,14 @@ async function listEntries(last = 0) {
 
     $("article>h2").innerHTML = entry.title;
     $("article>time").innerHTML = entry.updated.toLocaleString();
-    $("article>div").innerHTML = entry.summary;
     $("article>a.link").href = entry.link;
+
+    let sum = $("article>div");
+    sum.innerHTML = entry.summary;
+
+    if (sum.children) {
+      sum.innerHTML = sum.innerText;
+    }
 
     // drop duplicate read more link in content
     let a = $(`article>div a[href="${entry.link}"]`);
