@@ -26,3 +26,12 @@ a.link {
   text-align: center;
   cursor: pointer;
 }
+
+img.icon {
+  width: 1em;
+  display: inline-block;
+}
+
+article > .meta {
+  vertical-align: middle;
+}

@@ -4,6 +4,19 @@ import * as idb from "./idb.js";
 
 let browser = self.browser || self.chrome;
 
+export async function saveIcon(domain, icon) {
+  let opts = {};
+  opts["icon-"+domain] = icon;
+  await browser.storage.local.set(opts);
+}
+
+export async function getIcon(domain) {
+  let key = "icon-"+domain;
+  let results = await browser.storage.local.get(key) || {};
+
+  return results[key] || 'icons/icon-square.svg';
+}
+
 export async function subscribed(url) {
   url = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
   let bs = await browser.bookmarks.search({url});

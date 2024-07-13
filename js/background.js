@@ -11,6 +11,9 @@ async function setAction(tabId, feeds) {
     return;
   }
 
+  let tab = await browser.tabs.get(tabId);
+  store.saveIcon(utils.getSiteTitle(tab.url), tab.favIconUrl);
+
   if (feeds.length > 1) {
     await browser.pageAction.setPopup({
       tabId,

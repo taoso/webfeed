@@ -13,6 +13,9 @@ async function renderHTML(feed) {
   h1.href = feed.link;
   h1.innerHTML = utils.getSiteTitle(feed.link);
 
+  let img = header.querySelector('#site-icon');
+  img.src = await store.getIcon(h1.innerHTML);
+
   let button = header.querySelector('subscribe-button')
   button.dataset.url = feed.url
   button.dataset.link = feed.link

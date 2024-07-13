@@ -35,8 +35,10 @@ async function listEntries(last = 0) {
     $("article>a.link").href = entry.link;
 
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
+    let site = utils.getSiteTitle(entry.site);
     $("article>a.site").href = showUrl;
-    $("article>a.site").innerHTML = utils.getSiteTitle(entry.site);
+    $("article>a.site").innerHTML = site;
+    $("article>img.icon").src = await store.getIcon(site);
 
     $("article").id = id;
 

@@ -1,7 +1,7 @@
 'use strict';
 
-import { syncAll } from "./js/utils.js";
-import { fixBookmarks } from "./js/store.js";
+import * as utils from "./js/utils.js";
+import * as store from "./js/store.js";
 
 let browser = chrome;
 
@@ -27,6 +27,8 @@ const handler = async (id) => {
     });
 
     popup = `./popup.html?links=${encodeURIComponent(JSON.stringify(feeds))}`;
+
+    store.saveIcon(utils.getSiteTitle(tab.url), tab.favIconUrl);
   }
 
   await browser.action.setPopup({
@@ -36,7 +38,7 @@ const handler = async (id) => {
 };
 
 browser.runtime.onInstalled.addListener(async details => {
-  fixBookmarks();
+  store.fixBookmarks();
   browser.alarms.create("sync-feed", {periodInMinutes:1});
   browser.contextMenus.create({
     id: "open-web-feed",
@@ -52,7 +54,7 @@ browser.action.onClicked.addListener((tab) => {
   browser.tabs.create({url:browser.runtime.getURL("./list.html")});
 });
 
-browser.alarms.onAlarm.addListener(async e => syncAll());
+browser.alarms.onAlarm.addListener(async e => utils.syncAll());
 
 chrome.contextMenus.onClicked.addListener((info, tab) => browser.tabs.create({
   url: browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`),

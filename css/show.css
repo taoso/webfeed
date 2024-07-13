@@ -31,3 +31,12 @@ a.link {
   display: inline-block;
   padding: 0.5em 0;
 }
+
+#site-icon {
+  width: 1em;
+  display: inline-block;
+}
+
+#site-icon, #site-link, subscribe-button {
+  vertical-align: middle;
+}
