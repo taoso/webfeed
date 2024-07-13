@@ -24,13 +24,11 @@ document.addEventListener("click", e => {
   });
 });
 
-if (!self.browser) {
-  feeds.unshift({
-    title: "My Feeds",
-    url: browser.runtime.getURL(`list.html`),
-    type: "html",
-  });
-}
+feeds.unshift({
+  title: "My Feeds",
+  url: browser.runtime.getURL(`list.html`),
+  type: "html",
+});
 
 const template = document.getElementById("item");
 const items = feeds.map(feed => {

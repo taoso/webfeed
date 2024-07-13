@@ -3,35 +3,30 @@
   "name": "WebFeed",
   "version": "0.8.1",
   "description": "Web Feed Reader",
-  "author": "涛叔",
+  "author": "Taoshu",
   "homepage_url": "https://github.com/taoso/webfeed",
   "icons": {
-    "128": "icons/icon-square-128.png"
+    "48": "icons/icon-square.png"
   },
-  "background": {
-    "service_worker": "background.js",
-    "type": "module"
-  },
+  "background": "js/background.js",
   "permissions": [
     "alarms",
-    "storage",
-    "scripting",
     "bookmarks",
-    "contextMenus"
+    "contextMenus",
+    "scripting",
+    "storage"
   ],
   "host_permissions": [
-    "*://*/*"
+    "<all_urls>"
   ],
   "action": {
     "default_icon": {
-      "128": "icons/icon-square-gray-128.png"
+      "128": "icons/icon-square-gray.png"
     },
     "default_title": "WebFeed"
   },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
-  },
-  "minimum_chrome_version": "92"
+  }
 }
-
