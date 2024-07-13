@@ -1,9 +1,9 @@
 'use strict';
 
-import * as utils from "./utils.js";
-import * as store from "./store.js";
+import * as utils from "./js/utils.js";
+import * as store from "./js/store.js";
 
-let browser = chrome;
+let browser = self.browser || self.chrome;
 
 const handler = async (id) => {
   let tab = await browser.tabs.get(id);

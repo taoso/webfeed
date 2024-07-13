@@ -7,13 +7,13 @@ if (!target) {
 
 if (target === "chrome") {
   obj.background = {
-    "service_worker": "js/background.js",
+    "service_worker": obj.background,
     "type": "module",
   };
   obj.minimum_chrome_version = "92";
 } else {
   obj.background = {
-    "scripts": ["js/background.js"],
+    "scripts": [ obj.background ],
     "type": "module",
   };
   obj.browser_specific_settings = {
