@@ -1,6 +1,5 @@
 body {
-  max-width: 30rem;
-  min-width: 10rem;
+  max-width: 50rem;
   font-size: 1em;
   padding: 0;
   margin: 0;
@@ -14,6 +13,7 @@ body {
   display: block;
   position: relative;
   padding: 0.2rem 0.4rem;
+  text-wrap: nowrap;
 }
 
 .items__item + .items__item {
