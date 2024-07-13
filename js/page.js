@@ -13,7 +13,7 @@
   .map(el => ({
     type: el.getAttribute("type"),
     url: el.href,
-    title: el.title,
+    title: el.title || document.title,
   }));
 
   return feeds;
