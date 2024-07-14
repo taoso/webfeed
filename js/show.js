@@ -38,10 +38,8 @@ async function renderHTML(feed) {
     }
     if (button.innerHTML == "Subscribe") {
       await store.subscribe(e.target.dataset);
+      await store.saveEntries(feed.url, feed.entries);
       button.innerHTML = "Unsubscribe";
-      await utils.fetchFeed(feed.url, async (resp, feed) => {
-        await store.saveEntries(feed.url, feed.entries);
-      });
     } else {
       let bs = await browser.bookmarks.search({url:document.URL});
       await browser.bookmarks.remove(bs[0].id);
@@ -104,7 +102,7 @@ async function main() {
   }
 
   try {
-    let { resp, feed } = await utils.fetchFeed(url);
+    let { resp, feed } = await utils.fetchFeed(url, 30000);
     if (resp.status >= 400) {
       const notFound = document.createElement("div");
       notFound.innerHTML = `

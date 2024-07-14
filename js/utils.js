@@ -53,7 +53,7 @@ async function parseFeed(reader, url) {
   return feed;
 }
 
-export async function fetchFeed(url, done) {
+export async function fetchFeed(url, timeout) {
   console.log("fetching", url);
   let manifest = await browser.runtime.getManifest();
   var resp = await fetch(url, {
@@ -62,6 +62,7 @@ export async function fetchFeed(url, done) {
     headers: {
       "user-agent": navigator.userAgent + " WebFeed/" + manifest.version,
     },
+    signal: AbortSignal.timeout(timeout||10000),
   });
   let reader = resp.body.getReader();
 
@@ -86,7 +87,7 @@ export async function syncAll() {
 
   for (const url of urls) {
     try {
-      let { resp, feed } = await fetchFeed(url);
+      let { resp, feed } = await fetchFeed(url, 10000);
       let entries = feed.entries.filter(f => f.updated >= cleanDate);
 
       // feed may be unsubscribed during fetch
