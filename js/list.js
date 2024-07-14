@@ -30,8 +30,8 @@ async function listEntries(last = 0) {
     let $ = content.querySelector.bind(content);
 
     $("article>h2").innerHTML = entry.title;
-    $("article>time").innerHTML = entry.updated.toLocaleString();
-    $("article>a.link").href = entry.link;
+    $("article>.meta time").innerHTML = entry.updated.toLocaleString();
+    $("article>.meta a.link").href = entry.link;
 
     let sum = $("article>div");
     sum.innerHTML = entry.summary;
@@ -41,14 +41,14 @@ async function listEntries(last = 0) {
     }
 
     // drop duplicate read more link in content
-    let a = $(`article>div a[href="${entry.link}"]`);
+    let a = $(`article>.summary a[href="${entry.link}"]`);
     if (a) a.outerHTML = '';
 
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
     let site = utils.getSiteTitle(entry.site);
-    $("article>a.site").href = showUrl;
-    $("article>a.site").innerHTML = site;
-    let $img = $("article>img.icon");
+    $("article>.meta a.site").href = showUrl;
+    $("article>.meta a.site").innerHTML = site;
+    let $img = $("article>.meta img.icon");
     store.getIcon(site).then(src => $img.src = src);
 
     $("article").id = id;
