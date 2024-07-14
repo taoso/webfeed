@@ -98,8 +98,7 @@ export async function syncAll() {
         let entries = feed.entries.filter(f => f.updated >= cleanDate);
 
         // feed may be unsubscribed during fetch
-        let subscribed = await store.subscribed(url);
-        if (!subscribed) {
+        if (!await store.subscribed(url)) {
           continue;
         }
 

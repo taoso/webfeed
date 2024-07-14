@@ -53,13 +53,12 @@ export async function fixBookmarks() {
   let bs = await browser.bookmarks.search({title:"[web-feed]"});
   if (bs.length === 0) return;
 
-  let host = await browser.runtime.getURL("").split("/")[2];
   let feeds = await browser.bookmarks.getChildren(bs[0].id);
   let exists = {};
   for (let feed of feeds) {
     let url = new URL(feed.url);
-
     let feedUrl = url.searchParams.get("url");
+
     if (exists[feedUrl]) {
       console.debug(`removing duplicated ${feedUrl}`);
       await browser.bookmarks.remove(feed.id);
@@ -67,8 +66,7 @@ export async function fixBookmarks() {
     }
     exists[feedUrl] = true;
 
-    url.host = host;
-    let newUrl = url.toString();
+    let newUrl = await browser.runtime.getURL(`show.html?url=${encodeURI(feedUrl)}`);
     await browser.bookmarks.update(feed.id, {url: newUrl});
     console.debug(`convert ${feed.url} to ${newUrl}`);
   }
