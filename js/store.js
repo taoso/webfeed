@@ -238,3 +238,28 @@ export async function isFetching() {
   let results = await browser.storage.local.get(key) || {};
   return results[key] === "1";
 }
+
+export async function isModified(resp) {
+  let last = resp.headers.get('last-modified');
+  if (!last) {
+    last = resp.headers.get('etag');
+  }
+
+  if (!last) {
+    return true;
+  }
+
+  let key = "cache@"+resp.url;
+  let results = await browser.storage.local.get(key) || {};
+  let old = results[key];
+
+  if (old === last) {
+    return false;
+  }
+
+  let opts = {};
+  opts[key] = last;
+  await browser.storage.local.set(opts);
+
+  return true;
+}

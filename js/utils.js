@@ -66,9 +66,14 @@ export async function fetchFeed(url, timeout) {
     },
     signal: AbortSignal.timeout(timeout||10000),
   });
+
   if (!resp.ok) {
     throw new Error(`fetch ${url} failed, code: ${resp.status}`);
+  } else if (!await store.isModified(resp)) {
+    console.log(`feed ${url} not modified`);
+    return {};
   }
+
   let reader = resp.body.getReader();
 
   let feed = await parseFeed(reader, url);
@@ -97,6 +102,9 @@ export async function syncAll() {
     for (const url of urls) {
       try {
         let { resp, feed } = await fetchFeed(url, 10000);
+
+        if (!feed) { continue; }
+
         let entries = feed.entries.filter(f => f.updated >= cleanDate);
 
         // feed may be unsubscribed during fetch
