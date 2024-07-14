@@ -14,8 +14,12 @@ subscribe-button {
   display: none;
 }
 
+article > h2 {
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
 article .summary {
-  font-family: serif;
   margin-top: 0.3em;
   max-height: 6em;
   max-height: 5lh;
@@ -24,10 +28,6 @@ article .summary {
 
 article .summary > * {
   overflow-x: scroll;
-}
-
-article {
-  border-bottom: 1px dashed;
 }
 
 a.link {
