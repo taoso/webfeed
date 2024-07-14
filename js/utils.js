@@ -38,8 +38,10 @@ async function parseFeed(reader, url) {
 
   if (chunk.includes("<rss")) {
     var feed = new RssFeed(url, num);
-  } else {
+  } else if (chunk.includes("<feed")) {
     var feed = new AtomFeed(url, num);
+  } else {
+    throw new Error(`invalid feed from ${url}`);
   }
 
   if (feed.write(chunk)) return feed;
