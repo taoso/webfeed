@@ -36,13 +36,11 @@ async function listEntries(last = 0) {
     let sum = $("article>div");
     sum.innerHTML = entry.summary;
 
-    if (sum.children) {
-      sum.innerHTML = sum.innerText;
-    }
-
     // drop duplicate read more link in content
     let a = $(`article>.summary a[href="${entry.link}"]`);
     if (a) a.outerHTML = '';
+
+    utils.html2txt(sum);
 
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
     let site = utils.getSiteTitle(entry.site);
@@ -52,8 +50,6 @@ async function listEntries(last = 0) {
     store.getIcon(site).then(src => $img.src = src);
 
     $("article").id = id;
-
-    utils.dropHr(content);
 
     items.appendChild(content);
 

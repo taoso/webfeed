@@ -121,15 +121,16 @@ export async function syncAll() {
   }
 }
 
-export async function dropHr(content) {
-  let nodes = content.querySelectorAll("hr,hr~*");
-
-  if (nodes.length === 0) return;
-
-  let prev = nodes[0].previousElementSibling;
-  if (prev) prev.style.marginBottom = "0px";
-
-  nodes.forEach(n => n.remove());
+// publisher may embed html code in <pre> or <code>
+// this should convert to text recursively.
+export async function html2txt(e) {
+  for (let i = 0; i < 10; i++) {
+    if (e.children) {
+      e.innerHTML = e.innerText;
+    } else {
+      break;
+    }
+  }
 }
 
 export function getSiteTitle(link) {

@@ -63,9 +63,7 @@ async function renderHTML(feed) {
     let sum = content.querySelector("article>div");
     sum.innerHTML = entry.summary;
 
-    if (sum.children) {
-      sum.innerHTML = sum.innerText;
-    }
+    utils.html2txt(sum);
 
     let link = utils.fixLink(entry.link, feed.url);
     content.querySelector("article>a").href = link;
@@ -87,8 +85,6 @@ async function renderHTML(feed) {
     content.querySelectorAll("article>div a").forEach(a => {
       a.href = utils.fixLink(a.href, feed.url);
     });
-
-    utils.dropHr(content);
 
     document.querySelector(".items").appendChild(content);
   });
