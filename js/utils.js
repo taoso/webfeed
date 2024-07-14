@@ -55,7 +55,7 @@ async function parseFeed(reader, url) {
   return feed;
 }
 
-export async function fetchFeed(url, timeout) {
+export async function fetchFeed(url, timeout, force) {
   console.log("fetching", url);
   let manifest = await browser.runtime.getManifest();
   var resp = await fetch(url, {
@@ -64,12 +64,12 @@ export async function fetchFeed(url, timeout) {
     headers: {
       "User-Agent": "WebFeed/" + manifest.version,
     },
-    signal: AbortSignal.timeout(timeout||10000),
+    signal: AbortSignal.timeout(timeout*1000),
   });
 
   if (!resp.ok) {
     throw new Error(`fetch ${url} failed, code: ${resp.status}`);
-  } else if (!await store.isModified(resp)) {
+  } else if (!await store.isModified(resp) && !force) {
     console.log(`feed ${url} not modified`);
     return {};
   }
@@ -98,10 +98,11 @@ export async function syncAll() {
     let urls = await store.listFeeds();
     let saveDays = await store.getOptionInt("entry-save-days") || 30;
     let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
+    let timeout = await store.getOptionInt("fetch-timeout") || 15;
 
     for (const url of urls) {
       try {
-        let { resp, feed } = await fetchFeed(url, 10000);
+        let { resp, feed } = await fetchFeed(url, timeout);
 
         if (!feed) { continue; }
 

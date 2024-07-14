@@ -92,13 +92,10 @@ async function renderHTML(feed) {
 
 async function main() {
   let url = decodeURI(window.location.search.substr(5));
-  if (url.indexOf("ext%2Brss%3A") === 0) {
-    url = decodeURIComponent(url.substr(12));
-    window.location.replace("/show.html?url=" + encodeURI(url));
-  }
 
   try {
-    let { resp, feed } = await utils.fetchFeed(url, 30000);
+    let timeout = await store.getOptionInt("fetch-timeout") || 15;
+    let { resp, feed } = await utils.fetchFeed(url, timeout, true);
     if (resp.status >= 400) {
       const notFound = document.createElement("div");
       notFound.innerHTML = `
