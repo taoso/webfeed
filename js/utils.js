@@ -76,41 +76,48 @@ export async function fetchFeed(url, timeout) {
 }
 
 export async function syncAll() {
-  if (!navigator.onLine) return;
+  if (!navigator.onLine) { return; }
+
+  if (await store.isFetching()) { return; }
 
   let now = new Date();
   let last = await store.getLastFetchTime();
   let interval = await store.getOptionInt("fetch-interval") || 60;
-  if ((now - last) < interval*60*1000) return;
+  if ((now - last) < interval*60*1000) { return; }
 
-  let newEntries = 0;
-  let urls = await store.listFeeds();
-  let saveDays = await store.getOptionInt("entry-save-days") || 30;
-  let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
+  try {
+    await store.setFetching();
+    let newEntries = 0;
+    let urls = await store.listFeeds();
+    let saveDays = await store.getOptionInt("entry-save-days") || 30;
+    let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
 
-  for (const url of urls) {
-    try {
-      let { resp, feed } = await fetchFeed(url, 10000);
-      let entries = feed.entries.filter(f => f.updated >= cleanDate);
+    for (const url of urls) {
+      try {
+        let { resp, feed } = await fetchFeed(url, 10000);
+        let entries = feed.entries.filter(f => f.updated >= cleanDate);
 
-      // feed may be unsubscribed during fetch
-      let subscribed = await store.subscribed(url);
-      if (!subscribed) {
-        continue;
+        // feed may be unsubscribed during fetch
+        let subscribed = await store.subscribed(url);
+        if (!subscribed) {
+          continue;
+        }
+
+        newEntries += await store.saveEntries(feed.url, entries);
+      } catch (e) {
+        console.error(e);
       }
-
-      newEntries += await store.saveEntries(feed.url, entries);
-    } catch (e) {
-      console.error(e);
     }
-  }
 
-  if (newEntries > 0) {
-    await store.incrUnreadNum(newEntries);
-    await store.cleanEntries(cleanDate);
-  }
+    if (newEntries > 0) {
+      await store.incrUnreadNum(newEntries);
+      await store.cleanEntries(cleanDate);
+    }
 
-  await store.setLastFetchTime(now);
+    await store.setLastFetchTime(now);
+  } finally {
+    await store.unsetFetching();
+  }
 }
 
 export async function dropHr(content) {

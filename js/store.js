@@ -220,3 +220,23 @@ export async function getOptionInt(name) {
     return parseInt(value);
   }
 }
+
+export async function setFetching() {
+  let n = new Date;
+  let opts = {};
+  opts["fetching@"+n.getHours()] = "1";
+  await browser.storage.local.set(opts);
+}
+
+export async function unsetFetching() {
+  let n = new Date;
+  let key = "fetching@"+n.getHours();
+  await browser.storage.local.remove(key);
+}
+
+export async function isFetching() {
+  let n = new Date;
+  let key = "fetching@"+n.getHours();
+  let results = await browser.storage.local.get(key) || {};
+  return results[key] === "1";
+}
