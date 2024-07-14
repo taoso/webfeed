@@ -60,10 +60,13 @@ export async function fetchFeed(url, timeout) {
     credentials: "omit",
     cache: "no-cache",
     headers: {
-      "user-agent": navigator.userAgent + " WebFeed/" + manifest.version,
+      "User-Agent": "WebFeed/" + manifest.version,
     },
     signal: AbortSignal.timeout(timeout||10000),
   });
+  if (!resp.ok) {
+    throw new Error(`fetch ${url} failed, code: ${resp.status}`);
+  }
   let reader = resp.body.getReader();
 
   let feed = await parseFeed(reader, url);
