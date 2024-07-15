@@ -5,6 +5,7 @@ import * as idb from "./idb.js";
 let browser = self.browser || self.chrome;
 
 export async function saveIcon(domain, icon) {
+  if (!icon) { return; }
   let opts = {};
   opts["icon-"+domain] = icon;
   await browser.storage.local.set(opts);
