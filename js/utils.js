@@ -96,27 +96,40 @@ export async function syncAll() {
     await store.setFetching();
     let newEntries = 0;
     let urls = await store.listFeeds();
+    if (urls.length === 0) { return; }
     let saveDays = await store.getOptionInt("entry-save-days") || 30;
     let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
     let timeout = await store.getOptionInt("fetch-timeout") || 15;
 
-    for (const url of urls) {
-      try {
-        let { resp, feed } = await fetchFeed(url, timeout);
+    const chunkSize = 10;
+    for (let i = 0; i < urls.length; i += chunkSize) {
+      const chunk = urls.slice(i, i + chunkSize);
 
-        if (!feed) { continue; }
+      let fetches = [];
+      for (const url of chunk) {
+        let f = fetchFeed(url, timeout);
+        fetches.push(f);
+      }
 
-        let entries = feed.entries.filter(f => f.updated >= cleanDate);
+      let results = await Promise.allSettled(fetches);
+
+      results.forEach(async (r) => {
+        if (r.status === "rejected") {
+          console.error(r.reason);
+          return;
+        } // fulfilled
+
+        let {resp,feed} = r.value;
+
+        // content not modified
+        if (!feed) { return; }
 
         // feed may be unsubscribed during fetch
-        if (!await store.subscribed(url)) {
-          continue;
-        }
+        if (!await store.subscribed(feed.url)) { return; }
 
+        let entries = feed.entries.filter(f => f.updated >= cleanDate);
         newEntries += await store.saveEntries(feed.url, entries);
-      } catch (e) {
-        console.error(e);
-      }
+      });
     }
 
     if (newEntries > 0) {
