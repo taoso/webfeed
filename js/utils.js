@@ -125,6 +125,8 @@ export async function syncAll() {
     }
 
     await store.setLastFetchTime(now);
+  } catch (e) {
+    console.error(e);
   } finally {
     await store.unsetFetching();
   }
