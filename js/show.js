@@ -5,7 +5,7 @@ let browser = self.browser || self.chrome;
 import * as utils from './utils.js';
 import * as store from './store.js';
 
-async function renderHTML(feed) {
+async function renderHTML(feed, resp) {
   let header = document.querySelector('body header');
 
   header.querySelector('h1').innerHTML = feed.title;
@@ -25,6 +25,11 @@ async function renderHTML(feed) {
   if (bs.length > 0) {
     button.innerHTML = "Unsubscribe";
   } else {
+    if (resp.redirected) {
+      let url = browser.runtime.getURL(`show.html?url=${encodeURI(resp.url)}`);
+      document.location.href = url;
+      return;
+    }
     button.innerHTML = "Subscribe";
   }
   button.style.display = "inline";
@@ -107,7 +112,7 @@ async function main() {
       document.body.appendChild(notFound);
       return;
     }
-    await renderHTML(feed);
+    await renderHTML(feed, resp);
   } catch (e) {
     console.error(e);
     const error = document.createElement("div");
