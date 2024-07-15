@@ -6,7 +6,7 @@
   "author": "Taoshu",
   "homepage_url": "https://github.com/taoso/webfeed",
   "icons": {
-    "256": "icons/icon-square.png"
+    "256": "icons/icon.png"
   },
   "background": "./event.js",
   "permissions": [
@@ -21,7 +21,7 @@
   ],
   "action": {
     "default_icon": {
-      "256": "icons/icon-square-gray.png"
+      "256": "icons/icon-gray.png"
     },
     "default_title": "WebFeed"
   },

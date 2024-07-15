@@ -15,7 +15,7 @@ export async function getIcon(domain) {
   let key = "icon-"+domain;
   let results = await browser.storage.local.get(key) || {};
 
-  return results[key] || 'icons/icon-square.png';
+  return results[key] || 'icons/icon.png';
 }
 
 export async function subscribed(url) {
