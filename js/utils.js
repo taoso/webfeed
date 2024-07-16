@@ -58,28 +58,48 @@ async function parseFeed(reader, url) {
 export async function fetchFeed(url, timeout, force) {
   console.log("fetching", url);
   let manifest = await browser.runtime.getManifest();
-  var resp = await fetch(url, {
-    credentials: "omit",
-    cache: "no-cache",
-    headers: {
-      "User-Agent": "WebFeed/" + manifest.version,
-    },
-    signal: AbortSignal.timeout(timeout*1000),
-  });
+  try {
+    var resp = await fetch(url, {
+      credentials: "omit",
+      cache: "no-cache",
+      headers: {
+        "User-Agent": "WebFeed/" + manifest.version,
+      },
+      signal: AbortSignal.timeout(timeout*1000),
+    });
+  } catch (e) {
+    if (e.name === "TimeoutError") {
+      self.fetchlog.timeout.push(url);
+    } else {
+      self.fetchlog.error.push(url);
+    }
+    throw e;
+  }
 
   if (!resp.ok) {
+    self.fetchlog.notfound.push(url);
     throw new Error(`fetch ${url} failed, code: ${resp.status}`);
-  } else if (!await store.isModified(resp) && !force) {
+  }
+
+  if (resp.redirected) {
+    self.fetchlog.redirected.push(url);
+  }
+
+  if (!await store.isModified(resp) && !force) {
     console.log(`feed ${url} not modified`);
     return {};
   }
 
   let reader = resp.body.getReader();
 
-  let feed = await parseFeed(reader, url);
-  await reader.cancel();
-
-  return { resp, feed };
+  try {
+    let feed = await parseFeed(reader, url);
+    await reader.cancel();
+    return { resp, feed };
+  } catch (e) {
+    self.fetchlog.malformed.push(url);
+    throw e;
+  }
 }
 
 export async function syncAll() {
@@ -91,6 +111,14 @@ export async function syncAll() {
   let last = await store.getLastFetchTime();
   let interval = await store.getOptionInt("fetch-interval") || 60;
   if ((now - last) < interval*60*1000) { return; }
+
+  self.fetchlog = {
+    error: [],
+    timeout: [],
+    notfound: [],
+    malformed: [],
+    recirected: [],
+  };
 
   try {
     await store.setFetching();
@@ -142,6 +170,15 @@ export async function syncAll() {
     console.error(e);
   } finally {
     await store.unsetFetching();
+
+    let log = self.fetchlog;
+    delete self.fetchlog;
+    let count = 0;
+    for (const [k, v] of Object.entries(log)) {
+      count += v.length;
+    }
+    log.count = count;
+    await browser.storage.local.set({fetchlog:log});
   }
 }
 
