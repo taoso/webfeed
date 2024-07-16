@@ -1,6 +1,6 @@
 'use strict';
 
-const es = /&(?:amp|lt|gt|apos|quot|#\d+|#x\d+);/g;
+const es = /&(?:amp|lt|gt|apos|quot|#\d+|#x[\da-f]+);/ig;
 
 const unes = {
   '&amp;': '&',
@@ -21,4 +21,10 @@ const cape = (m) => {
   return unes[m] || m;
 };
 
-export const unescape = un => un.replace(es, cape);
+export const unescape = un => {
+  if (un.indexOf("&") === -1) {
+    return un;
+  }
+
+  return un.replace(es, cape);
+}

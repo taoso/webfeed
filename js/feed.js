@@ -1,7 +1,6 @@
 'use strict';
 
 import Parser from './parser.js';
-import { unescape as htmldecode } from './unescape.js';
 
 const STATE = {
   FEED: 0,
@@ -50,15 +49,6 @@ class Feed {
     if (!this.link.startsWith("http")) {
       let url = new URL(this.url);
       this.link = url.origin;
-    }
-
-    // Fix html entity (&#45 -> -)
-    if (this.entries.length > 0 && this.entries[0].link.indexOf("&#") > 0) {
-      for (let entry of this.entries) {
-        entry.link = entry.link.replace(/&#(\d+);/ig, (match, p1) => {
-          return String.fromCharCode(parseInt(p1, 10));
-        });
-      }
     }
 
     return true;
@@ -151,11 +141,7 @@ export class AtomFeed extends Feed {
             content = content.substring(0, MAX_SUMMARY)+"...";
           }
         case "summary":
-          if (event == "text") {
-            entry.summary = htmldecode(content);
-          } else {
-            entry.summary = content;
-          }
+          entry.summary = content;
           break;
       }
     }
@@ -233,11 +219,7 @@ export class RssFeed extends Feed {
           if (content.length > MAX_SUMMARY) {
             content = content.substring(0, MAX_SUMMARY)+"...";
           }
-          if (event == "text") {
-            entry.summary = htmldecode(content);
-          } else {
-            entry.summary = content;
-          }
+          entry.summary = content;
           break;
         case "pubDate":
         case "dc:date":

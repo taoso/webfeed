@@ -1,5 +1,7 @@
 'use strict';
 
+import * as htmlentity from './htmlentity.js';
+
 export default class Parser {
   constructor() {
     this.state = STATE.TEXT;
@@ -57,6 +59,7 @@ export default class Parser {
   }
 
   emit(event, content, attrs) {
+    content = htmlentity.unescape(content);
     if (this._emit(event, content, attrs)) {
       this.finished = true;
     }
