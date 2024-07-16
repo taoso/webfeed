@@ -2,7 +2,7 @@ SVGs := $(shell find ./icons -name '*.svg')
 PNGs := $(SVGs:.svg=.png)
 
 %.png: %.svg
-	rsvg-convert -h 256 $< > $@
+	rsvg-convert -h 128 $< > $@
 
 npm:
 	npm install --prefix js
