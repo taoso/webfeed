@@ -222,14 +222,27 @@ export async function getOptionInt(name) {
 
 export async function setFetching() {
   let n = new Date;
+  let h = n.getHours();
+
+  // clean lock for other hour
+  // i dont know why the try{}finally{} cannot clean lock some time.
+  for (let i = 0; i < 24; i++) {
+    if (i !== h) {
+      await unsetFetching(i);
+    }
+  }
+
   let opts = {};
   opts["fetching@"+n.getHours()] = "1";
   await browser.storage.local.set(opts);
 }
 
-export async function unsetFetching() {
-  let n = new Date;
-  let key = "fetching@"+n.getHours();
+export async function unsetFetching(h) {
+  if (!h) {
+    let n = new Date;
+    h = n.getHours();
+  }
+  let key = "fetching@"+h;
   await browser.storage.local.remove(key);
 }
 
