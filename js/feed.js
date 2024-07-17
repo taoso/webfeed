@@ -74,7 +74,7 @@ export class AtomFeed extends Feed {
       // FIXME this.entry will be undefined in some case.
       // parse https://pinlyu.com/atom.xml
       // It seems caused by invalid encoding.
-      if (this._entry) this.entries.push(this._entry);
+      if (this._entry && this._entry.summary) { this.entries.push(this._entry); }
       this._state = STATE.FEED;
       return;
     }
@@ -164,7 +164,9 @@ export class RssFeed extends Feed {
     }
 
     if (event == "closetag" && content == "item") {
-      this.entries.push(this._entry);
+      if (this._entry && this._entry.summary) {
+        this.entries.push(this._entry);
+      }
       this._state = STATE.FEED;
       return;
     }

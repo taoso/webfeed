@@ -121,6 +121,7 @@ async function main() {
 <div>
   <p>Error while fetching feed</p>
   <p style="color:red;">${e}</p>
+  <p><pre>${e.stack}</pre></p>
   <p>You may go to the site to find the latest feed and unsubscribe this one.</p>
   <a href="${url}">${url}</a>
 </div>
