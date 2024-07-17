@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebFeed Fetch Logs</title>
+    <link rel="icon" href="./icons/icon.png">
+    <link rel="stylesheet" href="./css/water.css">
+    <link rel="stylesheet" href="./css/logs.css">
+    <script src="./js/logs.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Fetch Logs</h1>
+    <p>Some errors occured during last fetch.</p>
+    <p>You can click the feed link to manage subscription.</p>
+    <main>
+      <div class="items"></div>
+    </main>
+  </body>
+  <template id="log-item">
+    <article>
+      <h2 class="type"></h2>
+      <div class="error"></div>
+      <ol class="urls"></ol>
+    </article>
+  </template>
+</html>

@@ -84,6 +84,18 @@ async function main() {
 
   await store.resetUnreadNum();
 
+  let log = await store.getFetchLog();
+  if (log.count > 0) {
+    let alert = document.querySelector("#alert");
+    alert.style.display = 'flex';
+    alert.onclick = async (e) => {
+      if (e.target.dataset.cmd === "dismiss") {
+        alert.style.display = 'none';
+        await store.setFetchLog({});
+      }
+    };
+  }
+
   let more = document.querySelector('#more');
   more.onclick = async (e) => {
     if (e.target.dataset.done) return;

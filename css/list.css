@@ -46,3 +46,21 @@ article .meta time {
   background-color: transparent;
   color: gray;
 }
+
+#alert {
+  border: 2px solid red;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 5px;
+  align-items: center;
+  display: none;
+}
+
+#alert span {
+  flex: 1;
+  color: red;
+}
+
+#alert a {
+  margin: 5px;
+}

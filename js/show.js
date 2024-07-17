@@ -101,29 +101,30 @@ async function main() {
   try {
     let timeout = await store.getOptionInt("fetch-timeout") || 15;
     let { resp, feed } = await utils.fetchFeed(url, timeout, true);
-    if (resp.status >= 400) {
-      const notFound = document.createElement("div");
-      notFound.innerHTML = `
-        <div>
-          <h1>404</h1>
-          <p>Feed <a href="${url}">${url}</a> not found</p>
-        </div>
-      `;
-      document.body.appendChild(notFound);
-      return;
-    }
     await renderHTML(feed, resp);
   } catch (e) {
-    console.error(e);
+    let bs = await browser.bookmarks.search({url:document.URL});
+    if (bs.length > 0) {
+      let b = bs[0];
+      let g = /(?<title>.+)\[(?<link>.+)\]/.exec(b.title).groups;
+      let feed = {
+        url: url,
+        title: g["title"],
+        link: g["link"],
+        entries: [],
+      };
+      await renderHTML(feed, {});
+    }
+
     const error = document.createElement("div");
     error.innerHTML = `
-        <div>
-          <h1>Error</h1>
-          <p>Error while fetching feed</p>
-          <p style="color:red;">${e}</p>
-          <a href="${url}">${url}</a>
-        </div>
-      `;
+<div>
+  <p>Error while fetching feed</p>
+  <p style="color:red;">${e}</p>
+  <p>You may go to the site to find the latest feed and unsubscribe this one.</p>
+  <a href="${url}">${url}</a>
+</div>
+`;
     document.body.appendChild(error);
     return;
   }

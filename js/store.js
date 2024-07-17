@@ -277,3 +277,17 @@ export async function isModified(resp) {
 
   return true;
 }
+
+export async function getFetchLog() {
+  let results = await browser.storage.local.get("fetchlog");
+  return results["fetchlog"] || {};
+}
+
+export async function setFetchLog(log) {
+  let count = 0;
+  for (const [k, v] of Object.entries(log)) {
+    count += v.length;
+  }
+  log.count = count;
+  await browser.storage.local.set({fetchlog:log});
+}

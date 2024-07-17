@@ -58,13 +58,20 @@ async function parseFeed(reader, url) {
 export async function fetchFeed(url, timeout, force) {
   console.log("fetching", url);
   let manifest = await browser.runtime.getManifest();
+
+  if (!self.fetchlog) {
+    self.fetchlog = {
+      error: [],
+      timeout: [],
+      notfound: [],
+      malformed: [],
+      redirected: [],
+    };
+  }
+
   try {
     var resp = await fetch(url, {
-      credentials: "omit",
       cache: "no-cache",
-      headers: {
-        "User-Agent": "WebFeed/" + manifest.version,
-      },
       signal: AbortSignal.timeout(timeout*1000),
     });
   } catch (e) {
@@ -77,11 +84,16 @@ export async function fetchFeed(url, timeout, force) {
   }
 
   if (!resp.ok) {
-    self.fetchlog.notfound.push(url);
+    if (resp.status === 404) {
+      self.fetchlog.notfound.push(url);
+    } else {
+      self.fetch.error.push(url);
+    }
     throw new Error(`fetch ${url} failed, code: ${resp.status}`);
   }
 
   if (resp.redirected) {
+    // todo auto fix
     self.fetchlog.redirected.push(url);
   }
 
@@ -117,7 +129,7 @@ export async function syncAll() {
     timeout: [],
     notfound: [],
     malformed: [],
-    recirected: [],
+    redirected: [],
   };
 
   try {
@@ -171,14 +183,8 @@ export async function syncAll() {
   } finally {
     await store.unsetFetching();
 
-    let log = self.fetchlog;
+    await store.setFetchLog(self.fetchlog);
     delete self.fetchlog;
-    let count = 0;
-    for (const [k, v] of Object.entries(log)) {
-      count += v.length;
-    }
-    log.count = count;
-    await browser.storage.local.set({fetchlog:log});
   }
 }
 

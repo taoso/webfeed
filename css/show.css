@@ -43,3 +43,7 @@ a.link {
 #site-icon, #site-link, subscribe-button {
   vertical-align: middle;
 }
+
+body > .error {
+  color:red;
+}
