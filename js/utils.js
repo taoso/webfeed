@@ -186,8 +186,8 @@ export async function syncAll() {
   } finally {
     await store.unsetFetching();
 
-    self.fetchlog.begin = now;
-    self.fetchlog.end = new Date();
+    self.fetchlog.begin = now.toUTCString();
+    self.fetchlog.end = new Date().toUTCString();
 
     await store.setFetchLog(self.fetchlog);
     delete self.fetchlog;

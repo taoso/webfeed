@@ -12,10 +12,12 @@ async function main() {
   let fetchlog = await store.getFetchLog();
 
   if (fetchlog.begin) {
-    summary.querySelector("#begin").innerText = fetchlog.begin.toLocaleString();
+    let d = new Date(fetchlog.begin).toLocaleString();
+    summary.querySelector("#begin").innerText = d;
   }
   if (fetchlog.begin) {
-    summary.querySelector("#end").innerText = fetchlog.end.toLocaleString();
+    let d = new Date(fetchlog.end).toLocaleString();
+    summary.querySelector("#end").innerText = d;
   }
   summary.querySelector("#feedNum").innerText = fetchlog.feedNum || 0;
   summary.querySelector("#newNum").innerText = fetchlog.newNum || 0;
