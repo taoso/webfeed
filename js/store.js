@@ -117,9 +117,12 @@ export async function cleanEntries(cleanDate) {
 
   let idx = maxTime - cleanDate.getTime();
   let begin = IDBKeyRange.lowerBound(idx);
+  let num = 0;
   for await (const cursor of index.iterate(begin)) {
     cursor.delete();
+    num++;
   }
+  return num;
 }
 
 export async function removeEntries(url) {
@@ -284,10 +287,5 @@ export async function getFetchLog() {
 }
 
 export async function setFetchLog(log) {
-  let count = 0;
-  for (const [k, v] of Object.entries(log)) {
-    count += v.length;
-  }
-  log.count = count;
   await browser.storage.local.set({fetchlog:log});
 }

@@ -141,6 +141,8 @@ export async function syncAll() {
     let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
     let timeout = await store.getOptionInt("fetch-timeout") || 15;
 
+    self.fetchlog.feedNum = urls.length;
+
     const chunkSize = 10;
     for (let i = 0; i < urls.length; i += chunkSize) {
       const chunk = urls.slice(i, i + chunkSize);
@@ -172,9 +174,10 @@ export async function syncAll() {
       });
     }
 
+    self.fetchlog.newNum = newEntries;
     if (newEntries > 0) {
       await store.incrUnreadNum(newEntries);
-      await store.cleanEntries(cleanDate);
+      self.fetchlog.cleanNum = await store.cleanEntries(cleanDate);
     }
 
     await store.setLastFetchTime(now);
@@ -182,6 +185,9 @@ export async function syncAll() {
     console.error(e);
   } finally {
     await store.unsetFetching();
+
+    self.fetchlog.begin = now;
+    self.fetchlog.end = new Date();
 
     await store.setFetchLog(self.fetchlog);
     delete self.fetchlog;

@@ -7,8 +7,19 @@ import * as store from './store.js';
 async function main() {
   const items = document.querySelector(".items");
   const template = document.getElementById("log-item");
+  const summary = document.querySelector(".summary");
 
   let fetchlog = await store.getFetchLog();
+
+  if (fetchlog.begin) {
+    summary.querySelector("#begin").innerText = fetchlog.begin.toLocaleString();
+  }
+  if (fetchlog.begin) {
+    summary.querySelector("#end").innerText = fetchlog.end.toLocaleString();
+  }
+  summary.querySelector("#feedNum").innerText = fetchlog.feedNum || 0;
+  summary.querySelector("#newNum").innerText = fetchlog.newNum || 0;
+  summary.querySelector("#cleanNum").innerText = fetchlog.cleanNum || 0;
 
   const infos = {
     "notfound": {
