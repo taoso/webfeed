@@ -135,21 +135,21 @@ export async function syncAll() {
   try {
     await store.setFetching();
     let newEntries = 0;
-    let urls = await store.listFeeds();
-    if (urls.length === 0) { return; }
+    let feeds = await store.listFeeds();
+    if (feeds.length === 0) { return; }
     let saveDays = await store.getOptionInt("entry-save-days") || 30;
     let cleanDate = new Date(new Date() - saveDays * 86400 * 1000);
     let timeout = await store.getOptionInt("fetch-timeout") || 15;
 
-    self.fetchlog.feedNum = urls.length;
+    self.fetchlog.feedNum = feeds.length;
 
     const chunkSize = 10;
-    for (let i = 0; i < urls.length; i += chunkSize) {
-      const chunk = urls.slice(i, i + chunkSize);
+    for (let i = 0; i < feeds.length; i += chunkSize) {
+      const chunk = feeds.slice(i, i + chunkSize);
 
       let fetches = [];
-      for (const url of chunk) {
-        let f = fetchFeed(url, timeout);
+      for (const feed of chunk) {
+        let f = fetchFeed(feed.url, timeout);
         fetches.push(f);
       }
 

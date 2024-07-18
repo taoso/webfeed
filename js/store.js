@@ -149,7 +149,11 @@ export async function listFeeds() {
   let feeds = await browser.bookmarks.getChildren(bs[0].id);
   return feeds.map(f => {
     let i = f.url.indexOf("show.html?url=")+14;
-    return f.url.substring(i);
+    return {
+      id: f.id,
+      title: f.title,
+      url: f.url.substring(i),
+    };
   });
 }
 
