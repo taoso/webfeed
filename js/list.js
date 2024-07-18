@@ -75,8 +75,10 @@ async function listEntries(last = 0) {
   let more = document.querySelector("#more")
   if (num > 0) {
     more.dataset.done = true;
-    more.innerHTML = "There is no more";
+    more.innerHTML = "There is no more feeds to load.";
   }
+
+  return firstId;
 }
 
 async function main() {
@@ -104,7 +106,9 @@ async function main() {
 
       let last = parseInt(more.dataset.last);
       do {
-        await listEntries(last);
+        if (!await listEntries(last)) {
+          full = true;
+        }
       } while (!full);
     }
   });

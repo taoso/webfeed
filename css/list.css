@@ -40,6 +40,7 @@ article .summary > * {
 #more {
   text-align: center;
   cursor: pointer;
+  margin: 1em;
 }
 
 img.icon {
