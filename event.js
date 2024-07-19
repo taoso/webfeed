@@ -22,7 +22,7 @@ const handler = async (id) => {
   let popup = "";
   if (feeds.length > 0) {
     await browser.action.setIcon({
-      path: "icons/icon.png",
+      path: { "128": "icons/icon.png" },
       tabId: id
     });
 
