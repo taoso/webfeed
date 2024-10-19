@@ -12,6 +12,7 @@ const types = {
   "application/rss+xml": "rss",
   "application/atom+xml": "atom",
   "html": "html",
+  "link": "link",
 };
 
 document.addEventListener("click", e => {

@@ -1,6 +1,6 @@
 (() => {
-  const links = document.head.querySelectorAll("link[rel='alternate']")
-  const feeds = Array.from(links) 
+  const links = document.head.querySelectorAll("link[rel='alternate']");
+  let feeds = Array.from(links)
   .filter(el => {
     if (!el.hasAttribute("type")) return false;
     if (!el.hasAttribute("href")) return false;
@@ -15,6 +15,22 @@
     url: el.href,
     title: el.title || document.title,
   }));
+
+  if (feeds.length === 0) {
+    feeds = Array.from(document.links)
+      .filter(el => {
+        if (!el.hasAttribute("href")) return false;
+        const href = el.getAttribute("href");
+        if (href.indexOf("rss") !== -1 || href.indexOf("atom") !== -1) {
+          return true;
+        }
+        return false;
+      }).map(el => ({
+        type: "link",
+        url: el.href,
+        title: el.href,
+      }));
+  }
 
   return feeds;
 })();
