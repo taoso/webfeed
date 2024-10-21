@@ -129,6 +129,7 @@ export class AtomFeed extends Feed {
           entry.title = content;
           break;
         case "updated":
+        case "modified":
           // Do not shadow the updated field.
           if (!entry.updated) entry.updated = new Date(content);
           break;
