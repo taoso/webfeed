@@ -2,7 +2,7 @@
 
 let browser = self.browser || self.chrome;
 
-import { findParent } from './utils.js';
+import * as utils from './utils.js';
 
 const feeds = JSON.parse(
   decodeURIComponent(window.location.search.substr(7))
@@ -16,7 +16,7 @@ const types = {
 };
 
 document.addEventListener("click", e => {
-  const el = findParent(e.target, ".items__item-link");
+  const el = utils.findParent(e.target, ".items__item-link");
   if (!el) return;
   e.preventDefault();
 
@@ -46,7 +46,7 @@ const items = feeds.map(feed => {
   }
 
   link.innerHTML =
-    (feed.title || feed.url) +
+    utils.html2txt(feed.title || feed.url) +
       (types[feed.type]
         ? ` <span style="opacity:0.6;">(${types[feed.type]})</span>`
         : "");

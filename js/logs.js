@@ -73,12 +73,13 @@ or caused by a small timeout option.<p>
     let info = infos[type];
 
     $('.type').innerText = info.title;
-    $('.error').innerHTML = info.desc;
+    $('.error').innerHTML = info.desc; // none user input, safe to use
     let ol = $('.urls');
     for (const url of urls) {
       let li = document.createElement('li');
       let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
-      li.innerHTML = `<a href="${showUrl}" target="_blank">${url}</a>`;
+      li.innerHTML = `<a href="${showUrl}" target="_blank"></a>`;
+      li.querySelector('a').innerText = url;
       ol.appendChild(li);
     }
 

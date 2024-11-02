@@ -194,16 +194,13 @@ export async function syncAll() {
   }
 }
 
-// publisher may embed html code in <pre> or <code>
-// this should convert to text recursively.
-export async function html2txt(e) {
-  for (let i = 0; i < 10; i++) {
-    if (e.children) {
-      e.innerHTML = e.innerText;
-    } else {
-      break;
-    }
-  }
+// The return value may include html tags, so do not
+// assign it to innerHTML directly!
+export function html2txt(content) {
+  let e = document.createElement('div');
+  e.innerHTML = content;
+
+  return e.innerText;
 }
 
 export function getSiteTitle(link) {

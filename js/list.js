@@ -29,23 +29,15 @@ async function listEntries(last = 0) {
     const content = template.content.cloneNode(true);
     let $ = content.querySelector.bind(content);
 
-    $("article>h2").innerHTML = entry.title;
-    $("article>.meta time").innerHTML = entry.updated.toLocaleString();
+    $("article>h2").innerText = utils.html2txt(entry.title);
+    $("article>.meta time").innerText = entry.updated.toLocaleString();
+    $("article>div").innerText = utils.html2txt(entry.summary);
     $("article>.meta a.link").href = entry.link;
-
-    let sum = $("article>div");
-    sum.innerHTML = entry.summary;
-
-    // drop duplicate read more link in content
-    let a = $(`article>.summary a[href="${entry.link}"]`);
-    if (a) a.outerHTML = '';
-
-    utils.html2txt(sum);
 
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
     let site = utils.getSiteTitle(entry.site);
     $("article>.meta a.site").href = showUrl;
-    $("article>.meta a.site").innerHTML = site;
+    $("article>.meta a.site").innerText = site;
     let $img = $("article>.meta img.icon");
     store.getIcon(site).then(src => $img.src = src);
 
@@ -75,7 +67,7 @@ async function listEntries(last = 0) {
   let more = document.querySelector("#more")
   if (num > 0) {
     more.dataset.done = true;
-    more.innerHTML = "There is no more feeds to load.";
+    more.innerText = "There is no more feeds to load.";
   }
 
   return firstId;
