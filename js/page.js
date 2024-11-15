@@ -21,7 +21,7 @@
       .filter(el => {
         if (!el.hasAttribute("href")) return false;
         const href = el.getAttribute("href");
-        if (href.indexOf("rss") !== -1 || href.indexOf("atom") !== -1) {
+        if (href.indexOf("rss") !== -1 || href.indexOf("atom") !== -1 || href.indexOf(".xml") !== -1) {
           return true;
         }
         return false;
