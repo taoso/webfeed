@@ -27,9 +27,9 @@ document.addEventListener("click", e => {
 });
 
 feeds.unshift({
-  title: "My Feeds",
+  title: "Reading List",
   url: browser.runtime.getURL(`list.html`),
-  type: "html",
+  type: "",
 });
 
 const template = document.getElementById("item");
