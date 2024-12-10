@@ -39,7 +39,7 @@ const items = feeds.map(feed => {
   const extURL = browser.runtime.getURL(`show.html?url=${encodeURI(feed.url)}`);
   link.href = feed.url;
 
-  if (feed.type === "html") {
+  if (feed.type === "html" || feed.type === '') {
     link.dataset.url = feed.url;
   } else {
     link.dataset.url = extURL;

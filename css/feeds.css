@@ -1,0 +1,8 @@
+.items > li > span {
+  display: flex;
+  align-items: center;
+}
+
+.items > li img {
+  width: 1em;
+}
