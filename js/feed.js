@@ -7,7 +7,7 @@ const STATE = {
   ENTRY: 1,
 };
 
-class Feed {
+export class Feed {
   link = "";
   title = "";
   description = "";
@@ -31,6 +31,17 @@ class Feed {
     this.#parser._emit = this.emitAll.bind(this);
   }
 
+  emitAll(event, content, attrs) {
+    if (event == "instruction") return;
+    if (event == "opentag" && content == "feed") {
+      this.#parser._emit = this.emitAtomAll.bind(this);
+    } else if (event == "opentag" && content == "rss") {
+      this.#parser._emit = this.emitRssAll.bind(this);
+    } else {
+      throw new Error(`invalid feed from ${this.url}`);
+    }
+  }
+
   write(chunk) {
     return this.#parser._write(chunk);
   }
@@ -51,10 +62,8 @@ class Feed {
 
     return true;
   }
-}
 
-export class AtomFeed extends Feed {
-  emitAll(event, content, attrs) {
+  emitAtomAll(event, content, attrs) {
     if (this.finish()) { return true; }
 
     if (event == "opentag" && content == "feed") {
@@ -81,14 +90,14 @@ export class AtomFeed extends Feed {
 
     switch (this._state) {
       case STATE.ENTRY:
-        this.emitEntry(event, content, attrs);
+        this.emitAtomEntry(event, content, attrs);
         break;
       default:
-        this.emitFeed(event, content, attrs);
+        this.emitAtomFeed(event, content, attrs);
     }
   }
 
-  emitFeed(event, content, attrs) {
+  emitAtomFeed(event, content, attrs) {
     if (event == "text" || event == "cdata") {
       switch(attrs._path) {
         case "feed/title":
@@ -107,7 +116,7 @@ export class AtomFeed extends Feed {
     }
   }
 
-  emitEntry(event, content, attrs) {
+  emitAtomEntry(event, content, attrs) {
     let entry = this._entry;
     if (event == "opentag" && attrs._path == "feed/entry/link") {
       if (!attrs.rel || attrs.rel == "alternate" || attrs.rel == "self") {
@@ -139,10 +148,8 @@ export class AtomFeed extends Feed {
       }
     }
   }
-}
 
-export class RssFeed extends Feed {
-  emitAll(event, content, attrs) {
+  emitRssAll(event, content, attrs) {
     if (this.finish()) { return true; }
 
     if (event == "opentag" && content == "channel") {
@@ -169,14 +176,14 @@ export class RssFeed extends Feed {
 
     switch (this._state) {
       case STATE.ENTRY:
-        this.emitEntry(event, content, attrs);
+        this.emitRssEntry(event, content, attrs);
         break;
       default:
-        this.emitFeed(event, content, attrs);
+        this.emitRssFeed(event, content, attrs);
     }
   }
 
-  emitFeed(event, content, attrs) {
+  emitRssFeed(event, content, attrs) {
     if (event == "text" || event == "cdata") {
       switch(attrs._path) {
         case "rss/channel/title":
@@ -192,7 +199,7 @@ export class RssFeed extends Feed {
     }
   }
 
-  emitEntry(event, content, attrs) {
+  emitRssEntry(event, content, attrs) {
     let entry = this._entry;
     if (event == "text" || event == "cdata") {
       switch(attrs._path.slice("rss/channel/item/".length)) {

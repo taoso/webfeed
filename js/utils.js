@@ -2,7 +2,7 @@
 
 let browser = self.browser || self.chrome;
 
-import { AtomFeed, RssFeed } from './feed.js';
+import { Feed } from './feed.js';
 import * as store from './store.js';
 import { fromIDN } from './punycode.js';
 
@@ -36,13 +36,7 @@ async function parseFeed(reader, url) {
 
   let num = await store.getOptionInt("fetch-limit") || 10;
 
-  if (chunk.includes("<rss")) {
-    var feed = new RssFeed(url, num);
-  } else if (chunk.includes("<feed")) {
-    var feed = new AtomFeed(url, num);
-  } else {
-    throw new Error(`invalid feed from ${url}`);
-  }
+  let feed = new Feed(url, num);
 
   if (feed.write(chunk)) return feed;
 
