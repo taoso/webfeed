@@ -50,6 +50,11 @@ const items = feeds.map(feed => {
       (types[feed.type]
         ? ` <span style="opacity:0.6;">(${types[feed.type]})</span>`
         : "");
+
+  if (feed.type === '') {
+    link.style.fontWeight = 'bold';
+  }
+
   return content;
 });
 
