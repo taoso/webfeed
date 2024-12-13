@@ -22,6 +22,8 @@
     if (!link.hasAttribute("href")) return false;
     const href = link.getAttribute("href");
 
+    if (href === document.URL) return false;
+
     const patterns = [
       '/feed',
       '/rss',
@@ -63,4 +65,3 @@
 
   return feeds;
 })();
-
