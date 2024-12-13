@@ -8,13 +8,14 @@ const STATE = {
 };
 
 export class Feed {
+  url = "";
   link = "";
   title = "";
   description = "";
   entries = [];
 
-  _state;
-  _entry;
+  #state;
+  #entry;
 
   #maxEntries;
   #done;
@@ -52,9 +53,6 @@ export class Feed {
 
     this.#finished = true;
 
-    delete this._state;
-    delete this._entry;
-
     if (!this.link.startsWith("http")) {
       let url = new URL(this.url);
       this.link = url.origin;
@@ -67,19 +65,19 @@ export class Feed {
     if (this.finish()) { return true; }
 
     if (event == "opentag" && content == "feed") {
-      this._state = STATE.FEED;
+      this.#state = STATE.FEED;
       return;
     }
 
     if (event == "opentag" && content == "entry") {
-      this._entry = {};
-      this._state = STATE.ENTRY;
+      this.#entry = {};
+      this.#state = STATE.ENTRY;
       return;
     }
 
     if (event == "closetag" && content == "entry") {
-      if (this._entry) { this.entries.push(this._entry); }
-      this._state = STATE.FEED;
+      if (this.#entry) { this.entries.push(this.#entry); }
+      this.#state = STATE.FEED;
       return;
     }
 
@@ -88,7 +86,7 @@ export class Feed {
       return true;
     }
 
-    switch (this._state) {
+    switch (this.#state) {
       case STATE.ENTRY:
         this.emitAtomEntry(event, content, attrs);
         break;
@@ -117,7 +115,7 @@ export class Feed {
   }
 
   emitAtomEntry(event, content, attrs) {
-    let entry = this._entry;
+    let entry = this.#entry;
     if (event == "opentag" && attrs._path == "feed/entry/link") {
       if (!attrs.rel || attrs.rel == "alternate" || attrs.rel == "self") {
         entry.link = attrs.href;
@@ -153,19 +151,19 @@ export class Feed {
     if (this.finish()) { return true; }
 
     if (event == "opentag" && content == "channel") {
-      this._state = STATE.FEED;
+      this.#state = STATE.FEED;
       return;
     }
 
     if (event == "opentag" && content == "item") {
-      this._entry = {};
-      this._state = STATE.ENTRY;
+      this.#entry = {};
+      this.#state = STATE.ENTRY;
       return;
     }
 
     if (event == "closetag" && content == "item") {
-      if (this._entry) { this.entries.push(this._entry); }
-      this._state = STATE.FEED;
+      if (this.#entry) { this.entries.push(this.#entry); }
+      this.#state = STATE.FEED;
       return;
     }
 
@@ -174,7 +172,7 @@ export class Feed {
       return true;
     }
 
-    switch (this._state) {
+    switch (this.#state) {
       case STATE.ENTRY:
         this.emitRssEntry(event, content, attrs);
         break;
@@ -200,7 +198,7 @@ export class Feed {
   }
 
   emitRssEntry(event, content, attrs) {
-    let entry = this._entry;
+    let entry = this.#entry;
     if (event == "text" || event == "cdata") {
       switch(attrs._path.slice("rss/channel/item/".length)) {
         case "title":
