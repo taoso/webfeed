@@ -71,9 +71,6 @@ export class AtomFeed extends Feed {
     }
 
     if (event == "closetag" && content == "entry") {
-      // FIXME this.entry will be undefined in some case.
-      // parse https://pinlyu.com/atom.xml
-      // It seems caused by invalid encoding.
       if (this._entry) { this.entries.push(this._entry); }
       this._state = STATE.FEED;
       return;
@@ -95,17 +92,17 @@ export class AtomFeed extends Feed {
 
   emitFeed(event, content, attrs) {
     if (event == "text" || event == "cdata") {
-      switch(attrs._last.name) {
-        case "title":
+      switch(attrs._path) {
+        case "feed/title":
           this.title = content;
           break;
-        case "subtitle":
+        case "feed/subtitle":
           this.description = content;
           break;
       }
     }
 
-    if (event == "opentag" && content == "link") {
+    if (event == "opentag" && attrs._path == "feed/link") {
       if (!attrs.rel || attrs.rel == "alternate") {
         this.link = attrs.href;
       }
@@ -114,7 +111,7 @@ export class AtomFeed extends Feed {
 
   emitEntry(event, content, attrs) {
     let entry = this._entry;
-    if (event == "opentag" && content == "link") {
+    if (event == "opentag" && attrs._path == "feed/entry/link") {
       if (!attrs.rel || attrs.rel == "alternate" || attrs.rel == "self") {
         entry.link = attrs.href;
         if (entry.link.startsWith("/")) {
@@ -124,7 +121,7 @@ export class AtomFeed extends Feed {
     }
     content = content.trim();
     if (event == "text" || event == "cdata") {
-      switch(attrs._last.name) {
+      switch(attrs._path.slice("feed/entry/".length)) {
         case "title":
           entry.title = content;
           break;
@@ -186,14 +183,14 @@ export class RssFeed extends Feed {
 
   emitFeed(event, content, attrs) {
     if (event == "text" || event == "cdata") {
-      switch(attrs._last.name) {
-        case "title":
+      switch(attrs._path) {
+        case "rss/channel/title":
           this.title = content;
           break;
-        case "link":
+        case "rss/channel/link":
           this.link = content;
           break;
-        case "description":
+        case "rss/channel/description":
           this.description = content;
           break;
       }
@@ -203,7 +200,7 @@ export class RssFeed extends Feed {
   emitEntry(event, content, attrs) {
     let entry = this._entry;
     if (event == "text" || event == "cdata") {
-      switch(attrs._last.name) {
+      switch(attrs._path.slice("rss/channel/item/".length)) {
         case "title":
           entry.title = content;
           break;

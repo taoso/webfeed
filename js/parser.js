@@ -1,5 +1,7 @@
 'use strict';
 
+// based on https://github.com/snappyjs/node-xml-stream
+
 import * as htmlentity from './htmlentity.js';
 
 export default class Parser {
@@ -8,8 +10,8 @@ export default class Parser {
     this.buffer = [];
     this.pos = 0;
     this.tagType = TAG_TYPE.NONE;
-    this.last = { name: "", attrs: {} };
     this.finished = false;
+    this.path = [];
   }
 
   _write(chunk) {
@@ -59,6 +61,7 @@ export default class Parser {
   }
 
   emit(event, content, attrs) {
+    attrs._path = this.path.join('/');
     content = htmlentity.unescape(content);
     if (this._emit(event, content, attrs)) {
       this.finished = true;
@@ -84,7 +87,7 @@ export default class Parser {
     let i = 1, j = this.pos-1;
     while (this.isWhite(this.buffer[i])) i++;
     while (this.isWhite(this.buffer[j])) j--;
-    
+
     let rec = this.buffer.slice(i, j);
 
     // Keep last item in buffer for prev comparison in main loop.
@@ -100,7 +103,7 @@ export default class Parser {
   _onStartNewTag() {
     let text = this._endRecording().trim();
     if (text) {
-      this.emit(EVENTS.TEXT, text, {_last: this.last});
+      this.emit(EVENTS.TEXT, text, {});
     }
     this.state = STATE.TAG_NAME;
     this.tagType = TAG_TYPE.OPENING;
@@ -111,21 +114,18 @@ export default class Parser {
     let { name, attributes } = this._parseTagString(tag);
 
     if ((this.tagType & TAG_TYPE.OPENING) == TAG_TYPE.OPENING) {
+      this.path.push(name);
       this.emit(EVENTS.OPEN_TAG, name, attributes);
     }
 
     if ((this.tagType & TAG_TYPE.CLOSING) == TAG_TYPE.CLOSING) {
       this.emit(EVENTS.CLOSE_TAG, name, attributes);
+      this.path.pop(name);
     }
 
     this.isCloseTag = false;
     this.state = STATE.TEXT;
     this.tagType = TAG_TYPE.NONE;
-
-    let attrs = Object.assign({}, attributes);
-    delete attrs._last
-
-    this.last = { name, attrs };
   }
 
   _onCloseTagStart() {
@@ -157,7 +157,7 @@ export default class Parser {
     text = text.slice(text.indexOf('[')+1, text.lastIndexOf(']')-1);
     this.state = STATE.TEXT;
 
-    this.emit(EVENTS.CDATA, text, { _last: this.last });
+    this.emit(EVENTS.CDATA, text, {});
   }
 
   _onCommentStart() {
@@ -183,7 +183,6 @@ export default class Parser {
       let value = attribute.substr(i+1);
       attributes[name] = value.trim().replace(/"|'/g, "");
     });
-    attributes["_last"] = this.last;
     return { name, attributes };
   }
 }
