@@ -17,6 +17,7 @@ const handler = async (id) => {
     });
 
     feeds = x[0].result || [];
+    feeds = [...new Map(feeds.map(f => [f.url, f])).values()];
   }
 
   let popup = "";
