@@ -49,7 +49,7 @@ async function main() {
 or caused by a small timeout option.<p>
 <p>This may be temporary errors.</p>
 <p>If some feeds always timeout, You need to checkout if you can access the server.</p>
-<p>Or you may adjust the timeout options in <a href="options.html" target="_blank">here</a>.</p>`
+<p>Or you may adjust the timeout options in <a href="options.html">here</a>.</p>`
     },
     "error": {
       title: "Other Errors",
@@ -78,7 +78,7 @@ or caused by a small timeout option.<p>
     for (const url of urls) {
       let li = document.createElement('li');
       let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
-      li.innerHTML = `<a href="${showUrl}" target="_blank"></a>`;
+      li.innerHTML = `<a href="${showUrl}"></a>`;
       li.querySelector('a').innerText = url;
       ol.appendChild(li);
     }

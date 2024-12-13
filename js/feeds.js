@@ -14,7 +14,7 @@ async function main() {
     let site = utils.getSiteTitle(m[1]||"");
     let img = await store.getIcon(site);
 
-    li.innerHTML = `<span><img src=""><a target="_blank" href=""></a></span>`;
+    li.innerHTML = `<span><img src=""><a href=""></a></span>`;
     li.querySelector('img').src = img;
     let a = li.querySelector('a');
     a.href= `show.html?url=${feed.url}`;
