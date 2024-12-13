@@ -6,7 +6,13 @@ import * as store from "./js/store.js";
 let browser = self.browser || self.chrome;
 
 const handler = async (id) => {
-  let tab = await browser.tabs.get(id);
+  let tab;
+  try {
+    tab = await browser.tabs.get(id);
+  } catch (e) {
+    console.log(e);
+    return;
+  }
 
   let feeds = [];
 
