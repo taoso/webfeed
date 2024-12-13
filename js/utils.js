@@ -204,7 +204,7 @@ export function html2txt(content) {
   let e = document.createElement('div');
   e.innerHTML = content;
 
-  return e.innerText;
+  return e.innerText.trim().replace(/[\n\r]+/g, " ");
 }
 
 export function getSiteTitle(link) {

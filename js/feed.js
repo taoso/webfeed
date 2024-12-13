@@ -7,8 +7,6 @@ const STATE = {
   ENTRY: 1,
 };
 
-const MAX_SUMMARY = 2048;
-
 class Feed {
   link = "";
   title = "";
@@ -135,9 +133,6 @@ export class AtomFeed extends Feed {
           break;
         case "content":
           if (entry.summary) return;
-          if (content.length > MAX_SUMMARY) {
-            content = content.substring(0, MAX_SUMMARY)+"...";
-          }
         case "summary":
           entry.summary = content;
           break;
@@ -213,9 +208,6 @@ export class RssFeed extends Feed {
         case "content:encoded":
           if (entry.summary) {
             return;
-          }
-          if (content.length > MAX_SUMMARY) {
-            content = content.substring(0, MAX_SUMMARY)+"...";
           }
           entry.summary = content;
           break;
