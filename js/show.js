@@ -80,6 +80,10 @@ async function main() {
     let { resp, feed } = await utils.fetchFeed(url, timeout, true);
     await renderHTML(feed, resp);
   } catch (e) {
+    if (e.message === 'WebFeed: html page') {
+      document.location = url;
+      return
+    }
     let bs = await browser.bookmarks.search({url:document.URL});
     if (bs.length > 0) {
       let b = bs[0];
