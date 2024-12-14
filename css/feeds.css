@@ -5,4 +5,5 @@
 
 .items > li img {
   width: 1em;
+  margin-right: 2px;
 }
