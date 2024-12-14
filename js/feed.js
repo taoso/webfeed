@@ -16,7 +16,6 @@ export class Feed {
 
   #state;
   #entry;
-
   #maxEntries;
   #done;
   #finished;
@@ -47,16 +46,24 @@ export class Feed {
     return this.#parser._write(chunk);
   }
 
+  _fixFeedLink() {
+    if (!this.link.startsWith("http")) {
+      let url = new URL(this.url);
+      this.link = url.origin;
+    }
+  }
+
+  _fixLink(entry) {
+    if (!entry.link.startsWith("http")) {
+      entry.link = this.link + entry.link;
+    }
+  }
+
   finish(force = false) {
     if (this.#finished) return true;
     if (!force && this.entries.length < this.#maxEntries) return false;
 
     this.#finished = true;
-
-    if (!this.link.startsWith("http")) {
-      let url = new URL(this.url);
-      this.link = url.origin;
-    }
 
     return true;
   }
@@ -110,6 +117,7 @@ export class Feed {
     if (event == "opentag" && attrs._path == "feed/link") {
       if (!attrs.rel || attrs.rel == "alternate") {
         this.link = attrs.href;
+        this._fixFeedLink();
       }
     }
   }
@@ -117,11 +125,9 @@ export class Feed {
   emitAtomEntry(event, content, attrs) {
     let entry = this.#entry;
     if (event == "opentag" && attrs._path == "feed/entry/link") {
-      if (!attrs.rel || attrs.rel == "alternate" || attrs.rel == "self") {
+      if (!attrs.rel || attrs.rel == "alternate") {
         entry.link = attrs.href;
-        if (entry.link.startsWith("/")) {
-          entry.link = this.link + entry.link;
-        }
+        this._fixLink(entry);
       }
     }
     content = content.trim();
@@ -189,6 +195,7 @@ export class Feed {
           break;
         case "rss/channel/link":
           this.link = content;
+          this._fixFeedLink();
           break;
         case "rss/channel/description":
           this.description = content;
@@ -207,6 +214,7 @@ export class Feed {
         case "link":
           if (!attrs.rel || attrs.rel == "alternate") {
             entry.link = content;
+            this._fixLink(entry);
           }
           break;
         case "description":
