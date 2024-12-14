@@ -17,13 +17,17 @@ const handler = async (id) => {
   let feeds = [];
 
   if (tab.url && tab.url.startsWith("http")) {
-    let x = await browser.scripting.executeScript({
-      target: {tabId: id},
-      files: ['./js/page.js'],
-    });
+    try {
+      let x = await browser.scripting.executeScript({
+        target: {tabId: id},
+        files: ['./js/page.js'],
+      });
 
-    feeds = x[0].result || [];
-    feeds = [...new Map(feeds.map(f => [f.url, f])).values()];
+      feeds = x[0].result || [];
+      feeds = [...new Map(feeds.map(f => [f.url, f])).values()];
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   let popup = "";
