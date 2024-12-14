@@ -205,7 +205,12 @@ export function getSiteTitle(link) {
   let url = new URL(link);
   let title = url.hostname.replace("www.", "")
   if (title === "medium.com") {
-    title += url.pathname.replace("/feed", "");
+    // convert both
+    // https://medium.com/feed/@example
+    // https://medium.com/@example/article-...
+    // to medium.com/@example
+    let m = link.match(/medium.com\/[^@]*(@[^/?]+)/)
+    title += '/'+m[1];
   } else if (title.indexOf("xn--") >= 0) {
     title = fromIDN(title);
   }

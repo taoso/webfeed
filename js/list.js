@@ -35,7 +35,7 @@ async function listEntries(last = 0) {
     $("article>.meta a.link").href = entry.link;
 
     let showUrl = browser.runtime.getURL(`show.html?url=${encodeURI(entry.site)}`)
-    let site = utils.getSiteTitle(entry.site);
+    let site = utils.getSiteTitle(entry.link);
     $("article>.meta a.site").href = showUrl;
     $("article>.meta a.site").innerText = site;
     let $img = $("article>.meta img.icon");
