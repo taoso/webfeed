@@ -7,6 +7,8 @@ const STATE = {
   ENTRY: 1,
 };
 
+const MAX_SUMMARY = 2048;
+
 export class Feed {
   url = "";
   link = "";
@@ -83,7 +85,13 @@ export class Feed {
     }
 
     if (event == "closetag" && content == "entry") {
-      if (this.#entry) { this.entries.push(this.#entry); }
+      let entry = this.#entry;
+      if (entry.link) {
+        if (entry.summary && entry.summary.length > MAX_SUMMARY) {
+          entry.summary = entry.summary.slice(0, MAX_SUMMARY);
+        }
+        this.entries.push(entry);
+      }
       this.#state = STATE.FEED;
       return;
     }
