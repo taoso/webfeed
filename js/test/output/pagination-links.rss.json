@@ -1,0 +1,14 @@
+{
+  "url": "https://example.com",
+  "link": "https://example.test/shows/new-show-1",
+  "title": "New Show - With Episode Block",
+  "description": "New Show",
+  "entries": [
+    {
+      "title": "The First Episode",
+      "link": "https://example.test/episode?id=283843",
+      "updated": "2021-01-21T07:58:00.000Z",
+      "summary": "<div>The First Episode</div>"
+    }
+  ]
+}

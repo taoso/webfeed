@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "http://www.jn.pt",
+  "title": "Jornal de Notícias - Últimas Notícias",
+  "description": "JN. Rede de Informação.",
+  "entries": [
+    {
+      "title": "Mãe de utente é a nova presidente da Raríssimas",
+      "link": "http://feeds.jn.pt/~r/JN-ULTIMAS/~3/UBnb8Ra3Q1U/sonia-laig-e-a-nova-presidente-da-rarissimas-9021600.html",
+      "summary": "Sónia Laygue, profissional na área da Recursos Humanos e mãe de uma criança de três anos, utente na Casa dos Marcos, é a nova presidente da direção da Raríssimas.<img src=\"http://feeds.feedburner.com/~r/JN-ULTIMAS/~4/UBnb8Ra3Q1U\" height=\"1\" width=\"1\" alt=\"\"/>",
+      "updated": "2018-01-03T13:47:00.000Z"
+    },
+    {
+      "title": "Reações dos partidos ao veto de Marcelo",
+      "link": "http://feeds.jn.pt/~r/JN-ULTIMAS/~3/GfXqkJnHUcM/reacoes-dos-partidos-ao-veto-de-marcelo-ao-financiamento-partidario-9021587.html",
+      "summary": "<img src=\"http://feeds.feedburner.com/~r/JN-ULTIMAS/~4/GfXqkJnHUcM\" height=\"1\" width=\"1\" alt=\"\"/>",
+      "updated": "2018-01-03T13:48:00.000Z"
+    }
+  ]
+}

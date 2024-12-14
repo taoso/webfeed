@@ -1,0 +1,18 @@
+{
+  "url": "https://example.com",
+  "link": "https://www.reddit.com",
+  "title": "reddit: the front page of the internet",
+  "description": "",
+  "entries": [
+    {
+      "title": "The Difficulties in Space",
+      "link": "https://www.reddit.com/r/space/comments/42babr/the_difficulties_in_space",
+      "updated": "2016-01-23T15:40:37.000Z"
+    },
+    {
+      "title": "Driving for Uber in the Virginia last night",
+      "link": "https://www.reddit.com/r/pics/comments/42bic6/driving_for_uber_in_the_virginia_last_night",
+      "updated": "2016-01-23T16:36:05.000Z"
+    }
+  ]
+}

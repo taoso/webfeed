@@ -1,0 +1,18 @@
+{
+  "url": "https://example.com",
+  "link": "http://www.oreilly.com/example/index.html",
+  "title": "RSS0.92 Example",
+  "description": "This is an example RSS0.91 feed",
+  "entries": [
+    {
+      "title": "The First Item",
+      "link": "http://www.oreilly.com/example/001.html",
+      "summary": "This is the first item."
+    },
+    {
+      "title": "The Second Item",
+      "link": "http://www.oreilly.com/example/002.html",
+      "summary": "This is the second item."
+    }
+  ]
+}

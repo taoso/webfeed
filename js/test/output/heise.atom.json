@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "http://www.heise.de/developer/",
+  "title": "heise developer neueste Meldungen",
+  "description": "Informationen für Entwickler",
+  "entries": [
+    {
+      "title": "Java-Anwendungsserver: Red Hat gibt WildFly 10 frei",
+      "updated": "2016-02-01T16:22:00.000Z",
+      "link": "http://www.heise.de/developer/meldung/Java-Anwendungsserver-Red-Hat-gibt-WildFly-10-frei-3088438.html?wt_mc=rss.developer.beitrag.atom",
+      "summary": "Die nun verfügbare Version 10 des Enterprise-Java-Servers stellt die Basis für Red Hats kommerzielle JBoss Enterprise Application Platform 7 ist zugleich das dritte größere Release seit dem Namenswechsel des Open-Source-Projekts."
+    },
+    {
+      "title": "Scrum Day 2016: Bewerbungen für Vorträge und Workshops",
+      "updated": "2016-02-01T13:29:00.000Z",
+      "link": "http://www.heise.de/developer/meldung/Scrum-Day-2016-Bewerbungen-fuer-Vortraege-und-Workshops-3088627.html?wt_mc=rss.developer.beitrag.atom",
+      "summary": "Über das Programm des zehnten Scrum Day stimmen die Teilnehmer selbst ab. Doch zuvor sind Scrum-Experten dran, sich bis Ende Februar mit einem Vortrag oder Workshop zu bewerben."
+    }
+  ]
+}

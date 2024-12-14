@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "https://www.giantbomb.com",
+  "title": "Giant Bombcast",
+  "description": "Giant Bomb discusses the latest video game news and new releases, taste-test questionable beverages, and get wildly off-topic in this weekly podcast.",
+  "entries": [
+    {
+      "title": "Giant Bombcast 603: Call of Tuesday",
+      "link": "https://www.giantbomb.com/shows/603-call-of-tuesday/2970-19653/free-podcast",
+      "summary": "Video games! Ghost Recon Breakpoint, The Last of Us Part II, Code Vein, The Surge 2, Card of Darkness, Call of Duty Mobile, Untitled Goose Game, Outer Wilds... Surely we talk about stuff besides games this week too. Probably.",
+      "updated": "2019-10-01T22:30:00.000Z"
+    },
+    {
+      "title": "Giant Bombcast 602: Easy Chicken",
+      "link": "https://www.giantbomb.com/shows/602-easy-chicken/2970-19636/free-podcast",
+      "summary": "A zillion games came out last week and we're here to talk about like 12 of them! Let's check in on Apple Arcade's lineup, Link's Awakening, and Borderlands 3. Then let's get into the news... is Valve going to have to let you resell your games? Weird! The",
+      "updated": "2019-09-24T22:49:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "http://www.taverncast.com",
+  "title": "Taverncast - Happy Hour in Your Head - Since 2005",
+  "description": "Order a beer, pull up a seat and join your friends at Taverncast for our patented un-scripted roundtable discussions, covering a wide range of topics with a unique wit and inviting style - all blended together, it's Happy Hour in Your Head!",
+  "entries": [
+    {
+      "title": "Taverncast 62 - Temporal Anomaly",
+      "link": "http://taverncast.com",
+      "summary": "Taverncast tosses around the age old topic: time travel!  Where would you go?  Why would you go? Also, Bryce has customer service issues, and Mike buys a dog.",
+      "updated": "2015-11-07T17:00:00.000Z"
+    },
+    {
+      "title": "Taverncast 61 - Life in the Middle Ages",
+      "link": "http://taverncast.com",
+      "summary": "Our 10th Anniversary!  Life for the TC cast, being 40-something, League of Legends, Mike goes dark.",
+      "updated": "2015-07-18T17:00:00.000Z"
+    }
+  ]
+}

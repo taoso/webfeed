@@ -1,0 +1,14 @@
+{
+  "url": "https://example.com",
+  "link": "https://www.swr.de/swr2/programm/SWR2-Wissen-Impuls-Podcast,swr2-impuls-podcast-100.html",
+  "title": "SWR2 Impuls - Wissen aktuell",
+  "description": "Neues aus Wissenschaft, Medizin, Umwelt und Bildung.",
+  "entries": [
+    {
+      "title": "Ostafrika stellt sich auf die nächste Heuschreckenplage ein",
+      "link": "https://www.swr.de/swr2/wissen/Hungersnot-Ostafrika-stellt-sich-auf-die-naechste-Heuschreckenplage-ein,ostafrika-stellt-sich-auf-naechste-heuschreckenplage-ein-100.html",
+      "summary": "Nach der jüngsten Heuschreckenplage droht Ostafrika neues Unheil. Es regnet mehr als sonst. Der feuchte Boden ist ein idealer Brutkasten für die nächste Generation Heuschrecken. Die ohnehin angespannte Ernährungslage könnte sich weiter verschlechtern.",
+      "updated": "2020-03-10T15:05:00.000Z"
+    }
+  ]
+}

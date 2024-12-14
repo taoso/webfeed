@@ -12,9 +12,43 @@ export default class Parser {
     this.tagType = TAG_TYPE.NONE;
     this.finished = false;
     this.path = [];
+    this.decoder = null;
   }
 
   _write(chunk) {
+    if (!this.decoder) {
+      for (let i = 0; i < chunk.length && !this.finished; i++) {
+        let c = String.fromCharCode(chunk[i]);
+        this.buffer.push(c);
+
+        if (c === '>') {
+          let encoding = 'utf-8';
+          let p = this.buffer[this.buffer.length-2];
+          let s = this.buffer.join('');
+          if (p === '?') {
+            let m = s.match(/encoding="([^"]+)"/)
+            if (m[1]) {
+              encoding = m[1]
+            }
+          }
+
+          this.decoder = new TextDecoder(encoding);
+
+          chunk = s + this.decoder.decode(chunk.slice(i+1), {stream: true});
+          this.skip = true;
+          this.buffer = [];
+          break;
+        }
+      }
+      if (!this.decoder) { return; }
+    }
+
+    if (!this.skip) {
+      chunk = this.decoder.decode(chunk, {stream: true});
+    } else {
+      this.skip = false;
+    }
+
     for (let i = 0; i < chunk.length && !this.finished; i++) {
       let c = chunk[i];
       let prev = this.buffer[this.pos-1];
@@ -37,7 +71,7 @@ export default class Parser {
             } else if (pp === '<' && prev === '!' && c === '-') {
               this._onCommentStart()
             } else if (c === '>') {
-              if (prev === "/") { this.tagType |= TAG_TYPE.CLOSING; }
+              if (prev === '/') { this.tagType |= TAG_TYPE.CLOSING; }
               this._onTagCompleted();
             }
           }
@@ -62,6 +96,7 @@ export default class Parser {
 
   emit(event, content, attrs) {
     attrs._path = this.path.join('/');
+    content = content.trim();
     content = htmlentity.unescape(content);
     if (this._emit(event, content, attrs)) {
       this.finished = true;
@@ -70,12 +105,12 @@ export default class Parser {
 
   isWhite(c) {
     switch (c) {
-      case " ":
-      case "\t":
-      case "\v":
-      case "\f":
-      case "\n":
-      case "\r":
+      case ' ':
+      case '\t':
+      case '\v':
+      case '\f':
+      case '\n':
+      case '\r':
       case '\uFEFF': // BOM
         return true;
       default:
@@ -97,7 +132,7 @@ export default class Parser {
     if (rec[rec.length-1] === '/') rec = rec.slice(0, -1);
     if (rec[rec.length-1] === '>') rec = rec.slice(0, -2);
 
-    return rec.join("");
+    return rec.join('');
   }
 
   _onStartNewTag() {
@@ -181,7 +216,7 @@ export default class Parser {
       let i = attribute.indexOf('=');
       let name = attribute.substr(0, i);
       let value = attribute.substr(i+1);
-      attributes[name] = value.trim().replace(/"|'/g, "");
+      attributes[name] = value.trim().replace(/"|'/g, '');
     });
     return { name, attributes };
   }

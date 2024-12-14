@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "http://www.transfermarkt.de/rss/news",
+  "title": "Transfermarkt",
+  "description": "Die 10 letzten News",
+  "entries": [
+    {
+      "title": "Manager bewertet Transfers | Eberl lobt BVB für Pulisic-Deal – Hudson-Odoi kostet „fast so viel wie mein Kader“",
+      "link": "http://www.transfermarkt.de/eberl-lobt-bvb-fur-pulisic-deal-ndash-hudson-odoi-kostet-bdquo-fast-so-viel-wie-mein-kader-ldquo-/view/news/326649?rss",
+      "updated": "2019-01-07T16:19:19.000Z",
+      "summary": "Max Eberl (Foto) hat dem BVB zum Transfererl&ouml;s von Christian Pulisic (20) gratuliert. Gleichzeitig prangerte Gladbachs Sportdirektor allerdings auch derart hohe Abl&ouml;sesummen an...."
+    },
+    {
+      "title": "Im zweiten Anlauf | Magdeburg verleiht Talent Harant – Fünfter FCM-Spieler in Halberstadt",
+      "link": "http://www.transfermarkt.de/magdeburg-verleiht-talent-harant-ndash-funfter-fcm-spieler-in-halberstadt/view/news/326660?rss",
+      "updated": "2019-01-07T15:55:00.000Z",
+      "summary": "Der 1.FC Magdeburg treibt seine Umstrukturierung des Kaders im Winter-Transferfenster weiter voran. Nachdem Jan Kirchhoff und Timo Perthel den Kader von Trainer Michael Oenning verst&auml;rkten und..."
+    }
+  ]
+}

@@ -12,6 +12,8 @@ sync: npm $(PNGs)
 		--exclude="js/node_modules/.package-lock.json" \
 		--exclude="js/package-lock.json" \
 		--exclude="js/package.json" \
+		--exclude="js/*_test.js" \
+		--exclude="js/test/" \
 		--exclude="icons/*.svg" \
 		css *.html icons js event.js \
 		build/

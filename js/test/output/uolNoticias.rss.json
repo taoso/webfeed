@@ -1,0 +1,19 @@
+{
+  "url": "https://example.com",
+  "link": "http://noticias.uol.com.br",
+  "title": "UOL Noticias",
+  "description": "�ltimas Not�cias",
+  "entries": [
+    {
+      "title": "Ibope: Bolsonaro perde de Haddad, Ciro e Alckmin em simula��es de 2� turno",
+      "link": "https://noticias.uol.com.br/politica/eleicoes/2018/noticias/2018/09/24/ibope-bolsonaro-perde-de-haddad-ciro-e-alckmin-em-simulacoes-de-2-turno.htm",
+      "summary": "<img src='https://conteudo.imguol.com.br/c/noticias/5f/2018/09/17/presidenciaveis-1537211917356_142x100.jpg' align=\"left\" />  \tL�der na pesquisa Ibope de inten��o de voto para o primeiro turno divulgada nesta segunda-feira (24), o candidato do PSL a presidente, Jair Bolsonaro, n�o tem o mesmo desempenho nas simula��es de segundo turno feitas pela empresa no mesmo levantamento.",
+      "updated": null
+    },
+    {
+      "title": "Promotoria abre inqu�rito para apurar suspeita de improbidade de Skaf no Sebrae-SP",
+      "link": "https://www1.folha.uol.com.br/poder/2018/09/promotoria-abre-inquerito-para-apurar-suspeita-de-improbidade-de-skaf-no-sebrae-sp.shtml",
+      "updated": null
+    }
+  ]
+}

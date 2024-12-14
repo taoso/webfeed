@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="GBK"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>涛叔</title>
+  <id>https://taoshu.in/</id>
+  <author>
+    <name>涛叔</name>
+    <email>hi@taoshu.in</email>
+  </author>
+  <link href="https://taoshu.in"/>
+  <link href="https://taoshu.in/feed.xml" rel="self"/>
+  <updated>2024-12-10T06:36:18Z</updated>
+    <entry>
+    <id>https://taoshu.in/net/cnnic-fee.html</id>
+    <link href="https://taoshu.in/net/cnnic-fee.html"/>
+    <title>CNNIC费用分析</title>
+    <updated>2024-12-10T06:36:15Z</updated>
+    <published>2024-12-09T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[一直对 BGP 很感兴趣，于是研究了 IP 地址资源的分配策略。在全世界范围内，IP 地址 资源由各级非盈利的注册机构分配。如果要申请，当然要缴纳一定的费用，防止滥用。但是 我发现中国大陆地区的 CNNIC 的资源费用比上级单位 APNIC 的费用要高出一些，比隔壁 宝岛台湾的 TWNIC 的费用都要高。我开始怀疑 CNNIC 到底是不是一定非盈利机构]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/community.html</id>
+    <link href="https://taoshu.in/community.html"/>
+    <title>关于社区的思考</title>
+    <updated>2024-12-08T17:12:54Z</updated>
+    <published>2024-12-08T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[我一直有一个社区梦，希望能汇聚一波志同道合的朋友，大家一起研究、共同学习。但这个 梦想从来都没有实现过。除了筑梦，我也参加过不少所谓的社区，也研究过别人对社区的 见解。今天试着整理出自己对于社区这个话题的思考。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/go/sqlite.html</id>
+    <link href="https://taoshu.in/go/sqlite.html"/>
+    <title>SQLite 服务端优化备忘</title>
+    <updated>2024-12-09T03:24:22Z</updated>
+    <published>2024-12-07T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[我搞的几个业余项目都需要实现计费功能。但小项目用MySQL 等数据库有点小题大作， 所以我都是用 SQLite 来保存数据。SQLite 号称是应用最广泛的嵌入式关系数据库，简单 易用，性能强劲。不过它主要用在手机等客户端，在服务端使用还需要额外的优化技巧。 本文就整理记录 SQLite 的服务端优化方法，以备后续使用。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/life/sharpen-brain.html</id>
+    <link href="https://taoshu.in/life/sharpen-brain.html"/>
+    <title>多动脑多思考</title>
+    <updated>2024-12-06T13:51:31Z</updated>
+    <published>2024-12-06T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[今天看到 Elon Musk 在 X 上发了一行动态。说是怎样从一串连续的数字中快速 找到缺少一个数字。我大致瞄了一眼，没找到。然后想到了一个巧妙的算法，快速找出了 答案。然后我把问题发给老婆。她居然也很快找到了结果。一问果然是从头开始找的。从 而引出了本文的主旨，要多动脑多思考。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/web/lucky-canvas.html</id>
+    <link href="https://taoshu.in/web/lucky-canvas.html"/>
+    <title>抽奖组件 lucky-canvas 素材大全</title>
+    <updated>2024-12-05T14:53:57Z</updated>
+    <published>2024-12-01T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[最近需要用到抽奖组件，网上使用最多的是 lucky-canvas 项目。该项目完成度很高， 有大转盘、九宫格和老虎机三种样式，支持 Web 和微信小程序等多种平台。开发者只需要 做简单配置就能快速实现抽奖功能。官方还提供大量示例供大家参考。但美中不足，可能 是为了避免版权争议，官方的完整示例部分并没有提供源码和素材。而官方文档中的素材又 太素，与实战项目相距甚远。所以我抽空梳理出对应的源码和素材供读者学习参考之用。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/net/speedtest-link.html</id>
+    <link href="https://taoshu.in/net/speedtest-link.html"/>
+    <title>常用网络测速文件链接列表</title>
+    <updated>2024-11-27T06:50:45Z</updated>
+    <published>2024-11-24T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[本文搜集了一些测速文件链接备用。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/dns/io-cctld.html</id>
+    <link href="https://taoshu.in/dns/io-cctld.html"/>
+    <title>IO 域名的未来</title>
+    <updated>2024-12-08T08:29:00Z</updated>
+    <published>2024-11-18T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[2024年10月3号，英国政府与毛里求斯政府发布联合声明，说是英国将向毛国移交 Chagos 群岛主权。这是二战之后全世界去殖民化运动的尾声，没想到却可能决定 .IO 域名 的命运，甚至整个 .IO 域名都可能随这次主权移交而退出历史舞台。也有人觉得 .IO 域名 现在使用太广泛了，不太可能退休。但我从多方搜集的资料来看，前景不容乐观。本文就向 大家分析 .IO 域名未来的走向。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/go/iter.html</id>
+    <link href="https://taoshu.in/go/iter.html"/>
+    <title>Go语言迭代器</title>
+    <updated>2024-11-27T07:09:03Z</updated>
+    <published>2024-11-16T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[Go语言从1.8版本开始引入泛型，从此大家可以编写通用的容器类实现。然而Go语言的 for range 循环只能遍历 slice/map 这两种内置的容器对象。这使得泛型容器用起来很别扭， 大家不得不针对遍历成员场景写专门的代码。今年上半年发布了 1.23 版本，支持使用 for range 来遍历迭代器函数，从而解析自定义容器类的遍历问题。本文分享我 对这种设计的学习和理解。]]></summary>
+  </entry>
+    <entry>
+    <id>https://taoshu.in/unix/xargs.html</id>
+    <link href="https://taoshu.in/unix/xargs.html"/>
+    <title>Shell 脚本神器 xargs</title>
+    <updated>2024-11-19T09:30:39Z</updated>
+    <published>2024-11-15T00:00:00+08:00</published>
+    <summary type="html"><![CDATA[最近工作中要大批量操作线上机器。因为是历史遗留系统，无法使用 Ansible 等现成的 框架，只能自己手写 Shell 脚本来处理。这中间就不免会涉及到批量生成列表和并发 执行命令的场景。这类工作可以通过 xargs 命令来实现。本篇就来分享具体的实现技巧。]]></summary>
+  </entry>
+  </feed>

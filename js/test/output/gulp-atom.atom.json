@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "https://github.com/gulpjs/gulp/releases",
+  "title": "Release notes from gulp",
+  "description": "",
+  "entries": [
+    {
+      "updated": "2015-06-01T21:49:41.000Z",
+      "link": "https://github.com/gulpjs/gulp/releases/gulpjs/gulp/releases/tag/v3.9.0",
+      "title": "v3.9.0",
+      "summary": "<p>3.9.0</p>"
+    },
+    {
+      "updated": "2015-02-09T20:37:28.000Z",
+      "link": "https://github.com/gulpjs/gulp/releases/gulpjs/gulp/releases/tag/v3.8.11",
+      "title": "v3.8.11",
+      "summary": "<p>3.8.11</p>"
+    }
+  ]
+}

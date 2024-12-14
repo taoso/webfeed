@@ -1,0 +1,14 @@
+{
+  "url": "https://example.com",
+  "link": "http://on.narro.co/f",
+  "title": "foobar on Narro",
+  "description": "foobar uses Narro to create a podcast of articles transcribed to audio.",
+  "entries": [
+    {
+      "link": "https://www.narro.co/article/54e703933058540300000069",
+      "summary": "Listen to your reading list anywhere. Narro will take your bookmarked articles and read them back to you as a podcast.<br/> http://www.narro.co/faq<br/> <ul class=\"linkList\"></ul>",
+      "title": "FAQ for Narro",
+      "updated": "2015-02-20T09:51:15.000Z"
+    }
+  ]
+}

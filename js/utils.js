@@ -23,27 +23,17 @@ export function fixLink(link, feedLink) {
 }
 
 async function parseFeed(reader, url) {
-  const { value, done } = await reader.read();
-
-  let decoder = new TextDecoder("utf-8");
-  let chunk = decoder.decode(value, {stream: true});
-
-  let m = chunk.match(/<\?xml.+encoding="(.+?)".*\?>/);
-  if (m && m[1].toLowerCase() != "utf-8") {
-    decoder = new TextDecoder(m[1]);
-    chunk = decoder.decode(value, {stream: true});
-  }
+  let chunk = await reader.read();
 
   let num = await store.getOptionInt("fetch-limit") || 10;
 
   let feed = new Feed(url, num);
 
-  if (feed.write(chunk)) return feed;
+  if (feed.write(chunk.value)) return feed;
 
-  while (!done) {
-    const { value, done } = await reader.read();
-    let chunk = decoder.decode(value, {stream: true});
-    if (feed.write(chunk)) break;
+  while (!chunk.done) {
+    chunk = await reader.read();
+    if (feed.write(chunk.value)) break;
   };
 
   return feed;

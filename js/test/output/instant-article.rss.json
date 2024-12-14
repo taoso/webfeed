@@ -1,0 +1,14 @@
+{
+  "url": "https://example.com",
+  "link": "https://localhost:8000",
+  "title": "Instant Article Test",
+  "description": "1, 2, 1, 2… check the mic!",
+  "entries": [
+    {
+      "title": "My first Instant Article",
+      "link": "https://localhost:8000",
+      "summary": "Lorem ipsum",
+      "updated": "2016-05-04T06:53:45.000Z"
+    }
+  ]
+}

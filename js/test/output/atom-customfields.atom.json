@@ -1,0 +1,18 @@
+{
+  "url": "https://example.com",
+  "link": "https://www.youtube.com/channel/UCBcRF18a7Qf58cCRy5xuWwQ",
+  "title": "L2inc",
+  "description": "",
+  "entries": [
+    {
+      "title": "Buy Now, Bitches*",
+      "link": "https://www.youtube.com/watch?v=lR-w1h5ONOY",
+      "updated": "2017-09-14T18:03:34.000Z"
+    },
+    {
+      "title": "What Happens in an Internet Minute?",
+      "link": "https://www.youtube.com/watch?v=2DALPtbpZZo",
+      "updated": "2017-09-07T14:42:36.000Z"
+    }
+  ]
+}

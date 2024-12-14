@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "https://taoshu.in",
+  "title": "涛叔",
+  "description": "",
+  "entries": [
+    {
+      "link": "https://taoshu.in/net/cnnic-fee.html",
+      "title": "CNNIC费用分析",
+      "updated": "2024-12-08T16:00:00.000Z",
+      "summary": "一直对 BGP 很感兴趣，于是研究了 IP 地址资源的分配策略。在全世界范围内，IP 地址 资源由各级非盈利的注册机构分配。如果要申请，当然要缴纳一定的费用，防止滥用。但是 我发现中国大陆地区的 CNNIC 的资源费用比上级单位 APNIC 的费用要高出一些，比隔壁 宝岛台湾的 TWNIC 的费用都要高。我开始怀疑 CNNIC 到底是不是一定非盈利机构"
+    },
+    {
+      "link": "https://taoshu.in/community.html",
+      "title": "关于社区的思考",
+      "updated": "2024-12-07T16:00:00.000Z",
+      "summary": "我一直有一个社区梦，希望能汇聚一波志同道合的朋友，大家一起研究、共同学习。但这个 梦想从来都没有实现过。除了筑梦，我也参加过不少所谓的社区，也研究过别人对社区的 见解。今天试着整理出自己对于社区这个话题的思考。"
+    }
+  ]
+}

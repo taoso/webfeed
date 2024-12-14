@@ -1,0 +1,18 @@
+{
+  "url": "https://example.com",
+  "link": "https://www.reddit.com/.rss",
+  "title": "reddit: the front page of the internet",
+  "description": "",
+  "entries": [
+    {
+      "link": "https://www.reddit.com/r/funny/comments/42tizy/how_the_british_as_seen_by_americans_and_europeans/",
+      "updated": "2016-01-26T20:31:34.000Z",
+      "title": "How the British as seen by Americans and Europeans"
+    },
+    {
+      "link": "https://www.reddit.com/r/todayilearned/comments/42tcyp/til_the_only_character_to_appear_played_by_the/",
+      "updated": "2016-01-26T19:58:55.000Z",
+      "title": "TIL The only character to appear, played by the same actor, in 10 different series is Richard Belzer's Detective John Munch. He has appeared as this character in crossover shows ranging from X-Files to Arrested Development. His character has even been on five different TV networks."
+    }
+  ]
+}
