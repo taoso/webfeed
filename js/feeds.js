@@ -62,6 +62,7 @@ async function main() {
         });
       }
       location.reload();
+      utils.syncAll();
     };
 
     reader.onerror = (e) => {
