@@ -142,6 +142,14 @@ export async function removeEntries(url) {
   }
 }
 
+export async function hasFeeds() {
+  let bs = await browser.bookmarks.search({title:"[web-feed]"});
+  if (bs.length == 0) return false;
+
+  let feeds = await browser.bookmarks.getChildren(bs[0].id);
+  return feeds.length > 0;
+}
+
 export async function listFeeds() {
   let bs = await browser.bookmarks.search({title:"[web-feed]"});
   if (bs.length == 0)  return [];

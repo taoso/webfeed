@@ -79,6 +79,11 @@ async function main() {
   await store.resetUnreadNum();
 
   let more = document.querySelector('#more');
+  if (!await store.hasFeeds()) {
+    more.innerHTML = '<p>There is no feed. You may import feeds on the <a href="feeds.html">Feeds</a> page.</p>';
+    return;
+  }
+
   more.onclick = async (e) => {
     if (e.target.dataset.done) return;
 
@@ -107,4 +112,4 @@ async function main() {
   observer.observe(more);
 }
 
-main().catch(e => console.error(e));
+main();
