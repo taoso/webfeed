@@ -27,7 +27,7 @@ export default class Parser {
           let s = this.buffer.join('');
           if (p === '?') {
             let m = s.match(/encoding="([^"]+)"/)
-            if (m[1]) {
+            if (m && m[1]) {
               encoding = m[1]
             }
           }
