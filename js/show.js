@@ -46,9 +46,7 @@ async function renderHTML(feed, resp) {
       await store.saveEntries(feed.url, feed.entries);
       button.innerText = "Unsubscribe";
     } else {
-      let bs = await browser.bookmarks.search({url:document.URL});
-      await browser.bookmarks.remove(bs[0].id);
-      await store.removeEntries(feed.url);
+      await store.unsubscribe(feed.url);
       button.innerText = "Subscribe";
     }
   };

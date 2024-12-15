@@ -1,6 +1,7 @@
 'use strict';
 
 import * as idb from "./idb.js";
+import * as utils from "./utils.js";
 
 let browser = self.browser || self.chrome;
 
@@ -9,6 +10,11 @@ export async function saveIcon(domain, icon) {
   let opts = {};
   opts["icon-"+domain] = icon;
   await browser.storage.local.set(opts);
+}
+
+export async function removeIcon(domain) {
+  let key = "icon-"+domain;
+  await browser.storage.local.remove(key);
 }
 
 export async function getIcon(domain) {
@@ -22,6 +28,17 @@ export async function subscribed(url) {
   url = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
   let bs = await browser.bookmarks.search({url});
   return bs.length > 0;
+}
+
+export async function unsubscribe(url) {
+  let feed = await getFeed(url);
+  if (!feed) return;
+
+  await browser.bookmarks.remove(feed.id);
+
+  await removeEntries(url);
+  await removeIsModified(url);
+  await removeIcon(utils.getSiteTitle(feed.htmlUrl));
 }
 
 export async function subscribe(data) {
@@ -167,6 +184,21 @@ export async function listFeeds() {
   });
 }
 
+export async function getFeed(url) {
+  url = browser.runtime.getURL(`show.html?url=${encodeURI(url)}`);
+  let bs = await browser.bookmarks.search({url});
+  if (!bs[0]) {return;}
+
+  let f = bs[0];
+  let m = /(.+)\[(.+?)]$/.exec(f.title);
+  return {
+    id: f.id,
+    title: m[1],
+    htmlUrl: m[2],
+    url: url,
+  };
+}
+
 export async function getLastFetchTime() {
   let key = "last-fetch-at";
   let result = await browser.storage.sync.get(key) || {};
@@ -268,6 +300,11 @@ export async function isFetching() {
   let key = "fetching@"+n.getHours();
   let results = await browser.storage.local.get(key) || {};
   return results[key] === "1";
+}
+
+export async function removeIsModified(url) {
+  let key = "cache@"+url;
+  let results = await browser.storage.local.remove(key);
 }
 
 export async function isModified(resp) {
