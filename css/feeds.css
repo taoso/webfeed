@@ -7,3 +7,7 @@
   width: 1em;
   margin-right: 2px;
 }
+
+#import-file {
+  display: none;
+}

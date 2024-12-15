@@ -28,3 +28,15 @@ export const unescape = un => {
 
   return un.replace(es, cape);
 }
+
+export const escape = (unsafe) => {
+  return unsafe.replace(/[<>&'"]/g, (c) => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '\'': return '&apos;';
+      case '"': return '&quot;';
+    }
+  });
+}
