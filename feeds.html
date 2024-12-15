@@ -5,17 +5,23 @@
     <title>WebFeed Feeds</title>
     <link rel="icon" href="./icons/icon.png">
     <link rel="stylesheet" href="./css/water.css">
+    <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/feeds.css">
     <script src="./js/feeds.js" type="module"></script>
   </head>
   <body>
-    <h1>Following Feeds</h1>
-    <p>Feeds you are following.</p>
     <main>
+      <header>
+        <h1><a href="list.html">WebFeed</a></h1>
+        <a class="menu-item" href="feeds.html">📡Feeds</a>
+        <a class="menu-item" href="logs.html">🔬Logs</a>
+        <a class="menu-item" href="options.html">⚙️Options</a>
+      </header>
+      <h2>Feeds you are following</h2>
       <ol class="items"></ol>
-    </main>
-    <button id="import">Import from OPML</button>
-    <button id="export">Export to OPML</button>
-    <input type="file" id="import-file" accept="text/xml">
+      <button id="import">Import from OPML</button>
+      <button id="export">Export to OPML</button>
+      <input type="file" id="import-file" accept="text/xml">
   </body>
+  </main>
 </html>

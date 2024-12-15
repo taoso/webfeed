@@ -6,30 +6,38 @@
     <title>WebFeed Options</title>
     <link rel="icon" href="./icons/icon.png">
     <link rel="stylesheet" href="./css/water.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/options.css">
     <script src="./js/options.js" defer type="module"></script>
   </head>
   <body>
-    <header>
-      <h1>Options</h1>
-    </header>
-    <form id="options">
-      <div>
-        <label for="fetch-limit">Fetch limit: </label>
-        <input id="fetch-limit" type="number" value="10" max="10" min="1" placeholder="integer">
-      </div>
-      <div>
-        <label for="fetch-interval">Fetch interval (min): </label>
-        <input id="fetch-interval" type="number" value="60" min="1" placeholder="integer">
-      </div>
-      <div>
-        <label for="fetch-timeout">Fetch timeout (s): </label>
-        <input id="fetch-timeout" type="number" value="20" min="1" placeholder="integer">
-      </div>
-      <div>
-        <label for="entry-save-days">Entries save days: </label>
-        <input id="entry-save-days" type="number" value="30" min="1" placeholder="integer">
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <main>
+      <header>
+        <h1><a href="list.html">WebFeed</a></h1>
+        <a class="menu-item" href="feeds.html">📡Feeds</a>
+        <a class="menu-item" href="logs.html">🔬Logs</a>
+        <a class="menu-item" href="options.html">⚙️Options</a>
+      </header>
+      <h2>Options</h2>
+      <form id="options">
+        <div>
+          <label for="fetch-limit">Fetch limit: </label>
+          <input id="fetch-limit" type="number" value="10" max="10" min="1" placeholder="integer">
+        </div>
+        <div>
+          <label for="fetch-interval">Fetch interval (min): </label>
+          <input id="fetch-interval" type="number" value="60" min="1" placeholder="integer">
+        </div>
+        <div>
+          <label for="fetch-timeout">Fetch timeout (s): </label>
+          <input id="fetch-timeout" type="number" value="20" min="1" placeholder="integer">
+        </div>
+        <div>
+          <label for="entry-save-days">Entries save days: </label>
+          <input id="entry-save-days" type="number" value="30" min="1" placeholder="integer">
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    </main>
   </body>
 </html>

@@ -1,0 +1,22 @@
+body {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1em;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  border-bottom: 1px solid gray;
+}
+
+header h1 {
+  flex: 1;
+  margin: 10px 0 0;
+  font-weight: 300;
+}
+
+header .menu-item {
+  cursor: pointer;
+  margin: 2px;
+}

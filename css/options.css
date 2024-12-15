@@ -1,0 +1,16 @@
+form {
+  display: inline-block;
+}
+
+form div {
+  display: flex;
+  align-items: center;
+}
+
+form div input {
+  width: 4em;
+}
+
+form div label {
+  flex: 1;
+}

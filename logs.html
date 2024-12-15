@@ -5,38 +5,44 @@
     <title>WebFeed Fetch Logs</title>
     <link rel="icon" href="./icons/icon.png">
     <link rel="stylesheet" href="./css/water.css">
+    <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/logs.css">
     <script src="./js/logs.js" type="module"></script>
   </head>
   <body>
-    <h1>Fetch Logs</h1>
-    <article class="summary">
-      <h2>Summary</h2>
-      <table>
-        <tr>
-          <th>Fetch Begin</th>
-          <td id="begin"></td>
-        </tr>
-        <tr>
-          <th>Fetch End</th>
-          <td id="end"></td>
-        </tr>
-        <tr>
-          <th>Feed Checked</th>
-          <td id="feedNum"></td>
-        </tr>
-        <tr>
-          <th>Articles Found</th>
-          <td id="newNum"></td>
-        </tr>
-        <tr>
-          <th>Articles Cleaned</th>
-          <td id="cleanNum"></td>
-        </tr>
-      </table>
-    </article>
-    <p>You can click the feed link to manage subscription.</p>
     <main>
+      <header>
+        <h1><a href="list.html">WebFeed</a></h1>
+        <a class="menu-item" href="feeds.html">📡Feeds</a>
+        <a class="menu-item" href="logs.html">🔬Logs</a>
+        <a class="menu-item" href="options.html">⚙️Options</a>
+      </header>
+      <h2>Fetch Logs</h2>
+      <article class="summary">
+        <table>
+          <tr>
+            <th>Fetch Begin</th>
+            <td id="begin"></td>
+          </tr>
+          <tr>
+            <th>Fetch End</th>
+            <td id="end"></td>
+          </tr>
+          <tr>
+            <th>Feed Checked</th>
+            <td id="feedNum"></td>
+          </tr>
+          <tr>
+            <th>Articles Found</th>
+            <td id="newNum"></td>
+          </tr>
+          <tr>
+            <th>Articles Cleaned</th>
+            <td id="cleanNum"></td>
+          </tr>
+        </table>
+      </article>
+      <p>You can click the feed link to manage subscription.</p>
       <div class="items"></div>
     </main>
   </body>

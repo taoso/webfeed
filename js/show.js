@@ -6,9 +6,9 @@ import * as utils from './utils.js';
 import * as store from './store.js';
 
 async function renderHTML(feed, resp) {
-  let header = document.querySelector('body header');
+  let header = document.querySelector('body main .header');
 
-  header.querySelector('h1').innerText = utils.html2txt(feed.title);
+  header.querySelector('h2').innerText = utils.html2txt(feed.title);
   let h1 = header.querySelector('#site-link')
   h1.href = feed.link;
   h1.innerText = utils.getSiteTitle(feed.link);
