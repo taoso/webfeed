@@ -37,6 +37,7 @@ a.link {
 
 #site-icon {
   width: 1em;
+  max-height: 1em;
   display: inline-block;
 }
 
