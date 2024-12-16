@@ -71,13 +71,9 @@ export async function fetchFeed(url, timeout, force) {
     if (resp.status === 404) {
       self.fetchlog.notfound.push(url);
     } else {
-      self.fetch.error.push(url);
+      self.fetchlog.error.push(url);
     }
     throw new Error(`fetch ${url} failed, code: ${resp.status}`);
-  }
-
-  if (resp.headers.get('content-type').startsWith('text/html')) {
-    throw new Error('WebFeed: html page');
   }
 
   if (resp.redirected) {
