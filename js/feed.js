@@ -126,6 +126,9 @@ export class Feed {
       if (!attrs.rel || attrs.rel == "alternate") {
         this.link = attrs.href;
         this._fixFeedLink();
+      } else if (attrs.rel == 'self' && this.link == '') {
+        this.link = attrs.href;
+        this._fixFeedLink();
       }
     }
   }
