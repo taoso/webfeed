@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://feed.ctrl.blog/assets/stylesheet.xsl" media="all" type="text/xsl"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+  <id>urn:uuid:f6d9e764-f597-5370-94e1-c01aa3928860</id>
+  <title type="text">Ctrl blog</title>
+  <author>
+    <name>Daniel Aleksandersen</name>
+    <uri>https://www.daniel.priv.no/</uri>
+  </author>
+  <rights type="text">Copyright © 2023 Daniel Aleksandersen.</rights>
+  <link href="https://www.ctrl.blog/" rel="alternate" type="text/html" />
+  <link href="https://www.buymeacoffee.com/aleksandersen" rel="payment" type="text/html" />
+  <link href="https://feed.ctrl.blog/latest.atom" rel="self" type="application/atom+xml" />
+  <link href="https://feed.ctrl.blog/latest.atom" rel="current" type="application/atom+xml" />
+  <link href="https://feed.ctrl.blog/hub" rel="hub" />
+  <link href="https://feed.ctrl.blog/archive/58.atom" rel="prev-archive" type="application/atom+xml" />
+  <icon>https://www.ctrl.blog/assets/logo/logo-square.svg</icon>
+  <updated>2023-09-10T22:12:00Z</updated>
+  <sy:updatePeriod>daily</sy:updatePeriod>
+  <sy:updateFrequency>4</sy:updateFrequency>
+  <entry>
+    <id>urn:uuid:c563f648-bb50-4a50-a1bf-7d83ebfb28cd</id>
+    <link href="https://www.ctrl.blog/entry/windows-system-components-default-edge.html#src=feed" rel="alternate" type="text/html" />
+    <published>2023-09-10T22:12:00Z</published>
+    <updated>2023-09-10T22:12:00Z</updated>
+    <title type="text">Microsoft has not stopped forcing Edge on Windows 11 users</title>
+    <title type="html">Microsoft has &lt;strong&gt;not&lt;/strong&gt; stopped forcing Edge on Windows 11 users</title>
+    <summary type="text">Microsoft announces vague changes to the default web browser setting for Windows Insider. Nothing but wishful thinking. Still force-opens web links in Edge.</summary>
+    <content type="html">&lt;p&gt;Microsoft published a blog post on the Windows Insider Blog in late August with a vague statement saying that “Windows system components“ were to begin respecting the default web browser setting. Windows 10 and 11 regularly bypass this setting and force-open links in Microsoft Edge instead. In my extensive testing, I haven’t found any changes in the new Windows Insider version.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/windows-system-components-default-edge.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Microsoft Windows" scheme="https://www.ctrl.blog" term="/topic/microsoft-windows.html" />
+    <category label="Web Browsers" scheme="https://www.ctrl.blog" term="/topic/web-browsers.html" />
+    <media:content height="702" medium="image" type="image/png" url="https://www.ctrl.blog/media/hero/microsoft-edge.1280x720.png" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:d17dde9e-ee38-47d3-b639-41ed8f29bc71</id>
+    <link href="https://www.ctrl.blog/entry/security-key-decommission.html#src=feed" rel="alternate" type="text/html" />
+    <published>2023-08-08T12:56:00Z</published>
+    <updated>2023-08-08T12:56:00Z</updated>
+    <title type="text">The trouble with decommissioning a used FIDO security key</title>
+    <title type="html">The trouble with decommissioning a used &lt;abbr title='Fast IDentity Online'&gt;FIDO&lt;/abbr&gt; security key</title>
+    <summary type="text">You can’t throw out your worn-out USB security keys when you can’t recall what locks they’re for. Physical security tokens come with their own problems.</summary>
+    <content type="html">&lt;p&gt;Five years ago, I wrote about adopting security keys — small second-factor authentication token devices — to secure some of my most precious online accounts. In that article, I foresaw a future problem and detailed how I planned to mitigate it. The future is now, and I did not heed my own advice. 🤦‍♂️&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/security-key-decommission.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Authentication and Passwords" scheme="https://www.ctrl.blog" term="/topic/authentication-and-passwords.html" />
+    <category label="Hardware" scheme="https://www.ctrl.blog" term="/topic/hardware.html" />
+    <category label="Security" scheme="https://www.ctrl.blog" term="/topic/security.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/yubikey-security-key-replacement.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:2f548a61-84c1-4fbb-bf74-26990cab8ae2</id>
+    <link href="https://www.ctrl.blog/entry/freestyle-libre3-volume-level.html#src=feed" rel="alternate" type="text/html" />
+    <published>2023-05-01T14:11:00Z</published>
+    <updated>2023-05-01T14:11:00Z</updated>
+    <title type="text">The deafening problem with the FreeStyle Libre 3 app for Android</title>
+    <summary type="text">People with diabetes use the app to monitor glucose levels and trigger alerts when it goes critical. Unfortunately, it raises the volume to uncomfortable levels.</summary>
+    <content type="html">&lt;p&gt;I’ve finally begun using the Abbott FreeStyle Libre 3 continuous glucose monitoring (CGM) system a year after I first wrote about it. The newer sensor has been a significant upgrade except for a few issues. One of those issues could be damaging to your hearing.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/freestyle-libre3-volume-level.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Diabetes" scheme="https://www.ctrl.blog" term="/topic/diabetes.html" />
+    <category label="Mobile Apps" scheme="https://www.ctrl.blog" term="/topic/mobile-apps.html" />
+    <category label="Android" scheme="https://www.ctrl.blog" term="/topic/android.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/abbott-freestyle-libre3-app.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:933ffdf1-dc6d-48c0-8ef3-4a7e35fdb230</id>
+    <link href="https://www.ctrl.blog/entry/microsoft-phone-link-privacy.html#src=feed" rel="alternate" type="text/html" />
+    <published>2023-04-07T13:43:00Z</published>
+    <updated>2023-04-07T13:43:00Z</updated>
+    <title type="text">Phone Link relays your personal data through Microsoft servers</title>
+    <title type="html">&lt;cite&gt;Phone Link&lt;/cite&gt; relays your personal data through Microsoft servers</title>
+    <summary type="text">The Phone Link app doesn’t transfer data directly between your devices over the local network. Instead, it allows Microsoft to peak at your personal data.</summary>
+    <content type="html">&lt;p&gt;The Microsoft Phone Link (formerly known as “Your Phone”) app for Windows, Android, and iOS lets you access parts of your smartphone from within Windows. However, Microsoft has not built the service with your privacy in mind. Instead, the software behemoth relays your personal data through its servers, despite the app only working while your devices are connected to the same local network.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/microsoft-phone-link-privacy.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Privacy" scheme="https://www.ctrl.blog" term="/topic/privacy.html" />
+    <category label="Microsoft Windows" scheme="https://www.ctrl.blog" term="/topic/microsoft-windows.html" />
+    <category label="Mobile Apps" scheme="https://www.ctrl.blog" term="/topic/mobile-apps.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/microsoft-phone-link-cloud-sync.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:70607ead-1938-43b0-ba58-f4a0a34ef953</id>
+    <link href="https://www.ctrl.blog/entry/bankid-iframe-phishing.html#src=feed" rel="alternate" type="text/html" />
+    <published>2023-02-05T21:38:00Z</published>
+    <updated>2023-02-05T21:38:00Z</updated>
+    <title type="text">Norway’s BankID undermines anti-phishing best practices</title>
+    <summary type="text">An easily-spoofed iframe embedded onto every random online merchant’s websites is not a safe place to enter my bank password! Is it really BankID‽</summary>
+    <content type="html">&lt;p&gt;Imagine a privatized nationwide authentication system used to access government services, confirm contracts and online payments, and everything else. Now, imagine that the system was designed to be extra friendly to imitation and credential theft (“phishing”). Here’s everything wrong with Norway’s BankID authentication system.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/bankid-iframe-phishing.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Authentication and Passwords" scheme="https://www.ctrl.blog" term="/topic/authentication-and-passwords.html" />
+    <category label="Malware and Phishing" scheme="https://www.ctrl.blog" term="/topic/malware-and-phishing.html" />
+    <category label="Security" scheme="https://www.ctrl.blog" term="/topic/security.html" />
+    <media:content height="702" medium="image" type="image/png" url="https://www.ctrl.blog/media/hero/bankid-phishing.1280x720.png" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:7b453461-c66a-45db-acb7-06207a4ef953</id>
+    <link href="https://www.ctrl.blog/entry/vivaldi-technologies.html#src=feed" rel="alternate" type="text/html" />
+    <published>2023-01-01T22:26:00Z</published>
+    <updated>2023-01-01T22:26:00Z</updated>
+    <title type="text">I’ve joined Vivaldi Technologies</title>
+    <summary type="text">Back in November, I began my new job as a Quality Assurance (QA) Tester at Vivaldi Technologies. Vivaldi is the productivity super-app of web browsers.</summary>
+    <content type="html">&lt;p&gt;On November 1st, I joined familiar faces from my days at Opera Software and new colleges at Vivaldi Technologies. I joined as a Quality Assurance Tester working on the Vivaldi web browser product for mobile and desktop.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/vivaldi-technologies.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Web Browsers" scheme="https://www.ctrl.blog" term="/topic/web-browsers.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/vivaldi.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:487cc23e-2503-4b15-83cc-46d73aa64d35</id>
+    <link href="https://www.ctrl.blog/entry/joplin-notes-sync.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-11-14T22:15:00Z</published>
+    <updated>2022-11-14T22:15:00Z</updated>
+    <title type="text">Sync issues finally drove me away from the Joplin note-taking app</title>
+    <summary type="text">Joplin for Android stopped supporting local file syncing and Syncthing. I tried cloud-storage alternatives, but the other sync methods are slow and unreliable.</summary>
+    <content type="html">&lt;p&gt;My note-taking app of choice for the last three years has been Joplin, an open-source note-taker for Android, Linux, MacOS, and Windows. As I discussed in my app review, the desktop app is good, but the Android app has some issues. In the last year, updates to the app have brought along more issues. I can no longer rely on it, and the time has come for me to migrate away from the Joplin app.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/joplin-notes-sync.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Note-taking" scheme="https://www.ctrl.blog" term="/topic/note-taking.html" />
+    <category label="Android" scheme="https://www.ctrl.blog" term="/topic/android.html" />
+    <category label="Mobile Apps" scheme="https://www.ctrl.blog" term="/topic/mobile-apps.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/synthwave-note-taking.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:1a7d38d8-2b1c-4c40-8933-fd052e8c2142</id>
+    <link href="https://www.ctrl.blog/entry/append-only-social.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-11-08T22:29:00Z</published>
+    <updated>2022-11-08T22:29:00Z</updated>
+    <title type="text">Don’t record your social life on an append-only social network</title>
+    <summary type="text">The tech behind peer-to-peer (P2P) social networks such as Secure Scuttlebutt enforces permanency. Absolute permanency isn’t what you want in a social network.</summary>
+    <content type="html">&lt;p&gt;Secure Scuttlebutt (SSB) is an alternative, self-governed, distributed social network without gatekeepers. You only see updates and mentions from people you follow, so moderation isn’t as much of an issue as on Twitter. However, the technology that powers the platform is ill-suited for sharing things with our ever-changing social circles.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/append-only-social.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Privacy" scheme="https://www.ctrl.blog" term="/topic/privacy.html" />
+    <category label="P2P" scheme="https://www.ctrl.blog" term="/topic/p2p.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/message-bubbles-padlocked-blockchain.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:53bc6889-732e-49bf-9de2-08ec110fda20</id>
+    <link href="https://www.ctrl.blog/entry/microsoft-pc-manager-conflicting-interests.html#src=feed" rel="alternate" type="text/html" />
+    <link href="https://www.theverge.com/2022/10/21/23416070/microsoft-pc-manager-app-performance-systems-clean-up" rel="via" title="Microsoft’s PC Manager is like CCleaner for your computer" type="text/html" />
+    <link href="https://www.ctrl.blog/entry/microsoft-pc-manager-conflicting-interests.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-10-25T15:08:00Z</published>
+    <updated>2022-10-25T15:08:00Z</updated>
+    <title type="text">First look at Microsoft PC Manager and its conflicting interests</title>
+    <title type="html">First look at &lt;cite&gt;Microsoft PC Manager&lt;/cite&gt; and its conflicting interests</title>
+    <summary type="text">Microsoft’s new PC cleaner app puts the company’s interests in front of its customers’. At least it doesn’t over-promise and under-deliver like its competitors.</summary>
+    <content type="html">&lt;p&gt;Microsoft is testing a new app to compete with the many dubious “PC cleaner” software available on the market (like CCleaner and CleanMyMac). However, Microsoft’s new app looks out for the company’s interests before its customers’.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/microsoft-pc-manager-conflicting-interests.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Microsoft Windows" scheme="https://www.ctrl.blog" term="/topic/microsoft-windows.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/microsoft-pc-manager-beta.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:8daecf9b-084a-4ec3-a0c3-b2e783c378c2</id>
+    <link href="https://www.ctrl.blog/entry/routeros-wireguard-peer-bug.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-10-21T13:13:00Z</published>
+    <updated>2022-10-21T13:13:00Z</updated>
+    <title type="text">The frustrating RouterOS–WireGuard VPN peering bug</title>
+    <summary type="text">A bug in RouterOS’ webconfig interface caused me to waste hours troubleshooting what I initially believed was a mistake in my WireGuard VPN configuration.</summary>
+    <content type="html">&lt;p&gt;I’ve wanted to move my home virtual private network (VPN) server from a virtual machine onto my physical MikroTik router. I use the VPN to connect back to my home network to reach internal devices and services when I’m out and about. The router runs the RouterOS operating system, which supports WireGuard, a modern VPN protocol. I wasted several afternoons and late evenings but didn’t manage to set it up. It would turn out that a bug caused all my hardship in the MikroTik web configuration interface.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/routeros-wireguard-peer-bug.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="VPN" scheme="https://www.ctrl.blog" term="/topic/vpn.html" />
+    <category label="MikroTik" scheme="https://www.ctrl.blog" term="/topic/mikrotik.html" />
+    <category label="Networking" scheme="https://www.ctrl.blog" term="/topic/networking.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/routeros-cat-cable.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:411d5307-7d8f-4581-b275-e63be128dc69</id>
+    <link href="https://www.ctrl.blog/entry/tplink-dns-hijacking.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-10-15T12:23:00Z</published>
+    <updated>2022-10-15T12:23:00Z</updated>
+    <title type="text">TP-Link network equipment hijacks some DNS requests</title>
+    <summary type="text">No one remembers the IP address of their favorite websites. Why should you remember your router’s IP address? TP-Link hijacks DNS to give itself a domain name.</summary>
+    <content type="html">&lt;p&gt;TP-Link network products — including Wi-Fi routers, repeaters, and access points (AP) — use deep packet inspection (DPI) to intercept specific domain name system (DNS) requests. Each product looks for one or two domain names and will hijack the request to issue a local response containing its own internet protocol (IP) address.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/tplink-dns-hijacking.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="TP-Link" scheme="https://www.ctrl.blog" term="/topic/tp-link.html" />
+    <category label="DNS" scheme="https://www.ctrl.blog" term="/topic/dns.html" />
+    <category label="Networking" scheme="https://www.ctrl.blog" term="/topic/networking.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/tplink-eating-dns.1280x720.jpeg" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:4c301105-5fa9-4f2a-bd38-7604b11b9d70</id>
+    <link href="https://www.ctrl.blog/entry/delicious-bookmarks.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-10-10T10:34:00Z</published>
+    <updated>2022-10-10T10:34:00Z</updated>
+    <title type="text">I miss del.icio.us – the web’s discovery-engine and link classifier</title>
+    <summary type="text">The early 2000s social bookmarking and link-sharing website was great for organizing and discovering the web by topic. I really wish it still was around.</summary>
+    <content type="html">&lt;p&gt;Delicious (stylized after its domain &lt;code&gt;del.icio.us&lt;/code&gt;) was a social bookmarking website. It might not sound all that interesting, but it was one of the best websites in the early 2000s. Here’s why I miss this defunct website so much.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/delicious-bookmarks.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Metadata" scheme="https://www.ctrl.blog" term="/topic/metadata.html" />
+    <media:content height="702" medium="image" type="image/png" url="https://www.ctrl.blog/media/hero/delicious.1280x720.png" width="1248" />
+  </entry>
+  <entry>
+    <id>urn:uuid:3e3cceea-cea2-4378-a8b5-845c629c3ec9</id>
+    <link href="https://www.ctrl.blog/entry/sony-headphones-app-battery.html#src=feed" rel="alternate" type="text/html" />
+    <published>2022-10-09T12:20:00Z</published>
+    <updated>2022-10-09T12:20:00Z</updated>
+    <title type="text">A Sony Headphones app feature kills your phone’s battery life</title>
+    <summary type="text">Adaptive Sound Control auto-adjusts your noise-canceling and ambient-awareness levels based on detected activities and location. At a significant battery cost.</summary>
+    <content type="html">&lt;p&gt;I recently bought a pair of Sony WH-1000XM4 wireless headphones. Many of the headphone’s capabilities are unlocked using the Sony Headphones Connect (SHC) companion app. Unfortunately, the SHC app slashes hours off my phone’s battery life. Here’s what the app did wrong and how to rein in its energy consumption.&lt;/p&gt; &lt;p&gt;&lt;a href="https://www.ctrl.blog/entry/sony-headphones-app-battery.html#src=feed"&gt;Read more …&lt;/a&gt;&lt;/p&gt;</content>
+    <category label="Mobile Apps" scheme="https://www.ctrl.blog" term="/topic/mobile-apps.html" />
+    <category label="Android" scheme="https://www.ctrl.blog" term="/topic/android.html" />
+    <media:content height="702" medium="image" type="image/jpeg" url="https://www.ctrl.blog/media/hero/sony-headphones-connect.1280x720.jpeg" width="1248" />
+  </entry>
+</feed>

@@ -5,6 +5,7 @@ import fs from 'node:fs';
 
 let xmlPath = './test/input/';
 let jsonPath = './test/output/';
+
 fs.readdirSync(xmlPath).map(fileName => {
   let p = xmlPath + fileName;
   fs.readFile(p, (err, data) => {
@@ -29,4 +30,3 @@ fs.readdirSync(xmlPath).map(fileName => {
     });
   });
 });
-

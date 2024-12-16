@@ -1,0 +1,20 @@
+{
+  "url": "https://example.com",
+  "link": "https://www.ctrl.blog/",
+  "title": "Ctrl blog",
+  "description": "",
+  "entries": [
+    {
+      "link": "https://www.ctrl.blog/entry/windows-system-components-default-edge.html#src=feed",
+      "updated": "2023-09-10T22:12:00.000Z",
+      "title": "Microsoft has <strong>not</strong> stopped forcing Edge on Windows 11 users",
+      "summary": "Microsoft announces vague changes to the default web browser setting for Windows Insider. Nothing but wishful thinking. Still force-opens web links in Edge."
+    },
+    {
+      "link": "https://www.ctrl.blog/entry/security-key-decommission.html#src=feed",
+      "updated": "2023-08-08T12:56:00.000Z",
+      "title": "The trouble with decommissioning a used <abbr title='Fast IDentity Online'>FIDO</abbr> security key",
+      "summary": "You can’t throw out your worn-out USB security keys when you can’t recall what locks they’re for. Physical security tokens come with their own problems."
+    }
+  ]
+}

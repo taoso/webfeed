@@ -19,6 +19,7 @@ export default class Parser {
     if (!this.decoder) {
       for (let i = 0; i < chunk.length && !this.finished; i++) {
         let c = String.fromCharCode(chunk[i]);
+        if (c !== '<' && this.buffer.length === 0) { continue; }
         this.buffer.push(c);
 
         if (c === '>') {
