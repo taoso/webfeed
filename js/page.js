@@ -18,12 +18,10 @@
     return feeds;
   }
 
-  feeds = Array.from(document.links).filter(link => {
-    if (!link.hasAttribute("href")) return false;
-    const href = link.getAttribute("href");
+  let urls = Array.from(document.links).map(a => a.getAttribute('href'));
+  urls.push(document.URL);
 
-    if (href === document.URL) return false;
-
+  feeds = urls.filter(url => {
     const patterns = [
       '/feed',
       '/rss',
@@ -50,17 +48,17 @@
       '.rss',
     ];
 
-    let url = href.toLowerCase();
+    let url = url.toLowerCase();
     for (const p of patterns) {
       if (url.indexOf(p) !== -1) {
         return true;
       }
     }
     return false;
-  }).map(e => ({
+  }).map(url => ({
       type: "link",
-      url: e.href,
-      title: e.href,
+      url: url,
+      title: url,
     }));
 
   return feeds;
