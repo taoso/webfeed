@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "WebFeed",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Simple Privacy-focused Web Feed Reader",
   "author": "Taoshu",
   "homepage_url": "https://github.com/taoso/webfeed",
@@ -12,7 +12,6 @@
   "permissions": [
     "alarms",
     "bookmarks",
-    "contextMenus",
     "scripting",
     "storage"
   ],

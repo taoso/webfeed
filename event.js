@@ -51,11 +51,6 @@ const handler = async (id) => {
 browser.runtime.onInstalled.addListener(async details => {
   store.fixBookmarks();
   browser.alarms.create("sync-feed", {periodInMinutes:1});
-  browser.contextMenus.create({
-    id: "open-web-feed",
-    title: "Open in WebFeed",
-    contexts: ["link"],
-  });
 });
 
 browser.tabs.onActivated.addListener(info => handler(info.tabId));
@@ -66,9 +61,3 @@ browser.action.onClicked.addListener((tab) => {
 });
 
 browser.alarms.onAlarm.addListener(async e => utils.syncAll());
-
-browser.contextMenus.onClicked.addListener((info, tab) => {
-  store.saveIcon(utils.getSiteTitle(tab.url), tab.favIconUrl);
-  let url = browser.runtime.getURL(`show.html?url=${encodeURI(info.linkUrl)}`);
-  browser.tabs.create({url})
-});
