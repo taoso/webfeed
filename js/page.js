@@ -48,7 +48,7 @@
       '.rss',
     ];
 
-    let url = url.toLowerCase();
+    url = url.toLowerCase();
     for (const p of patterns) {
       if (url.indexOf(p) !== -1) {
         return true;
