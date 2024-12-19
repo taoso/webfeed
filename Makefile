@@ -14,6 +14,7 @@ sync: npm $(PNGs)
 		--exclude="js/package.json" \
 		--exclude="js/*_test.js" \
 		--exclude="js/test/" \
+		--exclude="*.ts" \
 		--exclude="icons/*.svg" \
 		css *.html icons js event.js \
 		build/
