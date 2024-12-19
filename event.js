@@ -24,7 +24,16 @@ const handler = async (id) => {
       });
 
       feeds = x[0].result || [];
-      feeds = [...new Map(feeds.map(f => [f.url, f])).values()];
+      feeds = [...new Map(feeds.map(f => {
+        if (!f.url.startsWith('http')) {
+          if (f.url.startsWith('/')) {
+            f.url = (new URL(tab.url)).origin + f.url;
+          } else {
+            f.url = tab.url + f.url;
+          }
+        }
+        return [f.url, f];
+      })).values()];
     } catch (e) {
       console.error(e);
     }
