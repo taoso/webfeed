@@ -18,6 +18,7 @@ fs.readdirSync(xmlPath).map(fileName => {
     f.write(data);
 
     let json = JSON.stringify(f, null, 2);
+    // fs.writeFileSync(jsonPath + fileName + '.json', json);
     fs.readFile(jsonPath + fileName + '.json', 'utf8', (err, data) => {
       if (err) {
         console.error("read file", p, err);

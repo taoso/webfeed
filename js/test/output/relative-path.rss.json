@@ -1,0 +1,14 @@
+{
+  "url": "https://example.com",
+  "link": "https://example.com",
+  "title": "zeromake 的个人博客",
+  "description": "Recent content on zeromake 的个人博客",
+  "entries": [
+    {
+      "title": "常用英文对照表",
+      "link": "https://example.com/pages/english-commonly-used-table",
+      "updated": "2024-08-20T02:41:00.000Z",
+      "summary": "前言 经常有很多英文单词会见到，但是又懒得记，这里做一个对照表自己用。 一、星期 中文 英文 缩写 周一 Monday Mon. 周二 Tuesday Tues. 周三 Wednesday Wed. 周四 Thursday Thur. 周五 Friday Fri. 周六 Saturday Sat. 周日"
+    }
+  ]
+}

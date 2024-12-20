@@ -79,6 +79,7 @@ export class Feed {
     }
 
     if (event == "opentag" && content == "entry") {
+      if (!this.link) { this._fixFeedLink(); }
       this.#entry = {};
       this.#state = STATE.ENTRY;
       return;
@@ -175,6 +176,7 @@ export class Feed {
     }
 
     if (event == "opentag" && content == "item") {
+      if (!this.link) { this._fixFeedLink(); }
       this.#entry = {};
       this.#state = STATE.ENTRY;
       return;

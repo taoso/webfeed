@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<channel>
+<title>zeromake 的个人博客</title>
+<link>/</link>
+<description>Recent content on zeromake 的个人博客</description>
+<generator>Hugo</generator>
+<language>zh-cn</language>
+<lastBuildDate>Tue, 20 Aug 2024 10:53:17 +0800</lastBuildDate>
+<atom:link href="/index.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>常用英文对照表</title>
+<link>/pages/english-commonly-used-table/</link>
+<pubDate>Tue, 20 Aug 2024 10:41:00 +0800</pubDate>
+<guid>/pages/english-commonly-used-table/</guid>
+<description>前言 经常有很多英文单词会见到，但是又懒得记，这里做一个对照表自己用。 一、星期 中文 英文 缩写 周一 Monday Mon. 周二 Tuesday Tues. 周三 Wednesday Wed. 周四 Thursday Thur. 周五 Friday Fri. 周六 Saturday Sat. 周日</description>
+</item>
+</channel>
+</rss>
