@@ -1,0 +1,24 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-us">
+<generator uri="https://gohugo.io/" version="0.101.0">Hugo</generator>
+<title type="html">
+<![CDATA[ Ariadne's Space ]]>
+</title>
+<link href="https://ariadne.space/" rel="alternate" type="text/html" title="HTML"/>
+<link href="https://ariadne.space/index.xml" rel="alternate" type="application/rss+xml" title="RSS"/>
+<link href="https://ariadne.space/atom.xml" rel="self" type="application/atom+xml" title="Atom"/>
+<link href="https://ariadne.space/newswire.txt" rel="alternate" type="text/plain" title="newswire"/>
+<updated>2024-05-14T06:17:21+00:00</updated>
+<id>https://ariadne.space/</id>
+<entry>
+<title type="html">
+<![CDATA[ The XZ Utils backdoor is a symptom of a larger problem ]]>
+</title>
+<link href="https://ariadne.space/2024/04/02/the-xz-utils-backdoor-is-a-symptom-of-a-larger-problem/?utm_source=atom_feed" rel="alternate" type="text/html"/>
+<id>https://ariadne.space/2024/04/02/the-xz-utils-backdoor-is-a-symptom-of-a-larger-problem/</id>
+<published>2024-04-02T00:00:00+00:00</published>
+<updated>2024-04-02T00:00:00+00:00</updated>
+<content type="html">
+<![CDATA[ demo html ]]>
+</content>
+</entry>
+</feed>

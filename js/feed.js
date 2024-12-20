@@ -124,8 +124,10 @@ export class Feed {
 
     if (event == "opentag" && attrs._path == "feed/link") {
       if (!attrs.rel || attrs.rel == "alternate") {
-        this.link = attrs.href;
-        this._fixFeedLink();
+        if (!attrs.type || attrs.type == 'text/html') {
+          this.link = attrs.href;
+          this._fixFeedLink();
+        }
       } else if (attrs.rel == 'self' && this.link == '') {
         this.link = attrs.href;
         this._fixFeedLink();

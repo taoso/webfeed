@@ -1,0 +1,14 @@
+{
+  "url": "https://example.com",
+  "link": "https://ariadne.space/",
+  "title": "Ariadne's Space",
+  "description": "",
+  "entries": [
+    {
+      "title": "The XZ Utils backdoor is a symptom of a larger problem",
+      "link": "https://ariadne.space/2024/04/02/the-xz-utils-backdoor-is-a-symptom-of-a-larger-problem/?utm_source=atom_feed",
+      "updated": "2024-04-02T00:00:00.000Z",
+      "summary": "demo html"
+    }
+  ]
+}
