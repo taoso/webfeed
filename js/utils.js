@@ -188,7 +188,12 @@ export function html2txt(content) {
 }
 
 export function getSiteTitle(link) {
-  let url = new URL(link);
+  try {
+    var url = new URL(link);
+  } catch (e) {
+    console.log(e, link);
+    return link;
+  }
   let title = url.hostname.replace("www.", "")
   if (title === "medium.com") {
     // convert both
