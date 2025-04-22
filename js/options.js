@@ -1,6 +1,6 @@
 'use strict';
 
-import { setOption, getOptionInt } from './store.js';
+import { setOption, getOptionInt, setLastFetchTime } from './store.js';
 
 async function main() {
   let form = document.getElementById("options")
@@ -23,6 +23,11 @@ async function main() {
       let v = await getOptionInt(input.id);
       console.debug(input.id, v);
     }
+  });
+
+  let fetchNow = document.getElementById("fetch-now")
+  fetchNow.addEventListener("click", (e) => {
+    setLastFetchTime(new Date("2000-01-01"));
   });
 }
 

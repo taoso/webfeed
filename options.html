@@ -24,9 +24,11 @@
           <label for="fetch-limit">Fetch limit: </label>
           <input id="fetch-limit" type="number" value="10" min="1" placeholder="integer">
         </div>
-        <div>
+        <div style="position:relative;">
           <label for="fetch-interval">Fetch interval (min): </label>
           <input id="fetch-interval" type="number" value="60" min="1" placeholder="integer">
+          <span id="fetch-now" title="Fetch all feeds now!"
+            style="position:absolute;right:-1em;cursor:pointer;">🔄</span>
         </div>
         <div>
           <label for="fetch-timeout">Fetch timeout (s): </label>
